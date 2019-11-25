@@ -1,9 +1,8 @@
 import React from 'react'
+import Measurement from '../components/atoms/Measurement';
 
 export const Styleguide1 = () => (
-  <div>
-    <p> This is Styleguide1 </p>
-  </div>
+    <Measurement> </Measurement>
 )
 
 export default Styleguide1;
