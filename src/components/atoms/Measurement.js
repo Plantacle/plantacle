@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Circle= styled.div`
+const Circle = styled.div`
   height: 50px;
   width: 50px;
   border-radius: 50%;
