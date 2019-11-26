@@ -14,7 +14,6 @@ const Circle = styled.div`
   margin-top: 10px;
 `;
 
-<<<<<<< HEAD
 class Measurement extends React.Component {
   render() {
     const name = this.props.name;
@@ -43,12 +42,6 @@ class Measurement extends React.Component {
 
   }
 }
-=======
-export const Measurement = () => (
-  <Circle>
- sdasdasd
-  </Circle>
-)
->>>>>>> master
+
 
 export default Measurement;
