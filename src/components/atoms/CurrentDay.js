@@ -1,13 +1,19 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 import moment from 'moment'
+
+const Title = styled.h2`
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #FFC759;
+`;
 
 
 class CurrentDay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      day: ""
+      day: null
     }
 
     this.getCurrentDay = this.getCurrentDay.bind(this)
@@ -18,19 +24,16 @@ class CurrentDay extends React.Component {
   }
 
   getCurrentDay() {
-
-      let startDate = moment('2019-11-25'); // Dummy data
-      let currentDate = moment();
-
+      let startDate = moment('2019-11-22') // Dummy data
+      let currentDate = moment()
       const newDate = currentDate.diff(startDate, 'days');
-
       this.setState({day: newDate})
   }
 
   render() {
     return(
       <div>
-        <h2> Dag {this.state.day} </h2>
+        <Title> DAG {this.state.day} </Title>
       </div>
     )
   }
