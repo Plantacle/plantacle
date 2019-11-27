@@ -7,9 +7,9 @@ class Styleguide1 extends React.Component {
     return (
       <div>
 
-        <Measurement name="temperature"> </Measurement>
-        <Measurement name="methane"> </Measurement>
-        <Measurement name="moist"> </Measurement>
+        <Measurement name="temperature" value="66°c"> </Measurement>
+        <Measurement name="methane" value="5,42"> </Measurement>
+        <Measurement name="moist"  value="15 %"> </Measurement>
 
       </div>
     )

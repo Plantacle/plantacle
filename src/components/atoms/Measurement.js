@@ -4,14 +4,27 @@ import Methane from '../svg/Methane';
 import Moist from '../svg/Moist';
 import Temperature from '../svg/Temperature';
 
+const Wrapper = styled.div`
+  height: 32px;
+  width: 32px;
+  margin-bottom: 30px;
+`;
+
 const Circle = styled.div`
   height: 32px;
   width: 32px;
   border-radius: 50%;
   border-color: #324BB8;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   margin-top: 10px;
+`;
+
+const TitleCircle = styled.p`
+  font-weight: 700;
+  font-size: 10px;
+  text-align: center;
+  color: #324BB8;
 `;
 
 class Measurement extends React.Component {
@@ -20,25 +33,26 @@ class Measurement extends React.Component {
 
      if (name === "methane") {
        return (
-         <div>
-         <Circle> <Methane width="20" height="20" /> </Circle>
-         </div>
+         <Wrapper>
+           <Circle> <Methane width="23" height="23" /> </Circle>
+           <TitleCircle> {this.props.value} </TitleCircle>
+         </Wrapper>
        )
      } else if (name === "moist") {
        return (
-         <div>
-         <Circle> <Moist width="20" height="20" /> </Circle>
-         </div>
+         <Wrapper>
+           <Circle> <Moist width="23" height="23" /> </Circle>
+           <TitleCircle> {this.props.value} </TitleCircle>
+         </Wrapper>
        )
      } else if (name === "temperature") {
       return (
-        <div>
-        <Circle> <Temperature width="20" height="20" /> </Circle>
-        </div>
+        <Wrapper>
+          <Circle> <Temperature width="23" height="23" /> </Circle>
+          <TitleCircle> {this.props.value} </TitleCircle>
+        </Wrapper>
       )
     }
-
-    return <div></div>;
 
   }
 }
