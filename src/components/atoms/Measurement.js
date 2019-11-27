@@ -11,20 +11,20 @@ const Wrapper = styled.div`
 `;
 
 const Circle = styled.div`
-  height: 32px;
-  width: 32px;
   border-radius: 50%;
   border-color: #324BB8;
   border-style: solid;
   border-width: 1px;
-  margin-top: 10px;
+  height: 32px;
+  margin-bottom: 5px;
+  width: 32px;
 `;
 
 const TitleCircle = styled.p`
+  color: #324BB8;
   font-weight: 700;
   font-size: 10px;
   text-align: center;
-  color: #324BB8;
 `;
 
 class Measurement extends React.Component {
