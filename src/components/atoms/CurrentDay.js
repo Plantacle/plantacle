@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import moment from 'moment'
 
 const Title = styled.h2`
-  font-weight: 700;
-  letter-spacing: 3px;
   color: #FFC759;
+  letter-spacing: 3px;
+  font-weight: 700;
+  font-size: 30px;
 `;
 
 
