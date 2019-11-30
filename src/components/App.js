@@ -9,6 +9,7 @@ import { createGlobalStyle } from 'styled-components';
 // Will be deleted later
 import Styleguide1 from '../pages/Styleguide1';
 import Styleguide2 from '../pages/Styleguide2';
+import Login from '../pages/Login';
 
 export const GlobalStyles = createGlobalStyle`
   body {
@@ -16,8 +17,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Poppins !important;
   }
 `;
-
-
 
 function App() {
   return (
@@ -31,9 +30,9 @@ function App() {
             <Route exact path="/" component={Overview} />
             <Route path="/tasks" component={Tasks} />
 
-            //
             <Route path="/styleguide1" component={Styleguide1} />
             <Route path="/styleguide2" component={Styleguide2} />
+            <Route path="/login" component = {Login} />
 
           </Switch>
         </Router>
