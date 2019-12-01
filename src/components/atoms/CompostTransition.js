@@ -1,84 +1,104 @@
 import React from 'react'
 import styled from 'styled-components'
+import SvgPhase1 from '../svg/Phase1';
+import SvgPhase2 from '../svg/Phase2';
 
+const PhaseStatus = styled.p`
+    font-weight: 300;
+    font-size: 12px;
+    color: #324BB8;
+    letter-spacing: 2px;
+`;
 
 class CompostTransition extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      transition: ''
+      temperature: '',
+      day: '',
     }
+
+    this.getTemperature = this.getTemperature.bind(this);
+    this.getDays = this.getDays.bind(this);
+
   }
 
   componentDidMount() {
-    this.getTransition()
+      this.getTemperature()
+      this.getDays()
   }
 
-  getTransition() {
+  getTemperature() {
+      let currentTemperature = 25;
+      this.setState({temperature: currentTemperature});
+  }
 
-    const temperature = 63;
-    const days = 113;
-    let status = '';
+  getDays() {
+      let currentDay = 5;
+      this.setState({day: currentDay});
+  }
+
+
+  render() {
 
     // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
-    if(temperature >= 20 && temperature < 40 && days >= 3 && days < 14 || temperature >= 20 && temperature < 35 && days < 3) {
-        status = 'Je zit in fase 1, restafval al in bak gedaan en wormen bovenop gelegd';
+    if(this.state.temperature >= 20 && this.state.temperature < 40 && this.state.day >= 3 && this.state.day < 14 || this.state.temperature >= 20 && this.state.temperature < 35 && this.state.day < 3) {
+        //status = 'Je zit in fase 1, restafval al in bak gedaan en wormen bovenop gelegd';
+        return (
+          <div>
+              <PhaseStatus>De compost is in een goede staat!</PhaseStatus>
+              <SvgPhase1 />
+          </div>
+        )
 
     // Fase 2 actually starts at day 14, but if it gets hot too quick on day 7 or earlier the compost might fail.
-    } else if(temperature >= 40 && temperature <=60 && days >= 7 && days < 56 || temperature >=40 && temperature < 50 && days > 3 && days < 7 ) { // 56 = 8 weeks
-        status = 'Je zit in fase 2, 5cm restafval aan compost toevoegen, om de 3-4 dagen 2.5 cm restafval toevoegen tot dag 56';
+    } else if(this.state.temperature >= 40 && this.state.temperature <=60 && this.state.day >= 7 && this.state.day < 56 || this.state.temperature >=40 && this.state.temperature < 50 && this.state.day > 3 && this.state.day < 7 ) { // 56 = 8 weeks
+        return <PhaseStatus> 'Je zit in fase 2, 5cm restafval aan compost toevoegen, om de 3-4 dagen 2.5 cm restafval toevoegen tot dag 56'; </PhaseStatus>
 
     // Fase 3
-    } else if(temperature >= 60 && temperature <= 65 && days >= 7 && days < 112) {
-        status = 'Je zit in fase 3, om de 2-3 dagen restafval toevoegen, worm castings zijn te zien'
+    } else if(this.state.temperature >= 60 && this.state.temperature <= 65 && this.state.day >= 7 && this.state.day < 112) {
+        //status = 'Je zit in fase 3, om de 2-3 dagen restafval toevoegen, worm castings zijn te zien'
+        return (
+          <div>
+            <PhaseStatus>De compost is in een goede staat!</PhaseStatus>
+            <SvgPhase2 />
+          </div>
+        )
 
     // Fase 4
-    } else if(temperature >= 40 && temperature <= 50 && days >= 56) {
-        status = 'Je zit in fase 4, afkoelingsfase, blijf elke dag of om de dag restafval toevoegen'
-
+    } else if(this.state.temperature >= 40 && this.state.temperature <= 50 && this.state.day >= 56) {
+        return <PhaseStatus> 'Je zit in fase 4, afkoelingsfase, blijf elke dag of om de dag restafval toevoegen' </PhaseStatus>
 
 
     // Fase 1 conception
-    } else if(temperature > 35 && days < 3) {
-        status = 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk'
-    } else if(temperature >= 20 && temperature < 40 && days > 14) {
-        status = 'Oei, de compost is aan het mislukken! De compostbeestjes zijn helemaal niet aan het werk'
+    } else if(this.state.temperature > 35 && this.state.day < 3) {
+        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk' </PhaseStatus>
+    } else if(this.state.temperature >= 20 && this.state.temperature < 40 && this.state.day > 14) {
+        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn helemaal niet aan het werk' </PhaseStatus>
 
     // Fase 2 conception
-    } else if(temperature > 50 && days < 7) {
-        status = 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk'
+    } else if(this.state.temperature > 50 && this.state.day < 7) {
+        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk' </PhaseStatus>
 
-    } else if(temperature >= 40 && temperature <=60 && days > 56) {
-        status = 'Oei, de compost is aan het mislukken! De compostbeestjes zijn helmaal niet aan het werk'
+    } else if(this.state.temperature >= 40 && this.state.temperature <=60 && this.state.day > 56) {
+        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn helmaal niet aan het werk' </PhaseStatus>
 
 
     // Fase 3 conception
 
-    } else if(temperature > 65) {
-        status = 'Oei te hard aan het werk!!! No no no no'
+    } else if(this.state.temperature > 65) {
+        return <PhaseStatus> 'Er is teveel methaangas vrijgekomen!' </PhaseStatus>
 
-    } else if(temperature >= 60 && temperature <= 65 && days > 112) {
-        status = 'Oei, de compost hoort nu af te koelen'
+    } else if(this.state.temperature >= 60 && this.state.temperature <= 65 && this.state.day > 112) {
+        return <PhaseStatus> 'Oei, de compost hoort nu af te koelen' </PhaseStatus>
 
 
     // Fase 4
 
-
-
-
     } else {
-        status = 'Error'
+        //status = 'Error'
+        return <PhaseStatus> Error </PhaseStatus>
     }
-
-    this.setState({transition: status})
-  }
-
-  render() {
-    return(
-      <div>
-          <p> {this.state.transition} </p>
-      </div>
-    )
   }
 }
 
