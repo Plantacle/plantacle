@@ -2,6 +2,7 @@ import React from 'react'
 import Measurement from '../components/atoms/Measurement';
 import CurrentDay from '../components/atoms/CurrentDay';
 import CompostTransition from '../components/atoms/CompostTransition';
+import OverviewButton from '../components/atoms/OverviewButton';
 
 
 class Styleguide1 extends React.Component {
@@ -34,6 +35,15 @@ class Styleguide1 extends React.Component {
           <div className="transition">
             <CompostTransition />
           </div>
+
+
+          <br />
+
+          <div className="button">
+            <OverviewButton />
+          </div>
+
+
 
 
 
