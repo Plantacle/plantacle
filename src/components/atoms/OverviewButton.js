@@ -6,8 +6,10 @@ const Button = styled.button`
     font-size: 18px;
     color: #ffffff;
     width: 179px;
-    height: 41px;
     letter-spacing: 1px;
+    height: 41px;
+
+    border-radius: 6px;
 
     border: none;
     margin: 0;
@@ -30,7 +32,7 @@ function OverviewButton() {
   return (
     <div>
       <Button href="#" onClick={handleClick}>
-        6 TAKEN
+        6 nieuwe taken
       </Button>
     </div>
   );
