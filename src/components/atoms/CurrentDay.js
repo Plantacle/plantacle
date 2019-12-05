@@ -14,7 +14,7 @@ class CurrentDay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      day: null
+      day: ''
     }
 
     this.getCurrentDay = this.getCurrentDay.bind(this)

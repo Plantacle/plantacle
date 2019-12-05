@@ -1,5 +1,5 @@
 import React from 'react'
-import Measurement from '../components/atoms/Measurement';
+import Measurements from '../components/molecules/Measurements';
 import CurrentDay from '../components/atoms/CurrentDay';
 import CompostTransition from '../components/atoms/CompostTransition';
 import OverviewButton from '../components/atoms/OverviewButton';
@@ -11,12 +11,9 @@ class Styleguide1 extends React.Component {
       <div>
           <div className="measurements">
 
-            <Measurement name="temperature" value="66°c"> </Measurement>
-            <Measurement name="methane" value="5,42"> </Measurement>
-            <Measurement name="moist"  value="15 %"> </Measurement>
+            <Measurements />
 
           </div>
-
 
           <br />
           <br />
@@ -42,9 +39,6 @@ class Styleguide1 extends React.Component {
           <div className="button">
             <OverviewButton />
           </div>
-
-
-
 
 
       </div>

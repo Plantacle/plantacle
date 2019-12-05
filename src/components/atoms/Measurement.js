@@ -28,6 +28,31 @@ const TitleCircle = styled.p`
 `;
 
 class Measurement extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      methane: '',
+      moist: '',
+      temperature: '',
+    }
+  }
+
+  componentDidMount() {
+      this.getMeasurement()
+  }
+
+  getMeasurement() {
+      let currentMethane = '5,24';
+      let currentMoist = '15 %';
+      let currentTemperature = '55°C'
+
+      this.setState({
+        methane: currentMethane,
+        moist: currentMoist,
+        temperature: currentTemperature
+      })
+  }
+
   render() {
     const name = this.props.name;
 
@@ -35,21 +60,21 @@ class Measurement extends React.Component {
        return (
          <Wrapper>
            <Circle> <Methane width="23" height="23" /> </Circle>
-           <TitleCircle> {this.props.value} </TitleCircle>
+           <TitleCircle> {this.state.methane} </TitleCircle>
          </Wrapper>
        )
      } else if (name === "moist") {
        return (
          <Wrapper>
            <Circle> <Moist width="23" height="23" /> </Circle>
-           <TitleCircle> {this.props.value} </TitleCircle>
+           <TitleCircle> {this.state.moist} </TitleCircle>
          </Wrapper>
        )
      } else if (name === "temperature") {
       return (
         <Wrapper>
           <Circle> <Temperature width="23" height="23" /> </Circle>
-          <TitleCircle> {this.props.value} </TitleCircle>
+          <TitleCircle> {this.state.temperature} </TitleCircle>
         </Wrapper>
       )
     }

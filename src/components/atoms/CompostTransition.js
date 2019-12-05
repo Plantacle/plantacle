@@ -29,12 +29,12 @@ class CompostTransition extends React.Component {
   }
 
   getTemperature() {
-      let currentTemperature = 61;
+      let currentTemperature = 62;
       this.setState({temperature: currentTemperature});
   }
 
   getDays() {
-      let currentDay = 10;
+      let currentDay = 50;
       this.setState({day: currentDay});
   }
 
