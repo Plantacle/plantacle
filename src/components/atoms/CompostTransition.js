@@ -38,6 +38,10 @@ class CompostTransition extends React.Component {
       this.setState({day: currentDay});
   }
 
+  getPlantState(){
+
+  }
+
   render() {
 
     // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
