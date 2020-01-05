@@ -5,43 +5,46 @@ import CompostTransition from '../components/atoms/CompostTransition';
 import OverviewButton from '../components/atoms/OverviewButton';
 
 
+import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
+
+
 class Overview extends React.Component {
   render() {
     return (
-      <div>
-          <div className="measurements">
+      <Container>
+          <Row>
 
             <Measurements />
 
-          </div>
+          </Row>
 
           <br />
           <br />
           <br />
 
-          <div className="date">
+          <Row>
 
             <CurrentDay />
 
-          </div>
+          </Row>
 
           <br />
           <br />
           <br />
 
-          <div className="transition">
+          <Row>
             <CompostTransition />
-          </div>
+          </Row>
 
 
           <br />
 
-          <div className="button">
+          <Row>
             <OverviewButton />
-          </div>
+          </Row>
 
 
-      </div>
+      </Container>
     )
   }
 }

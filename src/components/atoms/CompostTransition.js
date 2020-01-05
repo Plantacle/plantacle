@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import SvgPhase1 from '../svg/Phase1';
 import SvgPhase2 from '../svg/Phase2';
+import CompostStatus from './CompostStatus';
 
 const PhaseStatus = styled.p`
     font-weight: 300;
@@ -49,7 +50,7 @@ class CompostTransition extends React.Component {
         //status = 'Je zit in fase 1, restafval al in bak gedaan en wormen bovenop gelegd';
         return (
           <div>
-              <PhaseStatus> De compost is in een goede staat!  Fase 1 </PhaseStatus>
+              <CompostStatus text="De compost is in een goede staat! Fase 1"> </CompostStatus>
               <SvgPhase1 />
           </div>
         )
@@ -57,14 +58,14 @@ class CompostTransition extends React.Component {
     // Fase 2 actually starts at day 14, but if it gets hot too quick on day 7 or earlier the compost might fail.
     } else if(this.state.temperature >= 40 && this.state.temperature <=60 && this.state.day >= 7 && this.state.day < 56 || this.state.temperature >=40 && this.state.temperature < 50 && this.state.day >= 4 && this.state.day < 7) { // 56 = 8 weeks
         // status = 'Je zit in fase 2, 5cm restafval aan compost toevoegen, om de 3-4 dagen 2.5 cm restafval toevoegen tot dag 56';
-        return <PhaseStatus> De compost is in een goede staat! Fase 2 </PhaseStatus>
+        return <CompostStatus text="De compost is in een goede staat! Fase 2 "> </CompostStatus>
 
     // Fase 3
     } else if(this.state.temperature >= 60 && this.state.temperature <= 65 && this.state.day >= 7 && this.state.day < 112) {
         //status = 'Je zit in fase 3, om de 2-3 dagen restafval toevoegen, worm castings zijn te zien'
         return (
           <div>
-              <PhaseStatus> De compost is in een goede staat! Fase 3 </PhaseStatus>
+              <CompostStatus text="De compost is in een goede staat! Fase 3 "> </CompostStatus>
               <SvgPhase2 />
           </div>
         )
@@ -72,35 +73,35 @@ class CompostTransition extends React.Component {
     // Fase 4
     } else if(this.state.temperature >= 40 && this.state.temperature <= 50 && this.state.day >= 56) {
         //status = 'Je zit in fase 3, om de 2-3 dagen restafval toevoegen, worm castings zijn te zien'
-        return <PhaseStatus> De compost in een goede staat! Fase 4 </PhaseStatus>
+        return <CompostStatus text="De compost is in een goede staat! Fase 4"> </CompostStatus>
 
     // Fase 1 conception
     } else if(this.state.temperature > 30 && this.state.day < 3) {
-        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk' </PhaseStatus>
+        return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk'> </CompostStatus>
     } else if(this.state.temperature >= 20 && this.state.temperature < 40 && this.state.day > 14) {
-        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn helemaal niet aan het werk' </PhaseStatus>
+        return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn helemaal niet aan het werk'> </CompostStatus>
 
     // Fase 2 conception
     } else if(this.state.temperature > 50 && this.state.day < 7) {
-        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk' </PhaseStatus>
+        return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk'> </CompostStatus>
     } else if(this.state.temperature >= 40 && this.state.temperature <=60 && this.state.day == 3) {
-        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk' </PhaseStatus>
+        return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk'> </CompostStatus>
     } else if(this.state.temperature >= 40 && this.state.temperature <=60 && this.state.day > 56) {
-        return <PhaseStatus> 'Oei, de compost is aan het mislukken! De compostbeestjes zijn helmaal niet aan het werk' </PhaseStatus>
+        return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn helemaal niet aan het werk'> </CompostStatus>
 
     // Fase 3 conception
 
     } else if(this.state.temperature > 65) {
-        return <PhaseStatus> 'Er is teveel methaangas vrijgekomen!' </PhaseStatus>
+        return <CompostStatus text='Er is teveel methaangas vrijgekomen!'> </CompostStatus>
 
     } else if(this.state.temperature >= 60 && this.state.temperature <= 65 && this.state.day > 112) {
-        return <PhaseStatus> 'Oei, de compost hoort nu af te koelen' </PhaseStatus>
+        return <CompostStatus text='Oei, de compost hoort nu af te koelen'> </CompostStatus>
 
     // Fase 4
 
     } else {
         //status = 'Error'
-        return <PhaseStatus> Error </PhaseStatus>
+        return <CompostStatus text='Error'> </CompostStatus>
     }
   }
 }
