@@ -1,58 +1,56 @@
+import styled from 'styled-components';
 import React from 'react';
-import EmailField from '../components/atoms/EmailField'
-import PasswordField from '../components/atoms/PasswordField'
-import AnchorLink from '../components/atoms/Anchor'
-import Button from '../components/atoms/Button'
-import Paragraph from '../components/atoms/Paragraph'
-import Checkbox from '../components/atoms/Checkbox'
-import SvgEmail from '../components/svg/Email'
-import SvgPassword from '../components/svg/Password'
-import SvgPerson from '../components/svg/Person'
-import SvgLogo from '../components/svg/Logo'
+import InputField from '../atoms/InputField'
+import Checkbox from '../atoms/Checkbox'
+import Button from '../../components/atoms/Button'
+import SvgEmail from '../../components/svg/Email'
+import SvgPassword from '../../components/svg/Password'
+import SvgLogo from '../../components/svg/Logo'
 
-class LoginFormComponent extends React.Component {
-  constructor (props) {
+const Anchor = styled.a`
+  color: #FFC759;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  &:hover {
+      text-decoration: none;
+      color: #FFC759;
+  }
+`
+const P = styled.p`
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 500;
+`
 
-      super(props)
+class LoginForm extends React.Component {
 
-    this.state = {
-      email: '',
-      password: ''
+    constructor() {
+        super()
     }
 
-    this.changeHandler = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  
-  changeHandler = event => {
-    this.setState({
-      email: event.target.value,
-      password: event.target.value
-    });
-  }
+    render() {
+        return (
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
+            <div>
+                <form method='POST' action='#'>
+                    <SvgLogo/>
+                    <InputField type="email" placeholder="E-mail" id="email" name="email"/>
+                    <InputField type="password" placeholder="Wachtwoord" id="password" name="password"/>
+                    <Checkbox/>
+                    <SvgEmail></SvgEmail>
+                    <SvgPassword></SvgPassword>
+                    <P>Wachtwoord onthouden</P>
+                    <P>Nog geen account?</P>
+                    <Anchor href="#" value="test">Wachtwoord vergeten?</Anchor>
+                    <Button value="Login"></Button>
+                    <Anchor href="#" value="test">Registreer</Anchor>
+                </form>
+            </div>
 
-  render () {
-    return (
-      <form onSubmit={this.handleSubmit}>
-          <SvgLogo/>
-          <SvgPerson/>
-          <EmailField type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.changeHandler}>
-          <SvgEmail/>
-          </EmailField>
-          <PasswordField type="password" name="email" placeholder="Wachtwoord" value={this.state.password} onChange={this.changeHandler}>
-          <SvgPassword/>
-          </PasswordField>
-          <Checkbox>Wachtwoord onthouden?</Checkbox><AnchorLink>Wachtwoord vergeten?</AnchorLink>
-          <Button type="submit" value="Submit">Login</Button>
-          <Paragraph>Nog geen account?</Paragraph><AnchorLink>Registreer</AnchorLink>
-      </form>
-    );        
-  }
+        );
+    }
 }
 
-export default LoginFormComponent;
+export default LoginForm
