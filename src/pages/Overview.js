@@ -8,10 +8,12 @@ import styled from 'styled-components';
 import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
 
 const StyledContainer = styled(Container)`
-    width: 100px;
-    height: 100px;
-    background-color: yellow;
+    && {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
 `;
+
 
 class Overview extends React.Component {
   render() {
