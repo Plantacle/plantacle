@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Layout from './Layout';
 import Overview from '../pages/Overview';
 import Tasks from '../pages/Tasks';
+import RegisterForm from '../pages/RegisterForm'
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -30,6 +31,7 @@ function App() {
 
             <Route exact path="/" component={Overview} />
             <Route path="/tasks" component={Tasks} />
+            <Route path="/register" component={RegisterForm} />
 
             //
             <Route path="/styleguide1" component={Styleguide1} />
