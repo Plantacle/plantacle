@@ -6,6 +6,10 @@ const Status = styled.p`
     font-size: 12px;
     color: #324BB8;
     letter-spacing: 2px;
+
+    @media (min-width: 991.98px) { // Tablets
+      font-size: 17px;
+    }
 `;
 
 function CompostStatus(props) {

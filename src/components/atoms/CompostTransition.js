@@ -4,13 +4,6 @@ import SvgPhase1 from '../svg/Phase1';
 import SvgPhase2 from '../svg/Phase2';
 import CompostStatus from './CompostStatus';
 
-const PhaseStatus = styled.p`
-    font-weight: 300;
-    font-size: 12px;
-    color: #324BB8;
-    letter-spacing: 2px;
-`;
-
 class CompostTransition extends React.Component {
   constructor(props) {
     super(props);

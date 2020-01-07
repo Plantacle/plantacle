@@ -17,7 +17,7 @@ const StyledContainer = styled(Container)`
 
 const FirstRow = styled(Row)`
   && {
-    position: relative;
+
   }
 `;
 
@@ -35,11 +35,7 @@ const ThirdRow = styled(Row)`
 
 const SecondCol = styled(Col)`
   && {
-    position: absolute;
-    top: 30%;  /* position the top  edge of the element at the middle of the parent */
-    left: 82%; /* position the left edge of the element at the middle of the parent */
-    transform: translate(-50%, -50%); /* This is a shorthand of
-                                       translateX(-50%) and translateY(-50%) */
+      margin-top: 20px;
   }
 `;
 
@@ -52,11 +48,11 @@ class Overview extends React.Component {
     return (
         <StyledContainer>
             <FirstRow>
-                <Col>
+                <Col xs={4} md={4}>
                     <Measurements />
                 </Col>
 
-                <SecondCol>
+                <SecondCol xs={8} md={8}>
                     <CurrentDay />
                 </SecondCol>
             </FirstRow>

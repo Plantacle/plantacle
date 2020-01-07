@@ -7,6 +7,11 @@ const Title = styled.h2`
   letter-spacing: 3px;
   font-weight: 700;
   font-size: 30px;
+
+  @media (min-width: 991.98px) { // Tablets
+    font-size: 35px;
+  }
+
 `;
 
 
