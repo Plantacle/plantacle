@@ -12,7 +12,42 @@ code {
     monospace;
 }
 
-#logo{
-  width: 190px;
-  margin-bottom: 80px;
+.icons{
+  position: absolute;
+  margin: 18.7px 0px 0px 16px;
 }
+
+.logo{
+  width: 150px;
+}
+
+.container-top {
+  height: 40vh !important;
+  padding-left: 0px;
+  padding-right: 0px;
+  background: #ffffff !important;
+  
+}
+
+.container-bottom{
+  background: #f4f4f4;
+  padding: 20px;
+  position: relative;
+}
+
+.icon-1{
+  top: 16px;
+}
+
+.icon-2{
+  top: -6px;
+}
+
+.icon-3{
+  top: -5px;
+}
+
+.wave{
+  transform: rotate(180deg);
+}
+

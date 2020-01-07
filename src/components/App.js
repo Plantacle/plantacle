@@ -23,9 +23,6 @@ export const GlobalStyles = createGlobalStyle`
 function App() {
   return (
 
-    <React.Fragment>
-      <Layout>
-      <GlobalStyles />
         <Router>
           <Switch>
 
@@ -33,14 +30,13 @@ function App() {
             <Route path="/tasks" component={Tasks} />
             <Route path="/register" component={RegisterForm} />
 
-            //
+            
             <Route path="/styleguide1" component={Styleguide1} />
             <Route path="/styleguide2" component={Styleguide2} />
 
           </Switch>
         </Router>
-      </Layout>
-    </React.Fragment>
+
 
   );
 }
