@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
-//import TaskList from './../components/molecules/Tasks.js';
+import TaskList from './../components/molecules/TaskList.js';
 
 window.id = 0;
 
@@ -17,11 +17,9 @@ class Tasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        tasks: ['Compost water geven', 'Groen toevoegen', 'Test']
+        tasks: ['Compost water geven', 'Groen toevoegen', 'Test', 'Bruin toevoegen'],
+        text: ['Doe hier 15 ml bij', 'Fruit, Aardapschillen', 'Gras', 'Test', 'Kartonnen dozen']
     }
-
-    //this.getTemperature = this.getTemperature.bind(this);
-    //this.getDays = this.getDays.bind(this);
 
     this.removeTask = this.removeTask.bind(this);
 
@@ -35,34 +33,14 @@ class Tasks extends React.Component {
       })
   }
 
-
-
   render() {
     return (
       <StyledContainer>
           <p> Taken </p>
-          <TaskList tasks={this.state.tasks} removeTask={this.removeTask}> </TaskList>
+          <TaskList tasks={this.state.tasks} text={this.state.text} removeTask={this.removeTask}> </TaskList>
       </StyledContainer>
     )
   }
 }
-
-class TaskList extends React.Component {
-
-    removeItem(item, i) {
-        this.props.removeTask(item, i)
-    }
-
-    render() {
-      return(
-          <ul>
-              { this.props.tasks.map((task, i) => {
-                   return <li onClick={() => { this.removeItem(task, i)}} key={i}>{ task }</li>
-               })}
-          </ul>
-      )
-    }
-}
-
 
 export default Tasks;
