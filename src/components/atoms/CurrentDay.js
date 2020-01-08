@@ -14,7 +14,6 @@ const Title = styled.h2`
 
 `;
 
-
 class CurrentDay extends React.Component {
   constructor(props) {
     super(props);

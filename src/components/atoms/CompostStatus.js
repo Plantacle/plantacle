@@ -1,6 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 
+const StatusWrapper = styled.div`
+    position: absolute;
+    top: -80px;
+    right: 10px;
+    width: 200px;
+`;
+
 const Status = styled.p`
     font-weight: 300;
     font-size: 12px;
@@ -14,11 +21,11 @@ const Status = styled.p`
 
 function CompostStatus(props) {
   return (
-    <div>
+    <StatusWrapper>
       <Status>
         {props.text}
       </Status>
-    </div>
+    </StatusWrapper>
   );
 }
 

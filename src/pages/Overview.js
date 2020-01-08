@@ -24,6 +24,8 @@ const FirstRow = styled(Row)`
 const SecondRow = styled(Row)`
   && {
     justify-content: center;
+    min-width: 400px;
+    position: relative;
   }
 `;
 
@@ -36,6 +38,8 @@ const ThirdRow = styled(Row)`
 const SecondCol = styled(Col)`
   && {
       margin-top: 20px;
+      display: flex;
+      justify-content: center;
   }
 `;
 
@@ -48,13 +52,15 @@ class Overview extends React.Component {
     return (
         <StyledContainer>
             <FirstRow>
-                <Col xs={4} md={4}>
+                <Col xs={3}>
                     <Measurements />
                 </Col>
 
-                <SecondCol xs={8} md={8}>
+                <SecondCol xs={6}>
                     <CurrentDay />
                 </SecondCol>
+                <Col xs={3}>
+                </Col>
             </FirstRow>
 
           <SecondRow>
