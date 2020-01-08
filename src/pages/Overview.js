@@ -37,9 +37,9 @@ const ThirdRow = styled(Row)`
 
 const SecondCol = styled(Col)`
   && {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
   }
 `;
 
