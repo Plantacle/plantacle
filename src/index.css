@@ -12,13 +12,28 @@ code {
     monospace;
 }
 
+
+/* External styling */
 .icons{
   position: absolute;
   margin: 18.7px 0px 0px 16px;
 }
 
+.icon-1{
+  top: 16px;
+}
+
+.icon-2{
+  top: -6px;
+}
+
+.icon-3{
+  top: -5px;
+}
+
 .logo{
   width: 150px;
+  margin-top: 6rem !important;
 }
 
 .container-top {
@@ -35,19 +50,76 @@ code {
   position: relative;
 }
 
-.icon-1{
-  top: 16px;
-}
-
-.icon-2{
-  top: -6px;
-}
-
-.icon-3{
-  top: -5px;
-}
-
 .wave{
   transform: rotate(180deg);
 }
+
+.anchor{
+  margin-left: 10px !important;
+}
+
+.form-check-label{
+  font-size: 12px;
+  font-weight: 600;
+  color: #b1b1b1;
+}
+
+.remember-password{
+  float: none !important;
+  color: #afafaf !important;
+  margin-top: 2px !important;
+}
+.forgotpassword{
+  margin-top: -2px;
+}
+
+.round{
+  float: left;
+  padding-right: 10px;
+}
+
+.nav{
+  box-shadow: 0 -3px 5px -6px #333;
+  justify-content: space-between;
+  padding: 22px 0px 10px 0px;
+  position: relative;
+}
+
+.nav-row{
+  display: contents !important;
+}
+
+.nav-col{
+  display: inline-flex !important;
+}
+
+.nav-col:nth-child(2){
+  flex-direction: row-reverse !important;
+}
+
+.nav-link{
+  font-size: 12px;
+  color: #4e4e4e;
+  font-weight: 500;
+}
+
+.nav-link:hover{
+  color: black;
+}
+
+.glyph{
+  margin-left: 32px;
+  color: #cacaca;
+}
+
+.task-icon{
+  margin-left: 23px;
+}
+
+.home-glyph{
+  color: #ffff;
+  margin-left: 10px;
+  margin: 21px 0px 0px 19px;
+}
+/* End External styling */
 

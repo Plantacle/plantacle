@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import SvgEmail from '../components/svg/Email'
-import SvgPassword from '../components/svg/Password'
-import logo from '../../src/img/logo.png'
-import SvgWave from '../components/svg/Wave'
-import { Bootstrap, Grid, Row, Col, Container, Form } from 'react-bootstrap';
+import SvgEmail from '../svg/Email'
+import SvgPassword from '../svg/Password'
+import logo from '../../img/logo.png'
+import SvgWave from '../svg/Wave'
+import { Bootstrap, Grid, Row, Col, Container, Form, Navbar, Nav } from 'react-bootstrap';
 
 /* Styling */
 
@@ -54,34 +54,33 @@ const BigButton = styled.input`
   font-weight: 500;
 `
 
+const Circle = styled.div`
+    height: 80px;
+    margin: 0 auto;
+    width: 80px;
+    border-radius: 50%;
+    border-color: #266db9;
+    border-style: solid;
+    background: #266db9;
+    border-width: 2px;
+    position: absolute;
+    left: 50%;
+    z-index: 999999;
+    left: calc(50% - 45px);
+    cursor: pointer;
+`;
+
 /* End Styling */
 
-class Register extends React.Component {
+class Navigation extends React.Component {
 
     constructor(props) {
 
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            verify_password: ''
+
         };
 
-        this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-
-    }
-
-    handleInputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value }) // [name='']: value of the field
-        console.log(event.target.value)
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-        window.location.href = 'overview'
-
-        // fetch here
     }
 
     render() {
@@ -148,11 +147,42 @@ class Register extends React.Component {
                                 <Anchor href="login">Log hier in</Anchor>
                             </Col>
                         </Row>
+                        <a href="overview"><Circle><i class="fas fa-home home-glyph fa-2x"></i></Circle></a>
                     </Container>
+                    <Nav>
+                    
+                    <Row className="nav-row">
+
+
+                        <Col className="nav-col">
+                        <Nav.Item>
+                        <i class="fas fa-map-marker-alt glyph"></i>
+                            <Nav.Link href="" className="nav-link">Locaties</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                        <i class="fas fa-tasks glyph task-icon"></i>
+                            <Nav.Link href="" className="nav-link">Taken</Nav.Link>
+                        </Nav.Item>
+                        </Col>
+
+                        <Col className="nav-col">
+                        <Nav.Item>
+                        <i class="fas fa-sign-out-alt glyph"></i>
+                            <Nav.Link href="" className="nav-link">Uitloggen</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                        <i class="fas fa-chart-line glyph"></i>
+                            <Nav.Link href="1" className="nav-link">Overzicht</Nav.Link>
+                        </Nav.Item>
+                        </Col>
+
+
+                        </Row>
+                    </Nav>
                 </form>
-                </div>
+            </div>
         );
     }
 }
 
-export default Register
+export default Navigation

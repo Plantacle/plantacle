@@ -4,6 +4,8 @@ import Layout from './Layout';
 import Overview from '../pages/Overview';
 import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
+import LoginForm from '../pages/LoginForm'
+import Navigation from '../components/organisms/Navigation'
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -29,6 +31,8 @@ function App() {
             <Route exact path="/" component={Overview} />
             <Route path="/tasks" component={Tasks} />
             <Route path="/register" component={RegisterForm} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/navigation" component={Navigation} />
 
             
             <Route path="/styleguide1" component={Styleguide1} />
