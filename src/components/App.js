@@ -20,11 +20,12 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Poppins !important;
   }
 `;
+
+
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com"
 })
 export const authenticationApi = new AuthenticationApi(apiConfig)
-
 
 function App() {
   return (
@@ -32,13 +33,13 @@ function App() {
         <Router>
           <Switch>
 
-            <Route exact path="/" component={Overview} />
+            //<Route exact path="/" component={Overview} />
             <Route path="/tasks" component={Tasks} />
+
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/navigation" component={Navigation} />
 
-            
             <Route path="/styleguide1" component={Styleguide1} />
             <Route path="/styleguide2" component={Styleguide2} />
 
