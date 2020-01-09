@@ -32,14 +32,14 @@ class CompostTransition extends React.Component {
   }
 
   getDays() {
-      let currentDay = 50;
+      let currentDay = 3;
       this.setState({day: currentDay});
   }
 
   render() {
 
     // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
-    if(this.state.temperature >= 10 && this.state.temperature < 40 && this.state.day >= 3 && this.state.day < 14 || this.state.temperature >= 20 && this.state.temperature < 30 && this.state.day < 3) {
+    if(this.state.temperature >= 10 && this.state.temperature < 40 && this.state.day >= 1 && this.state.day < 14 || this.state.temperature >= 20 && this.state.temperature < 30 && this.state.day < 3) {
         //status = 'Je zit in fase 1, restafval al in bak gedaan en wormen bovenop gelegd';
         return (
           <div>
