@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import SvgPhase1 from '../svg/Phase1';
 import SvgPhase2 from '../svg/Phase2';
 import CompostStatus from './CompostStatus';
+import { measurementsApi } from '../App';
 
 class CompostTransition extends React.Component {
   constructor(props) {
@@ -22,9 +23,10 @@ class CompostTransition extends React.Component {
       this.getDays()
   }
 
-  getTemperature() {
-      let currentTemperature = 62;
-      this.setState({temperature: currentTemperature});
+  async getTemperature() {
+      const result = await measurementsApi.getLatest()
+      console.log(result.data.temperature)
+      this.setState({temperature: result.data.temperature});   //result.data.temperature
   }
 
   getDays() {
@@ -32,14 +34,10 @@ class CompostTransition extends React.Component {
       this.setState({day: currentDay});
   }
 
-  getPlantState(){
-
-  }
-
   render() {
 
     // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
-    if(this.state.temperature >= 20 && this.state.temperature < 40 && this.state.day >= 3 && this.state.day < 14 || this.state.temperature >= 20 && this.state.temperature < 30 && this.state.day < 3) {
+    if(this.state.temperature >= 10 && this.state.temperature < 40 && this.state.day >= 3 && this.state.day < 14 || this.state.temperature >= 20 && this.state.temperature < 30 && this.state.day < 3) {
         //status = 'Je zit in fase 1, restafval al in bak gedaan en wormen bovenop gelegd';
         return (
           <div>
@@ -71,7 +69,7 @@ class CompostTransition extends React.Component {
     // Fase 1 conception
     } else if(this.state.temperature > 30 && this.state.day < 3) {
         return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn te snel en te hard aan het werk'> </CompostStatus>
-    } else if(this.state.temperature >= 20 && this.state.temperature < 40 && this.state.day > 14) {
+    } else if(this.state.temperature >= 10 && this.state.temperature < 40 && this.state.day > 14) {
         return <CompostStatus text='Oei, de compost is aan het mislukken! De compostbeestjes zijn helemaal niet aan het werk'> </CompostStatus>
 
     // Fase 2 conception

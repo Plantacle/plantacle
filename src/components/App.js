@@ -6,7 +6,7 @@ import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
 import LoginForm from '../pages/LoginForm'
 import Navigation from '../components/organisms/Navigation'
-import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client'
+import {AuthenticationApi, Configuration, UsersApi, MeasurementsApi} from 'plantacle-api-client'
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -21,11 +21,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-
 export const apiConfig = new Configuration({
-  basePath: "https://app.plantacle.com"
+  basePath: "https://app.plantacle.com",
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg1ODMzOTksImV4cCI6MTU3ODYxMjE5OX0.qKX7gsuJwri81AL9hYPbS0uhqscAsne0zFCLTUAMIaI"
 })
 export const authenticationApi = new AuthenticationApi(apiConfig)
+export const measurementsApi = new MeasurementsApi(apiConfig)
 
 function App() {
   return (
