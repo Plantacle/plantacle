@@ -8,7 +8,6 @@ import { Bootstrap, Grid, Row, Col, Container, Form, Navbar, Nav } from 'react-b
 
 /* Styling */
 
-
 const Anchor = styled.a`
   color: #FFC759 !important;
   font-size: 12px;
@@ -150,33 +149,28 @@ class Navigation extends React.Component {
                         <a href="overview"><Circle><i class="fas fa-home home-glyph fa-2x"></i></Circle></a>
                     </Container>
                     <Nav>
-                    
-                    <Row className="nav-row">
+                        <Row className="nav-row">
+                            <Col className="nav-col">
+                                <Nav.Item>
+                                    <i class="fas fa-map-marker-alt glyph"></i>
+                                    <Nav.Link href="" className="nav-link">Locaties</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <i class="fas fa-tasks glyph task-icon"></i>
+                                    <Nav.Link href="" className="nav-link">Taken</Nav.Link>
+                                </Nav.Item>
+                            </Col>
 
-
-                        <Col className="nav-col">
-                        <Nav.Item>
-                        <i class="fas fa-map-marker-alt glyph"></i>
-                            <Nav.Link href="" className="nav-link">Locaties</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                        <i class="fas fa-tasks glyph task-icon"></i>
-                            <Nav.Link href="" className="nav-link">Taken</Nav.Link>
-                        </Nav.Item>
-                        </Col>
-
-                        <Col className="nav-col">
-                        <Nav.Item>
-                        <i class="fas fa-sign-out-alt glyph"></i>
-                            <Nav.Link href="" className="nav-link">Uitloggen</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                        <i class="fas fa-chart-line glyph"></i>
-                            <Nav.Link href="1" className="nav-link">Overzicht</Nav.Link>
-                        </Nav.Item>
-                        </Col>
-
-
+                            <Col className="nav-col">
+                                <Nav.Item>
+                                    <i class="fas fa-sign-out-alt glyph"></i>
+                                    <Nav.Link href="" className="nav-link">Uitloggen</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <i class="fas fa-chart-line glyph"></i>
+                                    <Nav.Link href="1" className="nav-link">Overzicht</Nav.Link>
+                                </Nav.Item>
+                            </Col>
                         </Row>
                     </Nav>
                 </form>

@@ -6,6 +6,7 @@ import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
 import LoginForm from '../pages/LoginForm'
 import Navigation from '../components/organisms/Navigation'
+import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client'
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -19,7 +20,10 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Poppins !important;
   }
 `;
-
+export const apiConfig = new Configuration({
+  basePath: "https://app.plantacle.com"
+})
+export const authenticationApi = new AuthenticationApi(apiConfig)
 
 
 function App() {

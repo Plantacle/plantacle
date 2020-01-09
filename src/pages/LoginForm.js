@@ -5,6 +5,8 @@ import SvgPassword from '../components/svg/Password'
 import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
 import { Bootstrap, Grid, Row, Col, Container, Form } from 'react-bootstrap';
+import { authenticationApi, apiConfig } from '../components/App'
+
 
 /* Styling */
 
@@ -70,15 +72,27 @@ class Login extends React.Component {
     }
 
     handleInputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value }) // [name='']: value of the field
-        console.log(event.target.value)
+
+        const value = this.setState({ [event.target.name]: event.target.value }) // [name='']: value of the field
+        return value
+
     }
 
     handleSubmit = (event) => {
+
         event.preventDefault()
-        window.location.href = 'overview'
 
         // fetch here
+        authenticationApi.login({
+            email: this.handleInputChange,
+            password: this.handleInputChange
+        })
+
+        console.log(authenticationApi)
+
+
+        //apiConfig.accessToken = 'test'
+
     }
 
     render() {
