@@ -17,8 +17,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-
-
 function App() {
   return (
 
@@ -28,8 +26,9 @@ function App() {
         <Router>
           <Switch>
 
-            <Route exact path="/" component={Overview} />
+            //<Route exact path="/" component={Overview} />
             <Route path="/tasks" component={Tasks} />
+            <Route exact path="/overview" component={Overview} />
 
             //
             <Route path="/styleguide1" component={Styleguide1} />
