@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Methane from '../svg/Methane';
 import Moist from '../svg/Moist';
 import Temperature from '../svg/Temperature';
+import { measurementsApi } from '../App';
 
 const Wrapper = styled.div`
   height: 32px;
@@ -41,15 +42,15 @@ class Measurement extends React.Component {
       this.getMeasurement()
   }
 
-  getMeasurement() {
+  async getMeasurement() {
       let currentMethane = '5,24';
-      let currentMoist = '15 %';
-      let currentTemperature = '55°C'
+
+      let result = await measurementsApi.getLatest()
 
       this.setState({
         methane: currentMethane,
-        moist: currentMoist,
-        temperature: currentTemperature
+        moist: result.data.humidity + '%',
+        temperature: result.data.temperature
       })
   }
 
