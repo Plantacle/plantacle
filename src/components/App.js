@@ -23,8 +23,9 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com",
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg1ODMzOTksImV4cCI6MTU3ODYxMjE5OX0.qKX7gsuJwri81AL9hYPbS0uhqscAsne0zFCLTUAMIaI"
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg2NzU1MzgsImV4cCI6MTU3ODcwNDMzOH0.EApoC9sB5PQ5txBuRoEgGnE1GBDNespvjt2lLBJ8Smg"
 })
+
 export const authenticationApi = new AuthenticationApi(apiConfig)
 export const measurementsApi = new MeasurementsApi(apiConfig)
 
