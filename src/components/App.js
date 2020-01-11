@@ -59,13 +59,20 @@ class App extends React.Component {
 
   // Get temperature
   async getMeasurements() {
-      const result = await measurementsApi.getLatest()
 
-      this.setState({
-          temperature: result.data.temperature,
-          humidity: result.data.humidity
-     });
+    try {
+          const result = await measurementsApi.getLatest()
 
+          this.setState({
+              temperature: result.data.temperature,
+              humidity: result.data.humidity
+         });
+
+       } catch (e) {
+         console.log(e);
+       }
+
+       return null;
   }
 
   // Get days
@@ -81,11 +88,11 @@ class App extends React.Component {
         //const result = await measurementsApi.getLatest()
         const result = {
           data: {
-            temperature: 45
+            temperature: 11
           }
         }
 
-        let currentDay = 57;
+        let currentDay = 10;
 
         console.log(this.state.day);
 
@@ -234,7 +241,7 @@ class App extends React.Component {
             <Switch>
 
               <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} day={this.state.day} temperature={this.state.temperature} humidity={this.state.humidity} methane={this.state.methane}/>}/>
-              <Route path="/tasks" render={()=><Tasks currentPhase={this.state.phase.currentPhase} />}/>
+              <Route path="/tasks" render={()=><Tasks currentPhase={this.state.phase.currentPhase} humidity={this.state.humidity} />}/>
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />
               <Route path="/navigation" component={Navigation} />

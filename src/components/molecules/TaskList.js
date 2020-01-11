@@ -8,16 +8,26 @@ const TaskBlock = styled.div`
     box-shadow: 2px 12px 16px #F7F7F7;
     margin-bottom: 10px;
     padding-top: 15px;
+    padding-left: 15px;
+`;
+
+const TaskTitle = styled.p`
+    font-weight: 500;
+    font-size: 15px;
+    color: #324BB8;
+    letter-spacing: 2px;
+`;
+
+const TaskDescription = styled.p`
+    font-size: 12px;
+    margin-top: -10px;
+    color: #A5A5A5;
+    letter-spacing: 1px;
 `;
 
 const ListItem = styled.li`
     list-style-type: none;
-    color: #324BB8;
-    letter-spacing: 2px;
-
 `;
-
-
 
 class TaskList extends React.Component {
 
@@ -29,31 +39,20 @@ class TaskList extends React.Component {
       return(
           <ul>
               { this.props.tasks.map((task, i) => {
+                const linkText = this.props.text[i];
                    return (
 
 
                         <ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
                             <TaskBlock>
-                                { task }
-
-                                {/*
-
-                                {this.props.text.map((text, i) => {
-                                     return (
-                                       <div>
-                                       { text }
-                                       </div>
-                                     )
-                                })}
-
-                                */}
-
+                              <TaskTitle> { task } </TaskTitle>
+                              <TaskDescription> {linkText} </TaskDescription>
                             </TaskBlock>
                         </ListItem>
 
                    )
-
                })}
+
           </ul>
       )
     }
