@@ -48,25 +48,56 @@ const CompostTransitionWrapper = styled.div`
 `;
 
 class Overview extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.someFn = this.someFn.bind(this);
+
+  }
+
+  componentDidMount() {
+      this.someFn();
+  }
+
+  someFn(){
+        let yo = 'yoyooy';
+        this.props.callbackFromParent('hello');
+  }
+
   render() {
     return (
+
         <StyledContainer>
             <FirstRow>
                 <Col xs={3}>
                     <Measurements />
                 </Col>
-
                 <SecondCol xs={6}>
                     <CurrentDay />
                 </SecondCol>
                 <Col xs={3}>
                 </Col>
             </FirstRow>
-
           <SecondRow>
+
+        {/*   If(this.props.phase == phase1-1) {
+
+              <CompostStatus text="De compost is in een goede staat! Fase 2 "> </CompostStatus>
+              <SvgPhase1 />
+
+           } */}
               <CompostTransitionWrapper>
                   <CompostTransition />
               </CompostTransitionWrapper>
+
+              {/*   If(this.props.phase == phase1-1) {
+
+                    <CompostStatus text="De compost is in een goede staat! Fase 2 "> </CompostStatus>
+                    <SvgPhase1 />
+
+                 } */}
+
           </SecondRow>
 
           <ThirdRow>

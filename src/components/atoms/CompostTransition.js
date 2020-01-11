@@ -5,6 +5,7 @@ import SvgPhase2 from '../svg/Phase2';
 import SvgPhase3 from '../svg/Phase3';
 import SvgPhase4 from '../svg/Phase4';
 import CompostStatus from './CompostStatus';
+import TaskTransmitter from './TaskTransmitter';
 import { measurementsApi } from '../App';
 
 class CompostTransition extends React.Component {
@@ -26,10 +27,10 @@ class CompostTransition extends React.Component {
   }
 
   async getTemperature() {
-      //const result = await measurementsApi.getLatest()
-      let test = 45;
+      const result = await measurementsApi.getLatest()
+      //let test = 45;
       //console.log(result.data.temperature)
-      this.setState({temperature: test});   //result.data.temperature
+      this.setState({temperature: result.data.temperature});   //result.data.temperature
   }
 
   getDays() {
@@ -88,7 +89,7 @@ class CompostTransition extends React.Component {
     } else if(this.state.temperature >= 10 && this.state.temperature < 40 && this.state.day > 14) {
         return (
             <div>
-                <CompostStatus text='De compostbeestjes zijn helemaal niet aan het werk'> </CompostStatus>
+                <CompostStatus text='De compostbeestjes zijn niet actief bezig'> </CompostStatus>
                 <SvgPhase1 />
             </div>
         )
@@ -104,7 +105,7 @@ class CompostTransition extends React.Component {
     } else if(this.state.temperature >= 50 && this.state.temperature <=60 && this.state.day >= 56) {
         return (
             <div>
-                <CompostStatus text='De compostbeestjes zijn helemaal niet aan het werk'> </CompostStatus>
+                <CompostStatus text='De compostbeestjes zijn niet actief bezig'> </CompostStatus>
                 <SvgPhase2 />
             </div>
         )
