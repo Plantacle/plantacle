@@ -4,8 +4,9 @@ import CurrentDay from '../components/atoms/CurrentDay';
 import CompostTransition from '../components/atoms/CompostTransition';
 import OverviewButton from '../components/atoms/OverviewButton';
 import styled from 'styled-components';
+import Navigation from '../components/organisms/Navigation'
 
-import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
+import {Bootstrap, Grid, Row, Col, Container, Nav} from 'react-bootstrap';
 
 const StyledContainer = styled(Container)`
   && {
@@ -72,6 +73,7 @@ class Overview extends React.Component {
           <ThirdRow>
               <OverviewButton />
           </ThirdRow>
+          <Navigation/>
       </StyledContainer>
     )
   }

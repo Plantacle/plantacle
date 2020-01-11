@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
 import TaskList from './../components/molecules/TaskList.js';
+import Navigation from '../components/organisms/Navigation'
 
 window.id = 0;
 
@@ -38,6 +39,7 @@ class Tasks extends React.Component {
       <StyledContainer>
           <p> Taken </p>
           <TaskList tasks={this.state.tasks} text={this.state.text} removeTask={this.removeTask}> </TaskList>
+          <Navigation/>
       </StyledContainer>
     )
   }

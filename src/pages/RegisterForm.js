@@ -4,7 +4,8 @@ import SvgEmail from '../components/svg/Email'
 import SvgPassword from '../components/svg/Password'
 import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
-import { Bootstrap, Grid, Row, Col, Container, Form } from 'react-bootstrap';
+import { Row, Col, Container, Form } from 'react-bootstrap';
+import { usersApi } from '../components/App'
 
 /* Styling */
 
@@ -56,17 +57,21 @@ const BigButton = styled.input`
 
 /* End Styling */
 
+const initializeState = {
+    email: '',
+    password: '',
+    verify_password: '',
+    emailError: '',
+    passwordError: '',
+    verifyPasswordError: ''
+}
+
 class Register extends React.Component {
 
     constructor(props) {
 
         super(props);
-        this.state = {
-            email: '',
-            password: '',
-            verify_password: ''
-        };
-
+        this.state = initializeState
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
 
@@ -77,11 +82,69 @@ class Register extends React.Component {
         console.log(event.target.value)
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        window.location.href = 'overview'
+    validate(password, email, verify_password) {
 
-        // fetch here
+        let emailError = ''
+        let passwordError = ''
+        let verifyPasswordError = ''
+
+        if (this.state.email === '') {
+            emailError = 'Geef een e-mailadres op'
+        } else if (!this.state.email.includes('@')) {
+            emailError = 'Het moet een geldig e-mailadres zijn'
+        } else if (!this.state.email.includes('.')){
+            emailError = 'Het moet een geldig e-mailadres zijn'
+        }
+
+        if (this.state.password === '') {
+            passwordError = 'Geef een wachtwoord op'
+        } else if(this.state.password.length < 8){
+            passwordError = 'Het wachtwoord moet minstens 8 tekens bevatten'
+        }
+
+        if (this.state.verify_password === '') {
+            verifyPasswordError = 'Geef het wachtwoord opnieuw op'
+        }  else if(this.state.password.length < 8){
+            passwordError = 'Het wachtwoord moet minstens 8 tekens bevatten'
+        }
+
+        if(this.state.password !== this.state.verifyPasswordError){
+            passwordError = 'De wachtwoorden komen niet met elkaar overeen!'
+            verifyPasswordError = 'De wachtwoorden komen niet met elkaar overeen!'
+        }
+
+        if (emailError || passwordError || verifyPasswordError) {
+            this.setState({ emailError, passwordError, verifyPasswordError })
+            return false
+        }
+
+        return true
+
+    }
+
+
+    async handleSubmit(event) {
+
+        // Prevent the default submit action
+        event.preventDefault()
+
+        // Validates the form
+        const isValid = this.validate()
+        if (isValid) {
+            console.log(this.state)
+            this.setState(initializeState)
+
+        }
+
+        // Creates a new user with an username and password
+        const registerNewUser = await usersApi.addUser({
+            email: this.state.email,
+            password: this.state.password,
+        })
+
+        // Redirects the user to the login page after being succesfully registered
+        window.location.href = "login";
+
     }
 
     render() {
@@ -92,7 +155,7 @@ class Register extends React.Component {
                     <h5>Plantacle</h5>
                 </Container>
                 <SvgWave className="wave"></SvgWave>
-                <form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}>
                     <Container fluid={true} className="container-bottom">
                         <Row>
                             <Col>
@@ -106,6 +169,7 @@ class Register extends React.Component {
                                         onChange={this.handleInputChange}
                                         className="mb-3 mt-3"
                                     ></Input>
+                                    <P className="error-messages">{this.state.emailError}</P>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -121,6 +185,7 @@ class Register extends React.Component {
                                         onChange={this.handleInputChange}
                                         className="mb-3"
                                     ></Input>
+                                    <P className="error-messages">{this.state.passwordError}</P>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -136,6 +201,7 @@ class Register extends React.Component {
                                         onChange={this.handleInputChange}
                                         className="mb-3"
                                     ></Input>
+                                    <P className="error-messages">{this.state.verifyPasswordError}</P>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -149,8 +215,8 @@ class Register extends React.Component {
                             </Col>
                         </Row>
                     </Container>
-                </form>
-                </div>
+                </Form>
+            </div>
         );
     }
 }

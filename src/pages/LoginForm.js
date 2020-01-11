@@ -4,8 +4,8 @@ import SvgEmail from '../components/svg/Email'
 import SvgPassword from '../components/svg/Password'
 import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
-import { Bootstrap, Grid, Row, Col, Container, Form } from 'react-bootstrap';
-import { authenticationApi, apiConfig } from '../components/App'
+import { Row, Col, Container, Form } from 'react-bootstrap';
+import { authenticationApi, apiConfig, usersApi } from '../components/App'
 
 
 /* Styling */
@@ -54,44 +54,112 @@ const BigButton = styled.input`
   font-weight: 500;
 `
 
+const InputCheckBox = styled.input``
+
+
 /* End Styling */
+
+
+const intitialState = {
+    email: '',
+    password: '',
+    emailError: '',
+    passwordError: ''
+}
 
 class Login extends React.Component {
 
     constructor(props) {
-
         super(props);
-        this.state = {
-            email: '',
-            password: '',
-        };
-
+        this.state = intitialState
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+
+    componentDidMount() {
+
+        console.log('Page loaded!')
 
     }
 
-    handleInputChange = (event) => {
+    // Sets the state of the input fields
+    handleInputChange(event) {
 
-        const value = this.setState({ [event.target.name]: event.target.value }) // [name='']: value of the field
-        return value
+        this.setState({ [event.target.name]: event.target.value })
 
     }
 
-    handleSubmit = (event) => {
+    // Validates the form
+    validate(email, password) {
 
+        let emailError = ''
+        let passwordError = ''
+
+        // Checks if the user filled in a valid e-mail address
+        if (this.state.email === '') {
+            emailError = 'Geef een e-mailadres op'
+        }
+
+        // Checks if the password field is empty
+        if (this.state.password === '') {
+            passwordError = 'Geef een wachtwoord op'
+        }
+
+        // If there is an error set the state to that error 
+        if (emailError || passwordError) {
+            this.setState({ emailError, passwordError })
+            return false
+        }
+
+        return true
+
+    }
+
+    async handleSubmit(event) {
+
+        // Prevent the default submit action
         event.preventDefault()
 
-        // fetch here
-        authenticationApi.login({
-            email: this.handleInputChange,
-            password: this.handleInputChange
-        })
+        // Validates the input fields after
+        const isValid = this.validate()
+        if (isValid) {
+            console.log(this.state)
+            this.setState(intitialState)
+        }
 
-        console.log(authenticationApi)
+        // Authenticates the user trying to log in
+        const authenticateLogin = await authenticationApi.login({ email: this.state.email, password: this.state.password })
 
+        // Generates an accessToken 
+        apiConfig.accessToken = authenticateLogin.data.accessToken
 
-        //apiConfig.accessToken = 'test'
+        console.log(apiConfig.accessToken)
+
+        // Add the accessToken to the localStorage
+        localStorage.setItem("accessToken", apiConfig.accessToken);
+
+        // Checks if the username and password are both correct (comes from api/auth)
+        if (authenticateLogin.status == 201) {
+            console.log('Naam en wachtwoord zijn allebei correct!')
+        }
+
+        // Finds the registred user 
+        const getAuthenticatedUser = await usersApi.getUser()
+        console.log(getAuthenticatedUser)
+
+        // Checks if the input value is equal to data from the database (comes from api/users/me)
+        if (getAuthenticatedUser.data.email == this.state.email) {
+            console.log('De ingevulde e-mail door de gebruiker komt overeen met die uit de database!')
+        }
+
+        // Checks if value in the inputtext field matches the database information (does not work at the moment)
+        //if (getAuthenticatedUser.data.email !== this.state.email) {
+        //     console.log('Deze gebruiker bestaat niet!')
+        //}
+
+        // Redirect the user to the overview page
+        window.location.href = "/";
 
     }
 
@@ -103,7 +171,7 @@ class Login extends React.Component {
                     <h5>Plantacle</h5>
                 </Container>
                 <SvgWave className="wave"></SvgWave>
-                <form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}>
                     <Container fluid={true} className="container-bottom">
                         <Row>
                             <Col>
@@ -117,6 +185,7 @@ class Login extends React.Component {
                                         onChange={this.handleInputChange}
                                         className="mb-3 mt-3"
                                     ></Input>
+                                    <P className="error-messages">{this.state.emailError}</P>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -132,20 +201,21 @@ class Login extends React.Component {
                                         onChange={this.handleInputChange}
                                         className="mb-3"
                                     ></Input>
+                                    <P className="error-messages">{this.state.passwordError}</P>
                                 </Form.Group>
                             </Col>
                         </Row>
+                        {/*
                         <Row>
                             <Col className="text-left">
-                                <div class="round"><input type="checkbox" id="checkbox" />
-                                <label for="checkbox"></label>
-                                </div>
+                            <InputCheckBox id="input" type="checkbox" />
                                 <P className="remember-password">Wachtwoord onthouden</P>
                             </Col>
                             <Col className="text-right mb-5 forgotpassword">
                                 <Anchor href="register" className="anchor">Wachtwoord vergeten?</Anchor>
                             </Col>
                         </Row>
+                        */}
                         <BigButton type="submit" className="mb-4" value="Login"></BigButton>
                         <Row>
                             <Col>
@@ -156,7 +226,7 @@ class Login extends React.Component {
                             </Col>
                         </Row>
                     </Container>
-                </form>
+                </Form>
             </div>
         );
     }

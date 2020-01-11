@@ -123,5 +123,10 @@ code {
   margin: 21px 0px 0px 19px;
 }
 
+.error-messages{
+  font-size: 9px !important;
+  color: #FFC759 !important;
+  float: left !important;
+}
 /* End External styling */
 

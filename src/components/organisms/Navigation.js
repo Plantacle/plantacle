@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SvgEmail from '../svg/Email'
-import SvgPassword from '../svg/Password'
-import logo from '../../img/logo.png'
-import SvgWave from '../svg/Wave'
-import { Bootstrap, Grid, Row, Col, Container, Form, Navbar, Nav } from 'react-bootstrap';
+import {Row, Col, Container, Nav } from 'react-bootstrap';
 
 /* Styling */
 
@@ -76,105 +72,46 @@ class Navigation extends React.Component {
     constructor(props) {
 
         super(props);
-        this.state = {
+        this.state = {};
 
-        };
+    }
 
+    // Removes the access token when the user is logging out
+    removeAccessToken(){
+        localStorage.removeItem('accessToken')
+        window.location.href = "login";
     }
 
     render() {
         return (
-            <div>
-                <Container fluid={true} className="text-center container-top">
-                    <img src={logo} className="logo" />
-                    <h5>Plantacle</h5>
-                </Container>
-                <SvgWave className="wave"></SvgWave>
-                <form onSubmit={this.handleSubmit}>
-                    <Container fluid={true} className="container-bottom">
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="formBasicEmail">
-                                    <SvgEmail className="icons icon-1" />
-                                    <Input
-                                        type='text'
-                                        name='email'
-                                        placeholder="Email"
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange}
-                                        className="mb-3 mt-3"
-                                    ></Input>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="formBasicPassword">
-                                    <SvgPassword className="icons icon-2" />
-                                    <Input
-                                        type='password'
-                                        name='password'
-                                        placeholder="Wachtwoord"
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                        className="mb-3"
-                                    ></Input>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="mb-4">
-                            <Col>
-                                <SvgPassword className="icons icon-3" />
-                                <Form.Group controlId="formBasicPassword">
-                                    <Input
-                                        type='password'
-                                        name='verify_password'
-                                        placeholder="Bevestig wachtwoord"
-                                        value={this.state.verify_password}
-                                        onChange={this.handleInputChange}
-                                        className="mb-3"
-                                    ></Input>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <BigButton type="submit" className="mb-4" value="Registreer"></BigButton>
-                        <Row>
-                            <Col>
-                                <P>Al een account?</P>
-                            </Col>
-                            <Col>
-                                <Anchor href="login">Log hier in</Anchor>
-                            </Col>
-                        </Row>
-                        <a href="overview"><Circle><i class="fas fa-home home-glyph fa-2x"></i></Circle></a>
-                    </Container>
+            <Container className="mt-5">
+            <a href="/"><Circle className="mt-2"><i className="fas fa-home home-glyph fa-2x"></i></Circle></a>
                     <Nav>
                         <Row className="nav-row">
                             <Col className="nav-col">
                                 <Nav.Item>
-                                    <i class="fas fa-map-marker-alt glyph"></i>
-                                    <Nav.Link href="" className="nav-link">Locaties</Nav.Link>
+                                    <i className="fas fa-map-marker-alt glyph"></i>
+                                    <Nav.Link href="locations" className="nav-link">Locaties</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <i class="fas fa-tasks glyph task-icon"></i>
-                                    <Nav.Link href="" className="nav-link">Taken</Nav.Link>
+                                    <i className="fas fa-tasks glyph task-icon"></i>
+                                    <Nav.Link href="tasks" className="nav-link">Taken</Nav.Link>
                                 </Nav.Item>
                             </Col>
 
                             <Col className="nav-col">
                                 <Nav.Item>
-                                    <i class="fas fa-sign-out-alt glyph"></i>
-                                    <Nav.Link href="" className="nav-link">Uitloggen</Nav.Link>
+                                    <i className="fas fa-sign-out-alt glyph"></i>
+                                    <Nav.Link href="login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <i class="fas fa-chart-line glyph"></i>
-                                    <Nav.Link href="1" className="nav-link">Overzicht</Nav.Link>
+                                    <i className="fas fa-chart-line glyph"></i>
+                                    <Nav.Link href="/" className="nav-link">Overzicht</Nav.Link>
                                 </Nav.Item>
                             </Col>
                         </Row>
                     </Nav>
-                </form>
-            </div>
+            </Container>
         );
     }
 }

@@ -6,7 +6,7 @@ import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
 import LoginForm from '../pages/LoginForm'
 import Navigation from '../components/organisms/Navigation'
-import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client'
+import { AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client'
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -25,7 +25,13 @@ export const GlobalStyles = createGlobalStyle`
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com"
 })
+
+// Gets the accessToken from the localStorage for all pages in the application
+localStorage.getItem("accessToken");
+console.log(localStorage)
+
 export const authenticationApi = new AuthenticationApi(apiConfig)
+export const usersApi = new UsersApi(apiConfig)
 
 function App() {
   return (
@@ -33,7 +39,7 @@ function App() {
         <Router>
           <Switch>
 
-            //<Route exact path="/" component={Overview} />
+            <Route exact path="/" component={Overview} />
             <Route path="/tasks" component={Tasks} />
 
             <Route path="/register" component={RegisterForm} />
