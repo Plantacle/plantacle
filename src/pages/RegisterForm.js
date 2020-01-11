@@ -152,7 +152,7 @@ class Register extends React.Component {
             <div>
                 <Container fluid={true} className="text-center container-top">
                     <img src={logo} className="logo" />
-                    <h5>Plantacle</h5>
+                    {/*<h5>Plantacle</h5>*/}
                 </Container>
                 <SvgWave className="wave"></SvgWave>
                 <Form onSubmit={this.handleSubmit}>

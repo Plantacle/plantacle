@@ -32,9 +32,19 @@ code {
   top: -5px;
 }
 
+@keyframes pulse {
+  from { transform: scale(1); }
+  50% { transform: scale(0.85); }
+  to { transform: scale(1); }
+}
+
+
 .logo{
   width: 150px;
   margin-top: 6rem !important;
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
 }
 
 .container-top {
@@ -46,7 +56,7 @@ code {
 }
 
 .container-bottom{
-  background: #f4f4f4;
+  background: #fafafa;
   padding: 20px;
   position: relative;
 }
@@ -99,7 +109,7 @@ code {
 }
 
 .nav-link{
-  font-size: 12px;
+  font-size: 10px;
   color: #4e4e4e;
   font-weight: 500;
 }
@@ -110,17 +120,20 @@ code {
 
 .glyph{
   margin-left: 32px;
-  color: #cacaca;
+  color: #d4d4d4;
 }
 
 .task-icon{
-  margin-left: 23px;
+  margin-left: 20px;
 }
 
 .home-glyph{
   color: #ffff;
-  margin-left: 10px;
-  margin: 21px 0px 0px 19px;
+  margin: 16px 0px 0px 15px;
+}
+
+.location-glyph{
+  margin-left: 28px;
 }
 
 .error-messages{

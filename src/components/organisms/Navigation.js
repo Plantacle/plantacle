@@ -50,18 +50,17 @@ const BigButton = styled.input`
 `
 
 const Circle = styled.div`
-    height: 80px;
+    height: 70px;
     margin: 0 auto;
-    width: 80px;
+    width: 70px;
     border-radius: 50%;
-    border-color: #266db9;
+    border-color:  #4368d1;
     border-style: solid;
-    background: #266db9;
+    background:  #4368d1;
     border-width: 2px;
     position: absolute;
-    left: 50%;
     z-index: 999999;
-    left: calc(50% - 45px);
+    left: calc(50% - 40px);
     cursor: pointer;
 `;
 
@@ -90,7 +89,7 @@ class Navigation extends React.Component {
                         <Row className="nav-row">
                             <Col className="nav-col">
                                 <Nav.Item>
-                                    <i className="fas fa-map-marker-alt glyph"></i>
+                                    <i className="fas fa-map-marker-alt glyph location-glyph"></i>
                                     <Nav.Link href="locations" className="nav-link">Locaties</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>

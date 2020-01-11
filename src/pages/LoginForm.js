@@ -15,6 +15,7 @@ const Anchor = styled.a`
   color: #FFC759 !important;
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: 1px;
   &:hover {
       text-decoration: none;
       color: #FFC759;
@@ -25,8 +26,9 @@ const P = styled.p`
   font-size: 12px;
   float: right;
   margin-top: 5px;
-  color: #545454
+  color: #676767
   font-weight: 700;
+  letter-spacing: 1px;
 `
 
 const Input = styled.input`
@@ -37,9 +39,9 @@ const Input = styled.input`
   padding-left: 50px;
   border: none;
   letter-spacing: 2px;
-  font-weight: 100;
+  font-weight: 400;
   ::placeholder{
-      color: lightgrey;
+      color: #b6bab3;
       font-weight: 400;
   }
 `
@@ -168,7 +170,7 @@ class Login extends React.Component {
             <div>
                 <Container fluid={true} className="text-center container-top">
                     <img src={logo} className="logo" />
-                    <h5>Plantacle</h5>
+                    {/*<h5>Plantacle</h5>*/}
                 </Container>
                 <SvgWave className="wave"></SvgWave>
                 <Form onSubmit={this.handleSubmit}>
