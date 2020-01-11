@@ -37,6 +37,7 @@ class App extends React.Component {
     this.state = {
       temperature: '',
       humidity: '',
+      methane: '5,24',
       day: '',
       phase: {
           currentPhase: '',
@@ -232,7 +233,7 @@ class App extends React.Component {
           <Router>
             <Switch>
 
-              <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} day={this.state.day}/>}/>
+              <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} day={this.state.day} temperature={this.state.temperature} humidity={this.state.humidity} methane={this.state.methane}/>}/>
               <Route path="/tasks" render={()=><Tasks currentPhase={this.state.phase.currentPhase} />}/>
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />

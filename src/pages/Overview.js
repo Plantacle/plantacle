@@ -62,7 +62,7 @@ class Overview extends React.Component {
         <StyledContainer>
             <FirstRow>
                 <Col xs={3}>
-                    <Measurements />
+                    <Measurements temperature={this.props.temperature} humidity={this.props.humidity} methane={this.props.methane}/>
                 </Col>
                 <SecondCol xs={6}>
                     <CurrentDay day={this.props.day} />
