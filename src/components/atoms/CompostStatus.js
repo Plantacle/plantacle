@@ -23,7 +23,7 @@ function CompostStatus(props) {
   return (
     <StatusWrapper>
       <Status>
-        {props.text}
+        {props.status}
       </Status>
     </StatusWrapper>
   );

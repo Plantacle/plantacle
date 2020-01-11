@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
 import TaskList from './../components/molecules/TaskList.js';
-import TaskTransmitter from './../components/atoms/TaskTransmitter';
 
 window.id = 0;
 
