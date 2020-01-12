@@ -78,15 +78,21 @@ class App extends React.Component {
    calculatePhase() {
 
         //const result = await measurementsApi.getLatest()
+
+
+        //SHOW
         const result = {
           data: {
             temperature: 12
           }
         }
 
-        let currentDay = 10;
+        // Current day
+        const currentDay = this.state.day;
 
-        console.log(this.state.day);
+        //SHOW
+        //const currentDay = 100;
+
 
         // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
         if(result.data.temperature >= 10 && result.data.temperature <= 40 && currentDay >= 3 && currentDay <= 14 || result.data.temperature >= 10 && result.data.temperature <= 30 && currentDay < 3) {
