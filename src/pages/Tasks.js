@@ -17,7 +17,7 @@ const StyledContainer = styled(Container)`
 
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com",
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg3NTI3NTgsImV4cCI6MTU3ODc4MTU1OH0.c63N0mRtwMNZgnZUUr2Gc8YrVoK5PUJ_VQh4FUaIb_Y"
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg4NDI5NDIsImV4cCI6MTU3ODg3MTc0Mn0.M4y1Ch_2exRcbbWnfl-sN3AcBLRWY3Fyi2m9bfP4Lus"
 })
 
 export const measurementsApi = new MeasurementsApi(apiConfig);
@@ -78,7 +78,7 @@ class Tasks extends React.Component {
             const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
             const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
 
-            const tasks = currentTasks.concat('Voeg groen 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
+            const tasks = currentTasks.concat('Voeg om de 2 dagen 1,25 cm groen afval toe', ' Voeg om de 2 dagen 1,25 cm bruin afval toe');
             const text = currentText.concat(groenafvalText, bruinafvalText);
 
             this.setState({ tasks: tasks, text: text})
@@ -91,11 +91,49 @@ class Tasks extends React.Component {
             const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
             const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
 
-            const tasks = currentTasks.concat('Voeg groen 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
+            const tasks = currentTasks.concat('Voeg om de 3 dagen 1,25 cm groen afval toe', ' Voeg om de 3 dagen 1,25 cm bruin afval toe');
             const text = currentText.concat(groenafvalText, bruinafvalText);
 
             this.setState({ tasks: tasks, text: text})
+
+        } else if(currentPhase == "phase4") {
+
+            const currentTasks = this.state.tasks;
+            const currentText = this.state.text;
+
+            const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
+            const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
+
+            const tasks = currentTasks.concat('Voeg om de 4 dagen 1,25 cm groen afval toe', ' Voeg om de 4 dagen 1,25 cm bruin afval toe');
+            const text = currentText.concat(groenafvalText, bruinafvalText);
+
+            this.setState({ tasks: tasks, text: text})
+        } else {
+            console.log('errror')
         }
+
+        if(humidity < 20) {
+            const currentTasks = this.state.tasks;
+            const currentText = this.state.text;
+
+            const tasks = currentTasks.concat('Voeg 10 cl water toe aan de wormenbak');
+            const text = currentText.concat('De vochtigheid in de wormenbak is op het moment te laag');
+
+            this.setState({ tasks: tasks, text: text})
+
+        } else if(humidity > 101) {
+            const currentTasks = this.state.tasks;
+            const currentText = this.state.text;
+
+            const tasks = currentTasks.concat('Schep de wormenbak om');
+            const text = currentText.concat('De vochtigheid van de wormenbak is op het moment te hoog');
+
+            this.setState({ tasks: tasks, text: text})
+        } else {
+            console.log('errr')
+        }
+
+
   }
 
   render() {

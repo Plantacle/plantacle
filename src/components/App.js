@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com",
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg3NTI3NTgsImV4cCI6MTU3ODc4MTU1OH0.c63N0mRtwMNZgnZUUr2Gc8YrVoK5PUJ_VQh4FUaIb_Y"
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg4NDI5NDIsImV4cCI6MTU3ODg3MTc0Mn0.M4y1Ch_2exRcbbWnfl-sN3AcBLRWY3Fyi2m9bfP4Lus"
 })
 
 export const authenticationApi = new AuthenticationApi(apiConfig);
@@ -57,6 +57,12 @@ class App extends React.Component {
       this.calculatePhase()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+  if (prevState.humidity !== this.state.humidity) {
+    console.log('humidity state has changed.')
+  }
+}
+
   // Get temperature
   async getMeasurements() {
 
@@ -65,7 +71,8 @@ class App extends React.Component {
 
           this.setState({
               temperature: result.data.temperature,
-              humidity: result.data.humidity
+              //humidity: result.data.humidity
+              humidity: 200,
          });
 
        } catch (e) {
@@ -88,11 +95,11 @@ class App extends React.Component {
         //const result = await measurementsApi.getLatest()
         const result = {
           data: {
-            temperature: 11
+            temperature: 64
           }
         }
 
-        let currentDay = 10;
+        let currentDay = 30;
 
         console.log(this.state.day);
 
