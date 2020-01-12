@@ -57,29 +57,14 @@ class App extends React.Component {
       this.calculatePhase()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-  if (prevState.humidity !== this.state.humidity) {
-    console.log('humidity state has changed.')
-  }
-}
-
   // Get temperature
   async getMeasurements() {
-
-    try {
-          const result = await measurementsApi.getLatest()
-
-          this.setState({
-              temperature: result.data.temperature,
-              //humidity: result.data.humidity
-              humidity: 200,
-         });
-
-       } catch (e) {
-         console.log(e);
-       }
-
-       return null;
+      const result = await measurementsApi.getLatest()
+      const currentHumidity = result.data.humidity
+      this.setState({
+          temperature: result.data.temperature,
+          humidity: currentHumidity
+     });
   }
 
   // Get days
@@ -95,11 +80,11 @@ class App extends React.Component {
         //const result = await measurementsApi.getLatest()
         const result = {
           data: {
-            temperature: 64
+            temperature: 12
           }
         }
 
-        let currentDay = 30;
+        let currentDay = 10;
 
         console.log(this.state.day);
 
