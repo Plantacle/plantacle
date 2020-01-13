@@ -6,14 +6,13 @@ const Label = styled.label`
     display: block;
     position: relative;
     padding-left: 10px;
-    margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin-right: 20px;
+    margin-right: 2px;
 `;
 
 

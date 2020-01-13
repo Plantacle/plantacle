@@ -163,27 +163,31 @@ addWater = async (props) => {
 const result = await measurementsApi.getLatest()
 let humidity = result.data.humidity; // can't use this.props.humidity because of asynchronous function
 
+console.log(humidity);
 // SHOW
-//let humidity = 101;
 
 if(humidity) {
      if(humidity < 20) {
            const currentTasks = this.state.tasks;
            const currentText = this.state.text;
+           const currentDescription = this.state.description;
 
            const tasks = currentTasks.concat('Voeg 10 cl water toe aan de wormenbak');
            const text = currentText.concat('De vochtigheid in de wormenbak is op het moment te laag');
+           const description = currentDescription.concat('De composthoop mag niet te nat of te droog worden. Af en toe een beetje water is prima, maar bij te veel regen spoelen de voedingsstoffen uit, of kan een tekort aan lucht ontstaan in de composthoop.')
 
-           this.setState({ tasks: tasks, text: text})
+           this.setState({ tasks: tasks, text: text, description: description})
 
-     } else if(humidity > 100) {
+     } else if(humidity > 96) {
            const currentTasks = this.state.tasks;
            const currentText = this.state.text;
+           const currentDescription = this.state.description;
 
            const tasks = currentTasks.concat('Schep de wormenbak om');
            const text = currentText.concat('De vochtigheid van de wormenbak is op het moment te hoog');
+           const description = currentDescription.concat('De wormenbak is op het moment te vochtig waardoor de compost gaat beschimmelen.');
 
-           this.setState({ tasks: tasks, text: text})
+           this.setState({ tasks: tasks, text: text, description: description})
      }
 
 } else {

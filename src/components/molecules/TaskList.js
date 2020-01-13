@@ -149,6 +149,7 @@ class TaskList extends React.Component {
   }
 
     render() {
+
       return(
         <div>
           <HeadTitleWrapper>
@@ -172,13 +173,14 @@ class TaskList extends React.Component {
                             </div>
                               <CheckWrapper>
 
+                                <Checkbox checked={this.state.checked} onChange={this.toggleChange}/>
+
                                 <InfoButton onClick={()=> this.showModal(task, description)}>
                                   <Info>
                                       <SvgHelp />
                                   </Info>
                                 </InfoButton>
 
-                                  <Checkbox checked={this.state.checked} onChange={this.toggleChange}/>
                               </CheckWrapper>
                             </TaskBlock>
                             <Modal show={this.state.modalShow} onHide={this.onHide}>
