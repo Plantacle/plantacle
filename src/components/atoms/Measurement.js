@@ -9,6 +9,10 @@ const Wrapper = styled.div`
   height: 32px;
   width: 32px;
   margin-bottom: 30px;
+
+  @media (min-width: 991.98px) { // Tablets
+    margin-bottom: 45px;
+  }
 `;
 
 const Circle = styled.div`
@@ -19,6 +23,12 @@ const Circle = styled.div`
   height: 32px;
   margin-bottom: 5px;
   width: 32px;
+
+  @media (min-width: 991.98px) { // Tablets
+    width: 44px;
+    height: 43px;
+  }
+
 `;
 
 const TitleCircle = styled.p`
@@ -26,36 +36,44 @@ const TitleCircle = styled.p`
   font-weight: 700;
   font-size: 10px;
   text-align: center;
+
+  @media (min-width: 991.98px) { // Tablets
+    width: 44px;
+    height: 43px;
+    font-size: 12px;
+  }
+
 `;
 
-class Measurement extends React.Component {
-  render() {
-    const name = this.props.name;
+
+const Measurement = (props) => {
+    const name = props.name;
 
      if (name === "methane") {
        return (
          <Wrapper>
-           <Circle> <Methane width="23" height="23" /> </Circle>
-           <TitleCircle> {this.props.methane} </TitleCircle>
+           <Circle>
+              <Methane width="23" height="23"> </Methane>
+           </Circle>
+           <TitleCircle> {props.methane} </TitleCircle>
          </Wrapper>
        )
      } else if (name === "moist") {
        return (
          <Wrapper>
            <Circle> <Moist width="23" height="23" /> </Circle>
-           <TitleCircle> {this.props.humidity} </TitleCircle>
+           <TitleCircle> {props.humidity}% </TitleCircle>
          </Wrapper>
        )
      } else if (name === "temperature") {
       return (
         <Wrapper>
           <Circle> <Temperature width="23" height="23" /> </Circle>
-          <TitleCircle> {this.props.temperature} </TitleCircle>
+          <TitleCircle> {props.temperature}°C </TitleCircle>
         </Wrapper>
       )
     }
 
-  }
 }
 
 

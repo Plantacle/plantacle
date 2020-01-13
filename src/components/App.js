@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com",
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg4NDI5NDIsImV4cCI6MTU3ODg3MTc0Mn0.M4y1Ch_2exRcbbWnfl-sN3AcBLRWY3Fyi2m9bfP4Lus"
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg5MDcwNzAsImV4cCI6MTU3ODkzNTg3MH0.EDeUlVKKtz6x3ap5tVSMBixoJ72__ClBezOhRJPmJPY"
 })
 
 export const authenticationApi = new AuthenticationApi(apiConfig);
@@ -42,6 +42,7 @@ class App extends React.Component {
       phase: {
           currentPhase: '',
           status: '',
+          warning: false,
       }
     }
 
@@ -83,15 +84,15 @@ class App extends React.Component {
         //SHOW
         const result = {
           data: {
-            temperature: 12
+            temperature: 10
           }
         }
 
         // Current day
-        const currentDay = this.state.day;
+        //const currentDay = this.state.day;
 
         //SHOW
-        //const currentDay = 100;
+        const currentDay = 10;
 
 
         // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
@@ -155,6 +156,7 @@ class App extends React.Component {
               let phase = Object.assign({}, prevState.phase);
               phase.currentPhase = 'phase1';
               phase.status = 'De compostbeestjes zijn te snel en te hard aan het werk';
+              phase.warning = true;
               return { phase };
 
             });
@@ -166,6 +168,7 @@ class App extends React.Component {
               let phase = Object.assign({}, prevState.phase);
               phase.currentPhase = 'phase1';
               phase.status = 'De compostbeestjes zijn niet actief bezig';
+              phase.warning = true;
               return { phase };
 
             });
@@ -178,6 +181,7 @@ class App extends React.Component {
               let phase = Object.assign({}, prevState.phase);
               phase.currentPhase = 'phase2';
               phase.status = 'De compostbeestjes zijn te snel en te hard aan het werk';
+              phase.warning = true;
               return { phase };
 
             });
@@ -189,6 +193,7 @@ class App extends React.Component {
               let phase = Object.assign({}, prevState.phase);
               phase.currentPhase = 'phase2';
               phase.status = 'De compostbeestjes zijn niet actief bezig';
+              phase.warning = true;
               return { phase };
 
             });
@@ -203,6 +208,7 @@ class App extends React.Component {
               let phase = Object.assign({}, prevState.phase);
               phase.currentPhase = 'phase3';
               phase.status = 'Er is teveel methaangas vrijgekomen';
+              phase.warning = true;
               return { phase };
 
             });
@@ -214,6 +220,7 @@ class App extends React.Component {
               let phase = Object.assign({}, prevState.phase);
               phase.currentPhase = 'phase3';
               phase.status = 'Oei de compost hoort nu af te koelen';
+              phase.warning = true;
               return { phase };
 
             });
@@ -238,7 +245,7 @@ class App extends React.Component {
           <Router>
             <Switch>
 
-              <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} day={this.state.day} temperature={this.state.temperature} humidity={this.state.humidity} methane={this.state.methane}/>}/>
+              <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} warning={this.state.phase.warning} day={this.state.day} temperature={this.state.temperature} humidity={this.state.humidity} methane={this.state.methane}/>}/>
               <Route path="/tasks" render={()=><Tasks currentPhase={this.state.phase.currentPhase} humidity={this.state.humidity} />}/>
               <Route path="/register" component={RegisterForm} />
               <Route path="/login" component={LoginForm} />

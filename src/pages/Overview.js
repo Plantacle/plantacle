@@ -72,7 +72,7 @@ class Overview extends React.Component {
             </FirstRow>
           <SecondRow>
             <CompostTransitionWrapper>
-              <CompostTransition currentPhase={this.props.currentPhase} status={this.props.status}/>
+              <CompostTransition currentPhase={this.props.currentPhase} status={this.props.status} warning={this.props.warning}/>
             </CompostTransitionWrapper>
           </SecondRow>
 

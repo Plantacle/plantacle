@@ -1,12 +1,11 @@
 import React from "react";
 
-const SvgPhase1 = props => (
+const SvgPhase2 = props => (
   <svg
     id="phase2_svg__Laag_1"
     x={0}
     y={0}
     viewBox="0 0 284.4 310.9"
-    width={364.761} height={357}
     xmlSpace="preserve"
     {...props}
   >
@@ -756,4 +755,4 @@ const SvgPhase1 = props => (
   </svg>
 );
 
-export default SvgPhase1;
+export default SvgPhase2;

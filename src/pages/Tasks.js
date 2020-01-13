@@ -17,8 +17,9 @@ const StyledContainer = styled(Container)`
 
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com",
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg4NDI5NDIsImV4cCI6MTU3ODg3MTc0Mn0.M4y1Ch_2exRcbbWnfl-sN3AcBLRWY3Fyi2m9bfP4Lus"
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg5MDcwNzAsImV4cCI6MTU3ODkzNTg3MH0.EDeUlVKKtz6x3ap5tVSMBixoJ72__ClBezOhRJPmJPY"
 })
+
 
 export const measurementsApi = new MeasurementsApi(apiConfig);
 
