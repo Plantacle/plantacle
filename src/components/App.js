@@ -63,8 +63,7 @@ class App extends React.Component {
       const currentHumidity = result.data.humidity
       this.setState({
           temperature: result.data.temperature,
-          //humidity: currentHumidity
-          humidity: 15
+          humidity: currentHumidity
      });
   }
 
@@ -84,7 +83,7 @@ class App extends React.Component {
         //SHOW
         const result = {
           data: {
-            temperature: 113
+            temperature: 10
           }
         }
 
@@ -92,7 +91,7 @@ class App extends React.Component {
         //const currentDay = this.state.day;
 
         //SHOW
-        const currentDay = 62;
+        const currentDay = 10;
 
 
         // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.

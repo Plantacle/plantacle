@@ -5,7 +5,6 @@ const SVG = styled.svg`
   && {
     width: 25px;
     height: 25px
-    margin-left: 4px;
     margin-bottom: -5px;
 
     @media (min-width: 991.98px) { // Tablets

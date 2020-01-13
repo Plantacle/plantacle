@@ -45,6 +45,7 @@ class Tasks extends React.Component {
     this.state = {
         tasks: [],
         text: [],
+        description: [],
         //taskInfo: [],
         phase: props.currentPhase,
         humidity: props.humidity,
@@ -84,54 +85,74 @@ class Tasks extends React.Component {
 
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
+      const currentDescription = this.state.description;
 
       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
-      const tipsText = 'Zorg voor voldoende doorluchting, vochtigheid en variatie van de composthoop.'
+      const tipsText = 'Hou de wormen goed in de gaten, want zij zijn de basis van de wormenbak'
+      const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
+      const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
+      const descriptionTips = 'Elke wormenbak is anders omdat er verschillende variabelen zijn zoals de voedselfrequentie, de aard van het voedsel, de vochtigheid en de standplaats van de wormenbak alsook de omgevingstemperatuur. Een wormenbak in stand houden vraagt dus een beetje ervaring, noem het kunst, maar vooral een flinke dosis gezond verstand.Het is inderdaad zo dat een wormenbak heel weinig onderhoud vraagt maar toch is alles sterk afhankelijk van de gezondheid van de compostwormen. Deze dienen dus geregeld eens kort geinspecteerd te worden.Ga eens om de vier weken met een kleine woelvork of een stokje door de compost en controleer de vitaliteit van de compostwormen om er zeker van te zijn dat de compostproductie op volle toeren draait. In dezelfde handeling controleer je ook meteen het vochtgehalte en de zuurtegraad van jouw compostbak.Voeg bij twijfel genoeg versnipperd krantenpapier toe en een handvol kalk. Leeg de drainage schaal tijdig om overvloedig vocht en condens geen kans te geven.Composteren met wormen is een eenvoudig, efficient en natuurlijk proces. Een klein beetje zorg en aandacht zorgt reeds voor een geweldig succes. Hoewel er maar weinig problemen zijn, zijn ze eenvoudig te vermijden en meestal eenvoudig te verhelpen. Onthoud dat de conditie van de wormen allesbepalend is voor de snelheid en de kwaliteit van het composteringsproces.'
 
       const tasks = currentTasks.concat('Instructie groenafval', 'Instructie bruinafval', 'Tips & tricks');
       const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
+      const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
 
-      this.setState({ tasks: tasks, text: text})
+      this.setState({ tasks: tasks, text: text, description: description})
 
   } else if(currentPhase == "phase2") {
 
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
+      const currentDescription = this.state.description;
 
+      const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
+      const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
+
       const tasks = currentTasks.concat('Voeg om de 2 dagen 1,25 cm groen afval toe', ' Voeg om de 2 dagen 1,25 cm bruin afval toe');
       const text = currentText.concat(groenafvalText, bruinafvalText);
+      const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-      this.setState({ tasks: tasks, text: text})
+      this.setState({ tasks: tasks, text: text, description: description})
 
   } else if(currentPhase == "phase3") {
 
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
+      const currentDescription = this.state.description;
 
+      const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
+      const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
       const tasks = currentTasks.concat('Voeg om de 3 dagen 1,25 cm groen afval toe', ' Voeg om de 3 dagen 1,25 cm bruin afval toe');
       const text = currentText.concat(groenafvalText, bruinafvalText);
+      const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-      this.setState({ tasks: tasks, text: text})
+      this.setState({ tasks: tasks, text: text, description: description})
 
   } else if(currentPhase == "phase4") {
 
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
+      const currentDescription = this.state.description;
 
+      const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
+      const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
       const tasks = currentTasks.concat('Voeg om de 4 dagen 1,25 cm groen afval toe', ' Voeg om de 4 dagen 1,25 cm bruin afval toe');
       const text = currentText.concat(groenafvalText, bruinafvalText);
+      const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-      this.setState({ tasks: tasks, text: text})
+      this.setState({ tasks: tasks, text: text, description: description})
+
+
   } else {
       console.log('errror')
   }
@@ -188,7 +209,7 @@ if(humidity) {
               </Link>
               <TaskTitle> Taken </TaskTitle>
           </BackWrapper>
-          <TaskList tasks={this.state.tasks} text={this.state.text} removeTask={this.removeTask}> </TaskList>
+          <TaskList tasks={this.state.tasks} text={this.state.text} description={this.state.description} removeTask={this.removeTask}> </TaskList>
       </StyledContainer>
       <GlobalStyles />
       </div>

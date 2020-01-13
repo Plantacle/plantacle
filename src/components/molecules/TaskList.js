@@ -59,7 +59,7 @@ const Info = styled.div`
     height: 34px;
     border: 1px solid #4368D1;
     border-radius: 50%;
-    margin-top: 19px;
+    margin-top: -12px;
 `;
 
 const CheckWrapper = styled.div`
@@ -67,7 +67,64 @@ const CheckWrapper = styled.div`
     justify-content: space-between;
 `;
 
+const InfoButton = styled.button`
+    background: none;
+    border: none;
+`;
 
+const SubmitButton = styled.button`
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffffff;
+    width: 179px;
+    letter-spacing: 1px;
+    height: 41px;
+    border-radius: 6px;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    background: #324BB8;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+`;
+
+const ModalHeader = styled(Modal.Header)`
+    @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
+    color: #324BB8;
+    font-family: Poppins;
+    font-weight: 700;
+    text-indent: 4px;
+`;
+
+const ModalBody = styled(Modal.Body)`
+    @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
+    color: #717171;
+    font-family: Poppins;
+    font-weight: 300;
+    text-indent: 4px;
+`;
+
+const Ul = styled.ul`
+    margin-bottom: 30px;
+`;
+
+const BackButton = styled.button`
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffffff;
+    width: 100px;
+    letter-spacing: 1px;
+    height: 41px;
+    border-radius: 6px;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    background: #324BB8;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+`;
 
 class TaskList extends React.Component {
 
@@ -76,6 +133,7 @@ class TaskList extends React.Component {
         this.state = {
             checked: true,
             modalShow: false,
+            activeTitle: '',
             activeDescription: '',
         }
     }
@@ -86,23 +144,22 @@ class TaskList extends React.Component {
 
   onHide = () => this.setState({ modalShow: false });
 
-  showModal = (linkText) => {
-      this.setState({activeDescription: linkText}, ()=> this.setState({ modalShow: true }));
+  showModal = (task, description) => {
+      this.setState({activeTitle: task, activeDescription: description}, ()=> this.setState({ modalShow: true }));
   }
 
-
     render() {
-
-    console.log(this.state.activeDescription)
       return(
         <div>
           <HeadTitleWrapper>
               <HeadTitle> Mijn taken </HeadTitle>
           </HeadTitleWrapper>
 
-          <ul className="noPadding">
+          <Ul className="noPadding">
               { this.props.tasks.map((task, i) => {
                 const linkText = this.props.text[i];
+                const description = this.props.description[i];
+
                    return (
 
                         //<ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
@@ -115,30 +172,32 @@ class TaskList extends React.Component {
                             </div>
                               <CheckWrapper>
 
-                                <button onClick={()=> this.showModal(linkText)}>
+                                <InfoButton onClick={()=> this.showModal(task, description)}>
                                   <Info>
                                       <SvgHelp />
                                   </Info>
-                                </button>
+                                </InfoButton>
 
                                   <Checkbox checked={this.state.checked} onChange={this.toggleChange}/>
                               </CheckWrapper>
                             </TaskBlock>
                             <Modal show={this.state.modalShow} onHide={this.onHide}>
-                                 <Modal.Header closeButton>Hi</Modal.Header>
-                                 <Modal.Body>{this.state.activeDescription}</Modal.Body>
+                                 <ModalHeader closeButton>{this.state.activeTitle}</ModalHeader>
+                                 <ModalBody>
+                                 {this.state.activeDescription}
+                                 </ModalBody>
                                  <Modal.Footer>
-                                      <button onClick={this.hideModal}>Cancel</button>
-                                      <button>Save</button>
+                                      <BackButton onClick={this.onHide}>Ga terug</BackButton>
                                 </Modal.Footer>
                             </Modal>
                         </ListItem>
 
                    )
                })}
+          </Ul>
 
+          <SubmitButton>Klaar!</SubmitButton>
 
-          </ul>
         </div>
       )
     }
