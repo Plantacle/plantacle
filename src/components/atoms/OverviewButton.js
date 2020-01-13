@@ -24,16 +24,11 @@ const Button = styled.button`
 
 function OverviewButton() {
 
-  function handleClick(e) {
-    e.preventDefault();
-    console.log('The link was clicked.');
-  }
-
   return (
     <div>
-      <Button href="#" onClick={handleClick}>
-        6 nieuwe taken
-      </Button>
+        <Button>
+          6 nieuwe taken
+        </Button>
     </div>
   );
 

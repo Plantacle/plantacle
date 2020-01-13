@@ -4,6 +4,7 @@ import CurrentDay from '../components/atoms/CurrentDay';
 import CompostTransition from '../components/atoms/CompostTransition';
 import OverviewButton from '../components/atoms/OverviewButton';
 import styled from 'styled-components';
+import { Link, Router} from 'react-router-dom';
 
 import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
 
@@ -48,13 +49,6 @@ const CompostTransitionWrapper = styled.div`
 `;
 
 class Overview extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-
-  }
-
   render() {
 
     return (
@@ -77,7 +71,9 @@ class Overview extends React.Component {
           </SecondRow>
 
           <ThirdRow>
+            <Link to="/tasks"> 
               <OverviewButton />
+            </Link>
           </ThirdRow>
       </StyledContainer>
     )

@@ -62,14 +62,14 @@ const Measurement = (props) => {
        return (
          <Wrapper>
            <Circle> <Moist width="23" height="23" /> </Circle>
-           <TitleCircle> {props.humidity}% </TitleCircle>
+           <TitleCircle> {props.humidity} % </TitleCircle>
          </Wrapper>
        )
      } else if (name === "temperature") {
       return (
         <Wrapper>
           <Circle> <Temperature width="23" height="23" /> </Circle>
-          <TitleCircle> {props.temperature}°C </TitleCircle>
+          <TitleCircle> {props.temperature}</TitleCircle>
         </Wrapper>
       )
     }

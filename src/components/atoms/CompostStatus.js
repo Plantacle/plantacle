@@ -56,7 +56,7 @@ function CompostStatus(props) {
       {props.warning ? (
         <IconsWrapper>
             <StatusIcon>
-                <SvgExclamation />
+                <SvgExclamation> </SvgExclamation>
             </StatusIcon>
             <StatusLine />
         </IconsWrapper>

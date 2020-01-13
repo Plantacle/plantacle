@@ -150,4 +150,8 @@ input[type="checkbox"]:checked + span {
   background-size: 50%;
   background-position: center;
 }
+
+.noPadding {
+  padding: 0;
+}
 /* End External styling */

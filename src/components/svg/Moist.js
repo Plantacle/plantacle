@@ -5,11 +5,12 @@ const SVG = styled.svg`
   && {
     width: 24px;
     height: auto;
+    margin-bottom: 4px;
+    margin-left: -1px;
 
     @media (min-width: 991.98px) { // Tablets
       width: 35px;
       margin-left: -2px;
-      margin-top: -1px;
     }
 
   }

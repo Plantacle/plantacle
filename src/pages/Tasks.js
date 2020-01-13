@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import {Bootstrap, Grid, Row, Col, Container} from 'react-bootstrap';
 import TaskList from './../components/molecules/TaskList.js';
 import { MeasurementsApi, Configuration } from 'plantacle-api-client';
-
-window.id = 0;
+import { GlobalStyles } from '../components/App'
+import SvgBackArrow from '../components/svg/BackArrow';
+import { Link } from 'react-router-dom';
 
 const StyledContainer = styled(Container)`
   && {
@@ -12,6 +13,21 @@ const StyledContainer = styled(Container)`
     padding-right: 25px;
     padding-top: 25px;
   }
+`;
+
+const TaskTitle = styled.p`
+    font-weight: 500;
+    font-size: 19px;
+    color: #324BB8;
+    letter-spacing: 2px;
+    margin-left: 20px;
+    @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
+    font-family: Poppins;
+`;
+
+const BackWrapper = styled.div`
+    display: flex;
+    margin-bottom: 20px;
 `;
 
 
@@ -162,13 +178,20 @@ if(humidity) {
 
 }
 
-
   render() {
     return (
+      <div>
       <StyledContainer>
-          <p> Taken </p>
+          <BackWrapper>
+              <Link to="/overview">
+                  <SvgBackArrow />
+              </Link>
+              <TaskTitle> Taken </TaskTitle>
+          </BackWrapper>
           <TaskList tasks={this.state.tasks} text={this.state.text} removeTask={this.removeTask}> </TaskList>
       </StyledContainer>
+      <GlobalStyles />
+      </div>
     )
   }
 

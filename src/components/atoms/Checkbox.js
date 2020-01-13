@@ -5,7 +5,7 @@ import SvgCheck from '../svg/Check.js';
 const Label = styled.label`
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 10px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;

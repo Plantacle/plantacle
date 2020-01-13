@@ -8,7 +8,6 @@ import LoginForm from '../pages/LoginForm'
 import Navigation from '../components/organisms/Navigation'
 import {AuthenticationApi, Configuration, UsersApi, MeasurementsApi} from 'plantacle-api-client'
 import moment from 'moment'
-
 import { createGlobalStyle } from 'styled-components';
 
 // Will be deleted later
@@ -16,9 +15,9 @@ import Styleguide1 from '../pages/Styleguide1';
 import Styleguide2 from '../pages/Styleguide2';
 
 export const GlobalStyles = createGlobalStyle`
-  body {
+  * {
     @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
-    font-family: Poppins !important;
+    font-family: Poppins important!;
   }
 `;
 
@@ -64,7 +63,8 @@ class App extends React.Component {
       const currentHumidity = result.data.humidity
       this.setState({
           temperature: result.data.temperature,
-          humidity: currentHumidity
+          //humidity: currentHumidity
+          humidity: 15
      });
   }
 
@@ -84,7 +84,7 @@ class App extends React.Component {
         //SHOW
         const result = {
           data: {
-            temperature: 10
+            temperature: 113
           }
         }
 
@@ -92,7 +92,7 @@ class App extends React.Component {
         //const currentDay = this.state.day;
 
         //SHOW
-        const currentDay = 10;
+        const currentDay = 62;
 
 
         // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
