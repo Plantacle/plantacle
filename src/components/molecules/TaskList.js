@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import Checkbox from '../atoms/Checkbox';
 
 const TaskBlock = styled.div`
     width: 100%;
@@ -9,6 +10,9 @@ const TaskBlock = styled.div`
     margin-bottom: 10px;
     padding-top: 15px;
     padding-left: 15px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
 `;
 
 const TaskTitle = styled.p`
@@ -23,6 +27,7 @@ const TaskDescription = styled.p`
     margin-top: -10px;
     color: #A5A5A5;
     letter-spacing: 1px;
+    width: 300px;
 `;
 
 const ListItem = styled.li`
@@ -31,9 +36,23 @@ const ListItem = styled.li`
 
 class TaskList extends React.Component {
 
-    removeItem(item, i) {
+    constructor() {
+        super();
+
+        this.state = {
+            checked: true
+        }
+    }
+
+  removeItem = (item, i) => {
         this.props.removeTask(item, i)
     }
+
+  toggleChange = () => {
+    this.setState({
+      isChecked: !this.state.isChecked,
+    });
+  }
 
     render() {
       return(
@@ -43,10 +62,14 @@ class TaskList extends React.Component {
                    return (
 
 
-                        <ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
+                        //<ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
+                        <ListItem key={i}>
                             <TaskBlock>
+                            <div>
                               <TaskTitle> { task } </TaskTitle>
                               <TaskDescription> {linkText} </TaskDescription>
+                            </div>
+                              <Checkbox checked={this.state.checked} onChange={this.toggleChange}/>
                             </TaskBlock>
                         </ListItem>
 

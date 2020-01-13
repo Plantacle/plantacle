@@ -17,7 +17,7 @@ const StyledContainer = styled(Container)`
 
 export const apiConfig = new Configuration({
   basePath: "https://app.plantacle.com",
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg5MDcwNzAsImV4cCI6MTU3ODkzNTg3MH0.EDeUlVKKtz6x3ap5tVSMBixoJ72__ClBezOhRJPmJPY"
+  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzg5Mzc0MzUsImV4cCI6MTU3ODk2NjIzNX0.3Rm_Gqq34fgM9N0tBIQ2CI8Nrq4w899aEZ8mz-muIoo"
 })
 
 
@@ -29,6 +29,7 @@ class Tasks extends React.Component {
     this.state = {
         tasks: [],
         text: [],
+        //taskInfo: [],
         phase: props.currentPhase,
         humidity: props.humidity,
     }
@@ -68,9 +69,9 @@ class Tasks extends React.Component {
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
 
-      const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
-      const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
-      const tipsText = 'Zorg voor voldoende doorluchting, vochtigheid en variatie van de composthoop. Dan krijg je geen last van ongewenste gassen en stank.'
+      const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
+      const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
+      const tipsText = 'Zorg voor voldoende doorluchting, vochtigheid en variatie van de composthoop.'
 
       const tasks = currentTasks.concat('Instructie groenafval', 'Instructie bruinafval', 'Tips & tricks');
       const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
@@ -82,8 +83,8 @@ class Tasks extends React.Component {
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
 
-      const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
-      const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
+      const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
+      const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
       const tasks = currentTasks.concat('Voeg om de 2 dagen 1,25 cm groen afval toe', ' Voeg om de 2 dagen 1,25 cm bruin afval toe');
       const text = currentText.concat(groenafvalText, bruinafvalText);
@@ -95,8 +96,8 @@ class Tasks extends React.Component {
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
 
-      const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
-      const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
+      const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
+      const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
       const tasks = currentTasks.concat('Voeg om de 3 dagen 1,25 cm groen afval toe', ' Voeg om de 3 dagen 1,25 cm bruin afval toe');
       const text = currentText.concat(groenafvalText, bruinafvalText);
@@ -108,8 +109,8 @@ class Tasks extends React.Component {
       const currentTasks = this.state.tasks;
       const currentText = this.state.text;
 
-      const groenafvalText = 'Voorbeelden: Aardappelschillen (beperkt, tenzij biologisch), Bagger uit plastic regengoot of tuinvijver, Bladeren (goed mengen), Citrusschillen (beperkt, tenzij biologisch)';
-      const bruinafvalText = 'Voorbeelden: Fijngemaakt hout en takken, Koffiefilters en koffiedik, Stro(beperkt), Eierdozen'
+      const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
+      const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
       const tasks = currentTasks.concat('Voeg om de 4 dagen 1,25 cm groen afval toe', ' Voeg om de 4 dagen 1,25 cm bruin afval toe');
       const text = currentText.concat(groenafvalText, bruinafvalText);

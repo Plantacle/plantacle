@@ -42,7 +42,7 @@ code {
   padding-left: 0px;
   padding-right: 0px;
   background: #ffffff !important;
-  
+
 }
 
 .container-bottom{
@@ -123,5 +123,31 @@ code {
   margin: 21px 0px 0px 19px;
 }
 
-/* End External styling */
+input[type="checkbox"] {
+  display: none;
+}
 
+input[type="checkbox"] + span {
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 34px;
+  height: 34px;
+  margin: 20px 0px 0 0;
+  vertical-align: middle;
+  background: #F0F0F0 left top no-repeat;
+  background-image: url("./assets/images/check.png");
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + span {
+  background: #4368D1 -19px top no-repeat;
+  background-image: url("./assets/images/check.png");
+  background-size: 50%;
+  background-position: center;
+}
+/* End External styling */
