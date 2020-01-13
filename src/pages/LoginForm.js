@@ -6,6 +6,7 @@ import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
 import { Row, Col, Container, Form } from 'react-bootstrap';
 import { authenticationApi, apiConfig, usersApi } from '../components/App'
+import {Link} from 'react-router-dom'
 
 
 /* Styling */
@@ -61,19 +62,22 @@ const InputCheckBox = styled.input``
 
 /* End Styling */
 
+        
+let emailError = ''
+let passwordError = ''
 
-const intitialState = {
-    email: '',
-    password: '',
-    emailError: '',
-    passwordError: ''
-}
 
 class Login extends React.Component {
+    
 
     constructor(props) {
         super(props);
-        this.state = intitialState
+        this.state = {
+            email: '',
+            password: '',
+            emailError: '',
+            passwordError: ''
+        }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -94,9 +98,6 @@ class Login extends React.Component {
 
     // Validates the form
     validate(email, password) {
-
-        let emailError = ''
-        let passwordError = ''
 
         // Checks if the user filled in a valid e-mail address
         if (this.state.email === '') {
@@ -127,11 +128,26 @@ class Login extends React.Component {
         const isValid = this.validate()
         if (isValid) {
             console.log(this.state)
-            this.setState(intitialState)
+            //this.setState(intitialState)
         }
 
         // Authenticates the user trying to log in
-        const authenticateLogin = await authenticationApi.login({ email: this.state.email, password: this.state.password })
+        let authenticateLogin
+        
+        try {
+            authenticateLogin = await authenticationApi.login({ email: this.state.email, password: this.state.password })
+        } catch (error) {
+            if (error.response.status === 401) {
+                console.log('fout')
+                emailError = 'Het wachtwoord of e-mailadres is fout, probeer het opnieuw!'
+                passwordError = ''
+                console.log(emailError)
+
+            } else {
+                throw error
+            }
+            return
+        }
 
         // Generates an accessToken 
         apiConfig.accessToken = authenticateLogin.data.accessToken
@@ -224,7 +240,7 @@ class Login extends React.Component {
                                 <P>Nog geen account?</P>
                             </Col>
                             <Col>
-                                <Anchor href="register" className="anchor">Registreer</Anchor>
+                                <Link to="/register" className="extra-link anchor">Registreer</Link>
                             </Col>
                         </Row>
                     </Container>

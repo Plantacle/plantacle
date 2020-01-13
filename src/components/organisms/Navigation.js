@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Row, Col, Container, Nav } from 'react-bootstrap';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 /* Styling */
 
@@ -78,34 +79,36 @@ class Navigation extends React.Component {
     // Removes the access token when the user is logging out
     removeAccessToken(){
         localStorage.removeItem('accessToken')
-        window.location.href = "login";
+        //window.location.href = "login";
     }
 
     render() {
         return (
             <Container className="mt-5">
-            <a href="/"><Circle className="mt-2"><i className="fas fa-home home-glyph fa-2x"></i></Circle></a>
+            <Link to="/"><Circle className="mt-2"><i className="fas fa-home home-glyph fa-2x"></i></Circle></Link>
                     <Nav>
                         <Row className="nav-row">
                             <Col className="nav-col">
+                                {/*
                                 <Nav.Item>
                                     <i className="fas fa-map-marker-alt glyph location-glyph"></i>
                                     <Nav.Link href="locations" className="nav-link">Locaties</Nav.Link>
                                 </Nav.Item>
+                                /*/}
                                 <Nav.Item>
                                     <i className="fas fa-tasks glyph task-icon"></i>
-                                    <Nav.Link href="tasks" className="nav-link">Taken</Nav.Link>
+                                    <Link to="/tasks" className="nav-link">Taken</Link>
                                 </Nav.Item>
                             </Col>
 
                             <Col className="nav-col">
                                 <Nav.Item>
                                     <i className="fas fa-sign-out-alt glyph"></i>
-                                    <Nav.Link href="login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Nav.Link>
+                                    <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <i className="fas fa-chart-line glyph"></i>
-                                    <Nav.Link href="/" className="nav-link">Overzicht</Nav.Link>
+                                    <Link to="/" className="nav-link">Overzicht</Link>
                                 </Nav.Item>
                             </Col>
                         </Row>

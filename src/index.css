@@ -141,5 +141,17 @@ code {
   color: #FFC759 !important;
   float: left !important;
 }
+
+.extra-link{
+  color: #FFC759 !important;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.extra-link:hover{
+  text-decoration: none;
+  color: #FFC759;
+}
 /* End External styling */
 

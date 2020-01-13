@@ -6,6 +6,7 @@ import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
 import { Row, Col, Container, Form } from 'react-bootstrap';
 import { usersApi } from '../components/App'
+import {Link} from 'react-router-dom'
 
 /* Styling */
 
@@ -60,7 +61,7 @@ const BigButton = styled.input`
 const initializeState = {
     email: '',
     password: '',
-    verify_password: '',
+    verifyPassword: '',
     emailError: '',
     passwordError: '',
     verifyPasswordError: ''
@@ -82,7 +83,7 @@ class Register extends React.Component {
         console.log(event.target.value)
     }
 
-    validate(password, email, verify_password) {
+    validate(password, email, verifyPassword) {
 
         let emailError = ''
         let passwordError = ''
@@ -98,13 +99,17 @@ class Register extends React.Component {
 
         if (this.state.password === '') {
             passwordError = 'Geef een wachtwoord op'
-        } else if(this.state.password.length < 8){
+        }
+             
+        if (this.state.password.length < 8){
             passwordError = 'Het wachtwoord moet minstens 8 tekens bevatten'
         }
 
-        if (this.state.verify_password === '') {
+        if (this.state.verifyPassword === '') {
             verifyPasswordError = 'Geef het wachtwoord opnieuw op'
-        }  else if(this.state.password.length < 8){
+        } 
+        
+        if (this.state.verifyPassword.length < 8){
             passwordError = 'Het wachtwoord moet minstens 8 tekens bevatten'
         }
 
@@ -131,21 +136,40 @@ class Register extends React.Component {
         // Validates the form
         const isValid = this.validate()
         if (isValid) {
+            
             console.log(this.state)
             this.setState(initializeState)
 
         }
 
+        try {
+                    
         // Creates a new user with an username and password
-        const registerNewUser = await usersApi.addUser({
-            email: this.state.email,
-            password: this.state.password,
-        })
+        const registerNewUser = await usersApi.addUser({email: this.state.email, password: this.state.password,})
+
+        } catch (error) {
+            if (error.response.status === 400) {
+
+                console.log('Er zijn nog velden vergeten')
+
+            } else {
+                throw error
+            }
+            return
+        }
+
 
         // Redirects the user to the login page after being succesfully registered
         window.location.href = "login";
 
     }
+
+
+
+
+
+
+    
 
     render() {
         return (
@@ -195,9 +219,9 @@ class Register extends React.Component {
                                 <Form.Group controlId="formBasicPassword">
                                     <Input
                                         type='password'
-                                        name='verify_password'
+                                        name='verifyPassword'
                                         placeholder="Bevestig wachtwoord"
-                                        value={this.state.verify_password}
+                                        value={this.state.verifyPassword}
                                         onChange={this.handleInputChange}
                                         className="mb-3"
                                     ></Input>
@@ -211,7 +235,7 @@ class Register extends React.Component {
                                 <P>Al een account?</P>
                             </Col>
                             <Col>
-                                <Anchor href="login">Log hier in</Anchor>
+                                <Link to="/login" className="extra-link anchor">Log hier in</Link>
                             </Col>
                         </Row>
                     </Container>
