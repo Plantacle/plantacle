@@ -5,9 +5,11 @@ import TaskList from './../components/molecules/TaskList.js';
 import Navigation from '../components/organisms/Navigation'
 
 import { MeasurementsApi, Configuration } from 'plantacle-api-client';
+import { measurementsApi } from '../components/App';
 import { GlobalStyles } from '../components/App'
 import SvgBackArrow from '../components/svg/BackArrow';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 window.id = 0;
 
@@ -33,15 +35,6 @@ const BackWrapper = styled.div`
     display: flex;
     margin-bottom: 20px;
 `;
-
-
-export const apiConfig = new Configuration({
-    basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkwMDQyNTEsImV4cCI6MTU3OTAzMzA1MX0.vYZ6f6SEOTEzQdKzZFmJKdY-F9nvEPfmJ_h77w_tYSs"
-})
-
-
-export const measurementsApi = new MeasurementsApi(apiConfig);
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -100,10 +93,43 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        // Current day
+        let currentDate = moment();
 
-        //localStorage.setItem(tasks, text, description);
-        //console.log(localStorage)
+        // Access object in local storage
+        const accessObject = JSON.parse(localStorage.getItem('data'));
+
+        //Days between new date and deleted date
+        const differenceDate = currentDate.diff(currentDate, 'days');
+
+        //Reset startDate
+        const initialState = {
+            /* etc */
+        };
+
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
+
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+           this.setState({ tasks: tasks, text: text, description: description})
+           console.log('Al 24 uur verstreken');
+            //localStorage.clear();
+        } else {
+            console.log('24 uur is nog niet verstreken')
+            this.setState(initialState);
+        }
+
 
     } else if(currentPhase == "phase2") {
 

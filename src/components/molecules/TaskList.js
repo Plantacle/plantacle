@@ -4,6 +4,8 @@ import Checkbox from '../atoms/Checkbox';
 import SvgHelp from '../svg/Help';
 import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
+import SvgCheck from '../svg/Check';
+import moment from 'moment';
 
 const TaskBlock = styled.div`
     width: 100%;
@@ -109,6 +111,16 @@ const Ul = styled.ul`
     margin-bottom: 30px;
 `;
 
+const Button = styled.button`
+    border: none;
+    width: 34px;
+    height: 34px;
+    background-color: #E8E8E8;
+    border-radius: 50%;
+    background-image: url('../../assets/images/check.png');
+    background-repeat: no-repeat;
+`;
+
 const BackButton = styled.button`
     font-weight: 700;
     font-size: 18px;
@@ -140,6 +152,18 @@ class TaskList extends React.Component {
 
   removeItem = (item, i) => {
         this.props.removeTask(item, i)
+
+        const currentDate = moment();
+
+        let data = {
+            status: 1,
+            deleted_date: currentDate,
+        }
+
+        const stringifyData = JSON.stringify(data);
+        localStorage.setItem('data', stringifyData); 
+
+        //localStorage.clear();
     }
 
   onHide = () => this.setState({ modalShow: false });
@@ -177,7 +201,8 @@ class TaskList extends React.Component {
                             </div>
                               <CheckWrapper>
 
-                                <Checkbox checked={this.state.checked} onChange={this.toggleChange}/>
+                                <Button checked={this.state.checked} onClick={() => { this.removeItem(task, i)}}>
+                                </Button>
 
                                 <InfoButton onClick={()=> this.showModal(task, description)}>
                                   <Info>

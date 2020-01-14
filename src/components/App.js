@@ -19,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
     basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkwMDQyNTEsImV4cCI6MTU3OTAzMzA1MX0.vYZ6f6SEOTEzQdKzZFmJKdY-F9nvEPfmJ_h77w_tYSs"
+    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkwMzQwMTQsImV4cCI6MTU3OTA2MjgxNH0.mQ5igjvxFSReEoq78dyhPfQ15JBMWzewb-WfVb_Sapg"
 })
 
 // Gets the accessToken from the localStorage for all pages in the application

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SvgCheck from '../svg/Check.js';
 
-const Label = styled.label`
+const Button = styled.button`
     display: block;
     position: relative;
     padding-left: 10px;
@@ -19,11 +19,8 @@ const Label = styled.label`
 class Checkbox extends React.Component {
     render() {
         return(
-            <Label classname="checkbox-label">
-                <input type="checkbox" checked={this.props.isChecked} onChange={this.props.toggleChange}>
-                </input>
-                <span> </span>
-            </Label>
+                <Button type="checkbox" checked={this.props.isChecked} onChange={this.props.toggleChange}>
+                </Button>
         )
     }
 }
