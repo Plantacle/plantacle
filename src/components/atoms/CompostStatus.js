@@ -19,9 +19,9 @@ const Status = styled.p`
     width: 130px;
 
     @media (min-width: 991.98px) { // Tablets
-      font-size: 17px;
-      width: 220px;
-      margin-top: 6px;
+        font-size: 17px;
+        width: 220px;
+        margin-top: 6px;
     }
 `;
 
@@ -46,33 +46,31 @@ const IconsWrapper = styled.div`
 `;
 
 function CompostStatus(props) {
-  return (
+    return (
     <div>
-    <StatusWrapper>
-      <Status>
-        {props.status}
-      </Status>
+        <StatusWrapper>
+            <Status>
+                {props.status}
+            </Status>
 
-      {props.warning ? (
-        <IconsWrapper>
-            <StatusIcon>
-                <SvgExclamation> </SvgExclamation>
-            </StatusIcon>
-            <StatusLine />
-        </IconsWrapper>
-     ) : (
-       <IconsWrapper>
-          <StatusIcon>
-              <SvgCheck />
-          </StatusIcon>
-          <StatusLine />
-      </IconsWrapper>
-     )}
-
-    </StatusWrapper>
-
-    </div>
-  );
+            {props.warning ? (
+                <IconsWrapper>
+                    <StatusIcon>
+                        <SvgExclamation> </SvgExclamation>
+                    </StatusIcon>
+                    <StatusLine />
+                </IconsWrapper>
+           ) : (
+           <IconsWrapper>
+              <StatusIcon>
+                  <SvgCheck />
+              </StatusIcon>
+              <StatusLine />
+          </IconsWrapper>
+          )}
+      </StatusWrapper>
+  </div>
+        );
 }
 
 export default CompostStatus;

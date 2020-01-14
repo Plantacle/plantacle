@@ -17,15 +17,15 @@ const Label = styled.label`
 
 
 class Checkbox extends React.Component {
-  render() {
-    return(
-        <Label classname="checkbox-label">
-            <input type="checkbox" checked={this.props.isChecked} onChange={this.props.toggleChange}>
-            </input>
-            <span> </span>
-        </Label>
-    )
-  }
+    render() {
+        return(
+            <Label classname="checkbox-label">
+                <input type="checkbox" checked={this.props.isChecked} onChange={this.props.toggleChange}>
+                </input>
+                <span> </span>
+            </Label>
+        )
+    }
 }
 
 

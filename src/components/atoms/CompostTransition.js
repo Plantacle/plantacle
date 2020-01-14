@@ -31,50 +31,47 @@ const CompostImage = styled.img`
 `;
 
 class CompostTransition extends React.Component {
+    render() {
 
-  render() {
-
-    let currentPhase = this.props.currentPhase;
-
-    console.log(currentPhase)
+      let currentPhase = this.props.currentPhase;
 
     return (
-      <div>
-      {
-        currentPhase == "phase1" ?
+    <div>
+        {
+          currentPhase == "phase1" ?
+          <CompostWrapper>
+              <CompostImageWrapper>
+                  <CompostImage src={svgImage1} />
+              </CompostImageWrapper>
+              <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
+          </CompostWrapper>
+
+        : currentPhase == "phase2" ?
         <CompostWrapper>
             <CompostImageWrapper>
-                <CompostImage src={svgImage1} />
+                <CompostImage src={svgImage2} />
             </CompostImageWrapper>
             <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
         </CompostWrapper>
-
-      : currentPhase == "phase2" ?
-      <CompostWrapper>
-          <CompostImageWrapper>
-              <CompostImage src={svgImage2} />
-          </CompostImageWrapper>
-          <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
-      </CompostWrapper>
-      : currentPhase == "phase3" ?
-      <CompostWrapper>
-          <CompostImageWrapper>
-              <CompostImage src={svgImage3} />
-          </CompostImageWrapper>
-          <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
-      </CompostWrapper>
-      : currentPhase == "phase4" ?
-      <CompostWrapper>
-          <CompostImageWrapper>
-              <CompostImage src={svgImage4} />
-          </CompostImageWrapper>
-          <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
-      </CompostWrapper>
-      : <CompostStatus>Er is iets misgegaan</CompostStatus>
-      }
-     </div>
+        : currentPhase == "phase3" ?
+        <CompostWrapper>
+            <CompostImageWrapper>
+                <CompostImage src={svgImage3} />
+            </CompostImageWrapper>
+            <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
+        </CompostWrapper>
+        : currentPhase == "phase4" ?
+        <CompostWrapper>
+            <CompostImageWrapper>
+                <CompostImage src={svgImage4} />
+            </CompostImageWrapper>
+            <CompostStatus status={this.props.status} warning={this.props.warning}> </CompostStatus>
+        </CompostWrapper>
+        : <CompostStatus>Er is iets misgegaan</CompostStatus>
+        }
+   </div>
     )
-  }
+    }
 }
 
 export default CompostTransition;
