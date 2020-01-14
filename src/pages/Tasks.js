@@ -102,6 +102,9 @@ class Tasks extends React.Component {
 
         this.setState({ tasks: tasks, text: text, description: description})
 
+        //localStorage.setItem(tasks, text, description);
+        //console.log(localStorage)
+
     } else if(currentPhase == "phase2") {
 
         const currentTasks = this.state.tasks;

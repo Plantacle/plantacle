@@ -24,6 +24,7 @@ export const apiConfig = new Configuration({
 
 // Gets the accessToken from the localStorage for all pages in the application
 localStorage.getItem("accessToken");
+
 console.log(localStorage)
 
 export const authenticationApi = new AuthenticationApi(apiConfig)
@@ -81,7 +82,7 @@ class App extends React.Component {
           //SHOW
           const result = {
             data: {
-              temperature: 45
+              temperature: 12
             }
           }
 
@@ -89,7 +90,7 @@ class App extends React.Component {
           //const currentDay = this.state.day;
 
           //SHOW
-          const currentDay = 57;
+          const currentDay = 12;
 
           // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
           if(result.data.temperature >= 10 && result.data.temperature <= 40 && currentDay >= 3 && currentDay <= 14 || result.data.temperature >= 10 && result.data.temperature <= 30 && currentDay < 3) {

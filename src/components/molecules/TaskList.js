@@ -148,6 +148,10 @@ class TaskList extends React.Component {
       this.setState({activeTitle: task, activeDescription: description}, ()=> this.setState({ modalShow: true }));
   }
 
+  deleteTasks = () => {
+
+  }
+
     render() {
 
       return(
@@ -198,7 +202,7 @@ class TaskList extends React.Component {
                })}
           </Ul>
 
-          <SubmitButton>Klaar!</SubmitButton>
+          <SubmitButton onClick={this.deleteTasks}>Klaar!</SubmitButton>
 
         </div>
       )
