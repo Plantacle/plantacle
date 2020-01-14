@@ -184,13 +184,15 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <Container fluid={true} className="text-center container-top">
+                <Container className="text-center container-top">
                     <img src={logo} className="logo" />
                     {/*<h5>Plantacle</h5>*/}
                 </Container>
+                <Container className="waveContainer">
                 <SvgWave className="wave"></SvgWave>
+                </Container>
                 <Form onSubmit={this.handleSubmit}>
-                    <Container fluid={true} className="container-bottom">
+                    <Container className="container-bottom">
                         <Row>
                             <Col>
                                 <Form.Group controlId="formBasicEmail">

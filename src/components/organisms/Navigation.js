@@ -89,25 +89,25 @@ class Navigation extends React.Component {
                     <Nav>
                         <Row className="nav-row">
                             <Col className="nav-col">
-                                {/*
+                                
                                 <Nav.Item>
-                                    <i className="fas fa-map-marker-alt glyph location-glyph"></i>
-                                    <Nav.Link href="locations" className="nav-link">Locaties</Nav.Link>
+                                    <Link to="locations"><i className="fas fa-map-marker-alt glyph location-glyph"></i></Link>
+                                    <Link to="locations" className="nav-link">Locaties</Link>
                                 </Nav.Item>
-                                /*/}
+                                
                                 <Nav.Item>
-                                    <i className="fas fa-tasks glyph task-icon"></i>
+                                    <Link to="/tasks"><i className="fas fa-tasks glyph task-icon"></i></Link>
                                     <Link to="/tasks" className="nav-link">Taken</Link>
                                 </Nav.Item>
                             </Col>
 
                             <Col className="nav-col">
                                 <Nav.Item>
-                                    <i className="fas fa-sign-out-alt glyph"></i>
+                                    <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>
                                     <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <i className="fas fa-chart-line glyph"></i>
+                                    <Link to="/"><i className="fas fa-chart-line glyph"></i></Link>
                                     <Link to="/" className="nav-link">Overzicht</Link>
                                 </Nav.Item>
                             </Col>
