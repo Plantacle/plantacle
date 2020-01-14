@@ -5,15 +5,16 @@ import CompostTransition from '../components/atoms/CompostTransition';
 import OverviewButton from '../components/atoms/OverviewButton';
 import styled from 'styled-components';
 import Navigation from '../components/organisms/Navigation'
+import { Link, Router} from 'react-router-dom';
 
 import {Bootstrap, Grid, Row, Col, Container, Nav} from 'react-bootstrap';
 
 const StyledContainer = styled(Container)`
-  && {
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 25px;
-  }
+    && {
+      padding-left: 25px;
+      padding-right: 25px;
+      padding-top: 25px;
+    }
 `;
 
 const FirstRow = styled(Row)`
@@ -23,60 +24,60 @@ const FirstRow = styled(Row)`
 `;
 
 const SecondRow = styled(Row)`
-  && {
-    justify-content: center;
-    min-width: 400px;
-    position: relative;
-  }
+    && {
+      justify-content: center;
+      min-width: 400px;
+      position: relative;
+    }
 `;
 
 const ThirdRow = styled(Row)`
-  && {
-    justify-content: center;
-  }
+    && {
+      justify-content: center;
+    }
 `;
 
 const SecondCol = styled(Col)`
-  && {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-  }
+    && {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
 `;
 
 const CompostTransitionWrapper = styled.div`
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 `;
 
 class Overview extends React.Component {
-  render() {
-    return (
-        <StyledContainer>
-            <FirstRow>
-                <Col xs={3}>
-                    <Measurements />
-                </Col>
+    render() {
 
-                <SecondCol xs={6}>
-                    <CurrentDay />
-                </SecondCol>
-                <Col xs={3}>
-                </Col>
-            </FirstRow>
-
-          <SecondRow>
-              <CompostTransitionWrapper>
-                  <CompostTransition />
-              </CompostTransitionWrapper>
-          </SecondRow>
-
-          <ThirdRow>
-              <OverviewButton />
-          </ThirdRow>
-          <Navigation/>
-      </StyledContainer>
-    )
-  }
+      return (
+          <StyledContainer>
+              <FirstRow>
+                  <Col xs={3}>
+                      <Measurements temperature={this.props.temperature} humidity={this.props.humidity} methane={this.props.methane}/>
+                  </Col>
+                  <SecondCol xs={6}>
+                      <CurrentDay day={this.props.day} />
+                  </SecondCol>
+                  <Col xs={3}>
+                  </Col>
+              </FirstRow>
+            <SecondRow>
+                <CompostTransitionWrapper>
+                    <CompostTransition currentPhase={this.props.currentPhase} status={this.props.status} warning={this.props.warning}/>
+                </CompostTransitionWrapper>
+            </SecondRow>
+            <ThirdRow>
+                <Link to="/tasks">
+                    <OverviewButton />
+                </Link>
+            </ThirdRow>
+            <Navigation/>
+        </StyledContainer>
+      )
+    }
 }
 
 

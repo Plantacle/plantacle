@@ -8,9 +8,7 @@ const Button = styled.button`
     width: 179px;
     letter-spacing: 1px;
     height: 41px;
-
     border-radius: 6px;
-
     border: none;
     margin: 0;
     text-decoration: none;
@@ -23,20 +21,13 @@ const Button = styled.button`
 `;
 
 function OverviewButton() {
-
-  function handleClick(e) {
-    e.preventDefault();
-    console.log('The link was clicked.');
-  }
-
-  return (
-    <div>
-      <Button href="#" onClick={handleClick}>
-        6 nieuwe taken
-      </Button>
-    </div>
-  );
-
+    return (
+        <div>
+            <Button>
+              6 nieuwe taken
+            </Button>
+        </div>
+    );
 }
 
 export default OverviewButton;
