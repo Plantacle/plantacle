@@ -24,7 +24,7 @@ function OverviewButton() {
     return (
         <div>
             <Button>
-              6 nieuwe taken
+                Taken bekijken
             </Button>
         </div>
     );
