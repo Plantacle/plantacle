@@ -70,9 +70,9 @@ class Overview extends React.Component {
                 </CompostTransitionWrapper>
             </SecondRow>
             <ThirdRow>
-                <Link to="/tasks">
+                <a href="/tasks">
                     <OverviewButton />
-                </Link>
+                </a>
             </ThirdRow>
             <Navigation/>
         </StyledContainer>
