@@ -100,7 +100,7 @@ class Navigation extends React.Component {
 
                                 <Nav.Item>
                                 <Link to="/overview"><i className="fas fa-chart-line glyph"></i></Link>
-                                    <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Overzicht</Link>
+                                    <Link to="/overview" onClick={this.removeAccessToken} className="nav-link">Overzicht</Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                 <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>                               
