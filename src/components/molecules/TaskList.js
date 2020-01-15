@@ -152,7 +152,6 @@ class TaskList extends React.Component {
 
   removeItem = (item, i) => {
         this.props.removeTask(item, i)
-
         const currentDate = moment();
 
         let data = {
@@ -161,7 +160,7 @@ class TaskList extends React.Component {
         }
 
         const stringifyData = JSON.stringify(data);
-        localStorage.setItem('data', stringifyData); 
+        localStorage.setItem('data', stringifyData);
 
         //localStorage.clear();
     }

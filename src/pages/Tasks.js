@@ -13,6 +13,20 @@ import moment from 'moment';
 
 window.id = 0;
 
+// Current day
+let currentDate = moment();
+
+// Access object in local storage
+const accessObject = JSON.parse(localStorage.getItem('data'));
+
+//Days between new date and deleted date
+const differenceDate = currentDate.diff(currentDate, 'days');
+
+//Reset startDate
+const initialState = {
+    /* etc */
+};
+
 const StyledContainer = styled(Container)`
     && {
       padding-left: 25px;
@@ -93,20 +107,6 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
 
-        // Current day
-        let currentDate = moment();
-
-        // Access object in local storage
-        const accessObject = JSON.parse(localStorage.getItem('data'));
-
-        //Days between new date and deleted date
-        const differenceDate = currentDate.diff(currentDate, 'days');
-
-        //Reset startDate
-        const initialState = {
-            /* etc */
-        };
-
         if(localStorage.length == 0) {
              let data = {
                 status: 0,
@@ -122,12 +122,12 @@ class Tasks extends React.Component {
             this.setState({ tasks: tasks, text: text, description: description})
 
         } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
-           this.setState({ tasks: tasks, text: text, description: description})
-           console.log('Al 24 uur verstreken');
-            //localStorage.clear();
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 24 uur verstreken');
         } else {
             console.log('24 uur is nog niet verstreken')
             this.setState(initialState);
+            //localStorage.clear();
         }
 
 
@@ -147,7 +147,28 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
+
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 2 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 48 uur verstreken');
+        } else {
+            console.log('48 uur is nog niet verstreken')
+            this.setState(initialState);
+            //localStorage.clear();
+        }
 
     } else if(currentPhase == "phase3") {
 
@@ -164,7 +185,28 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
+
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 3 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 72 uur verstreken');
+        } else {
+            console.log('72 uur is nog niet verstreken')
+            this.setState(initialState);
+            //localStorage.clear();
+        }
 
     } else if(currentPhase == "phase4") {
 
@@ -181,24 +223,46 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
 
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 4 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 96 uur verstreken');
+        } else {
+            console.log('96 uur is nog niet verstreken')
+            this.setState(initialState);
+            //localStorage.clear();
+        }
 
     } else {
         console.log('errror')
     }
+
+    console.log(localStorage);
 }
 
     addWater = async (props) => {
 
     const result = await measurementsApi.getLatest()
-    let humidity = result.data.humidity; // can't use this.props.humidity because of asynchronous function
+    //let humidity = result.data.humidity;
+    let humidity = 15;
 
-    console.log(humidity);
     // SHOW
 
     if(humidity) {
-         if(humidity < 20) {
+         if(humidity <= 20) {
                const currentTasks = this.state.tasks;
                const currentText = this.state.text;
                const currentDescription = this.state.description;
@@ -207,9 +271,32 @@ class Tasks extends React.Component {
                const text = currentText.concat('De vochtigheid in de wormenbak is op het moment te laag');
                const description = currentDescription.concat('De composthoop mag niet te nat of te droog worden. Af en toe een beetje water is prima, maar bij te veel regen spoelen de voedingsstoffen uit, of kan een tekort aan lucht ontstaan in de composthoop.')
 
-               this.setState({ tasks: tasks, text: text, description: description})
+               if(localStorage.length == 0) {
+                    let data = {
+                       status: 0,
+                       deleted_date: null,
+                   }
 
-         } else if(humidity > 96) {
+                   const stringifyData = JSON.stringify(data);
+                   localStorage.setItem('data', stringifyData);
+
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+                    this.setState({ tasks: tasks, text: text, description: description})
+                    console.log('Al 48 uur verstreken');
+               } else {
+                   console.log('48 uur is nog niet verstreken')
+                   this.setState(initialState);
+                   //localStorage.clear();
+               }
+
+
+
+         } else if(humidity >= 102) {
                const currentTasks = this.state.tasks;
                const currentText = this.state.text;
                const currentDescription = this.state.description;
@@ -218,7 +305,28 @@ class Tasks extends React.Component {
                const text = currentText.concat('De vochtigheid van de wormenbak is op het moment te hoog');
                const description = currentDescription.concat('De wormenbak is op het moment te vochtig waardoor de compost gaat beschimmelen.');
 
-               this.setState({ tasks: tasks, text: text, description: description})
+               if(localStorage.length == 0) {
+                    let data = {
+                       status: 0,
+                       deleted_date: null,
+                   }
+
+                   const stringifyData = JSON.stringify(data);
+                   localStorage.setItem('data', stringifyData);
+
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+                    this.setState({ tasks: tasks, text: text, description: description})
+                    console.log('Al 48 uur verstreken');
+               } else {
+                   console.log('48 uur is nog niet verstreken')
+                   this.setState(initialState);
+                   //localStorage.clear();
+               }
          }
 
     } else {
