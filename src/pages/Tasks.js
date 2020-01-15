@@ -241,10 +241,10 @@ class Tasks extends React.Component {
              this.setState({ tasks: tasks, text: text, description: description})
              console.log('Al 96 uur verstreken');
         } else {
-            console.log('96 uur is nog niet verstreken')
-            this.setState(initialState);
+            //console.log('96 uur is nog niet verstreken')
+            //this.setState(initialState);
 
-            //localStorage.clear()
+            localStorage.clear()
         }
 
     } else {

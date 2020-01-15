@@ -221,7 +221,6 @@ class TaskList extends React.Component {
                             <div>
                               <TaskTitle> { task } </TaskTitle>
                               <TaskDescription> {linkText} </TaskDescription>
-
                             </div>
                               <CheckWrapper>
 
