@@ -177,7 +177,7 @@ class Login extends React.Component {
         //}
 
         // Redirect the user to the overview page
-        window.location.href = "/";
+        this.props.history.push('overview')
 
     }
 

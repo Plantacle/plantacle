@@ -52,7 +52,7 @@ const BigButton = styled.input`
 
 const Circle = styled.div`
     height: 70px;
-    margin: 0 auto;
+    margin-top: -33px !important;
     width: 70px;
     border-radius: 50%;
     border-color:  #4368d1;
@@ -61,7 +61,7 @@ const Circle = styled.div`
     border-width: 2px;
     position: absolute;
     z-index: 999999;
-    left: calc(50% - 40px);
+    left: calc(50% - 45px);
     cursor: pointer;
 `;
 
@@ -84,36 +84,31 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <Container className="mt-5">
-            <Link to="/"><Circle className="mt-2"><i className="fas fa-home home-glyph fa-2x"></i></Circle></Link>
+            <div className="mt-5">
+            <Link to="/overview"><Circle><i className="fas fa-home home-glyph fa-2x"></i></Circle></Link>
                     <Nav>
                         <Row className="nav-row">
-                            <Col className="nav-col">
-                                
                                 <Nav.Item>
-                                    <Link to="locations"><i className="fas fa-map-marker-alt glyph location-glyph"></i></Link>
-                                    <Link to="locations" className="nav-link">Locaties</Link>
+                                    <Link><i className="fas fa-map-marker-alt glyph location-glyph"></i></Link>
+                                    <Link className="nav-link">Locaties</Link>
                                 </Nav.Item>
                                 
                                 <Nav.Item>
                                     <Link to="/tasks"><i className="fas fa-tasks glyph task-icon"></i></Link>
                                     <Link to="/tasks" className="nav-link">Taken</Link>
                                 </Nav.Item>
-                            </Col>
 
-                            <Col className="nav-col">
                                 <Nav.Item>
-                                    <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>
-                                    <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Link>
+                                <Link to="/overview"><i className="fas fa-chart-line glyph"></i></Link>
+                                    <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Overzicht</Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Link to="/"><i className="fas fa-chart-line glyph"></i></Link>
-                                    <Link to="/" className="nav-link">Overzicht</Link>
+                                <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>                               
+                                    <Link to="/login" className="nav-link">Uitloggen</Link>
                                 </Nav.Item>
-                            </Col>
                         </Row>
                     </Nav>
-            </Container>
+            </div>
         );
     }
 }
