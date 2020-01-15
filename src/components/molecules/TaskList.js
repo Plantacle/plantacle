@@ -117,8 +117,21 @@ const Button = styled.button`
     height: 34px;
     background-color: #E8E8E8;
     border-radius: 50%;
-    background-image: url('../../assets/images/check.png');
-    background-repeat: no-repeat;
+    display: inline-block;
+    line-height:1em;
+    position:relative;
+    outline: none;
+    overflow: visible;
+    cursor: pointer;
+    margin-top: 19px;
+
+    &:active {
+        background-color: #4368D1;
+    }
+
+    &:focus {
+        outline: 0;
+    }
 `;
 
 const BackButton = styled.button`
@@ -136,6 +149,18 @@ const BackButton = styled.button`
     font-size: 1rem;
     cursor: pointer;
     text-align: center;
+`;
+
+const Test = styled.div`
+    width: 20px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+`;
+
+const Image = styled.img`
+    max-width: 100%;
+    max-height:100%;
 `;
 
 class TaskList extends React.Component {
@@ -201,6 +226,9 @@ class TaskList extends React.Component {
                               <CheckWrapper>
 
                                 <Button checked={this.state.checked} onClick={() => { this.removeItem(task, i)}}>
+                                  <Test>
+                                    <Image src={require('../../assets/images/check.png')}  />
+                                  </Test>
                                 </Button>
 
                                 <InfoButton onClick={()=> this.showModal(task, description)}>

@@ -243,7 +243,8 @@ class Tasks extends React.Component {
         } else {
             console.log('96 uur is nog niet verstreken')
             this.setState(initialState);
-            //localStorage.clear();
+
+            //localStorage.clear()
         }
 
     } else {
