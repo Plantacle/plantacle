@@ -5,11 +5,27 @@ import TaskList from './../components/molecules/TaskList.js';
 import Navigation from '../components/organisms/Navigation'
 
 import { MeasurementsApi, Configuration } from 'plantacle-api-client';
+import { measurementsApi } from '../components/App';
 import { GlobalStyles } from '../components/App'
 import SvgBackArrow from '../components/svg/BackArrow';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 window.id = 0;
+
+// Current day
+let currentDate = moment();
+
+// Access object in local storage
+const accessObject = JSON.parse(localStorage.getItem('data'));
+
+//Days between new date and deleted date
+const differenceDate = currentDate.diff(currentDate, 'days');
+
+//Reset startDate
+const initialState = {
+    /* etc */
+};
 
 const StyledContainer = styled(Container)`
     && {
@@ -33,15 +49,6 @@ const BackWrapper = styled.div`
     display: flex;
     margin-bottom: 20px;
 `;
-
-
-export const apiConfig = new Configuration({
-    basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkwMDQyNTEsImV4cCI6MTU3OTAzMzA1MX0.vYZ6f6SEOTEzQdKzZFmJKdY-F9nvEPfmJ_h77w_tYSs"
-})
-
-
-export const measurementsApi = new MeasurementsApi(apiConfig);
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -100,7 +107,29 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
+
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 24 uur verstreken');
+        } else {
+            console.log('24 uur is nog niet verstreken')
+            this.setState(initialState);
+            //localStorage.clear();
+        }
+
 
     } else if(currentPhase == "phase2") {
 
@@ -114,11 +143,32 @@ class Tasks extends React.Component {
         const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
 
-        const tasks = currentTasks.concat('Voeg om de 2 dagen 1,25 cm groen afval toe', ' Voeg om de 2 dagen 1,25 cm bruin afval toe');
+        const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
+
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 2 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 48 uur verstreken');
+        } else {
+            console.log('48 uur is nog niet verstreken')
+            this.setState(initialState);
+            //localStorage.clear();
+        }
 
     } else if(currentPhase == "phase3") {
 
@@ -131,11 +181,32 @@ class Tasks extends React.Component {
         const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
         const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
-        const tasks = currentTasks.concat('Voeg om de 3 dagen 1,25 cm groen afval toe', ' Voeg om de 3 dagen 1,25 cm bruin afval toe');
+        const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
+
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 3 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 72 uur verstreken');
+        } else {
+            console.log('72 uur is nog niet verstreken')
+            this.setState(initialState);
+            //localStorage.clear();
+        }
 
     } else if(currentPhase == "phase4") {
 
@@ -148,28 +219,49 @@ class Tasks extends React.Component {
         const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
         const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
-        const tasks = currentTasks.concat('Voeg om de 4 dagen 1,25 cm groen afval toe', ' Voeg om de 4 dagen 1,25 cm bruin afval toe');
+        const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', 'Voeg 1,25 cm bruin afval toe');
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        if(localStorage.length == 0) {
+             let data = {
+                status: 0,
+                deleted_date: null,
+            }
 
+            const stringifyData = JSON.stringify(data);
+            localStorage.setItem('data', stringifyData);
+
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+            this.setState({ tasks: tasks, text: text, description: description})
+
+        } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 4 ) {
+             this.setState({ tasks: tasks, text: text, description: description})
+             console.log('Al 96 uur verstreken');
+        } else {
+            console.log('96 uur is nog niet verstreken')
+            this.setState(initialState)
+        }
 
     } else {
         console.log('errror')
     }
+
+    console.log(localStorage);
 }
 
     addWater = async (props) => {
 
     const result = await measurementsApi.getLatest()
-    let humidity = result.data.humidity; // can't use this.props.humidity because of asynchronous function
+    //let humidity = result.data.humidity;
+    let humidity = 15;
 
-    console.log(humidity);
     // SHOW
 
     if(humidity) {
-         if(humidity < 20) {
+         if(humidity <= 20) {
                const currentTasks = this.state.tasks;
                const currentText = this.state.text;
                const currentDescription = this.state.description;
@@ -178,9 +270,32 @@ class Tasks extends React.Component {
                const text = currentText.concat('De vochtigheid in de wormenbak is op het moment te laag');
                const description = currentDescription.concat('De composthoop mag niet te nat of te droog worden. Af en toe een beetje water is prima, maar bij te veel regen spoelen de voedingsstoffen uit, of kan een tekort aan lucht ontstaan in de composthoop.')
 
-               this.setState({ tasks: tasks, text: text, description: description})
+               if(localStorage.length == 0) {
+                    let data = {
+                       status: 0,
+                       deleted_date: null,
+                   }
 
-         } else if(humidity > 96) {
+                   const stringifyData = JSON.stringify(data);
+                   localStorage.setItem('data', stringifyData);
+
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+                    this.setState({ tasks: tasks, text: text, description: description})
+                    console.log('Al 48 uur verstreken');
+               } else {
+                   console.log('48 uur is nog niet verstreken')
+                   this.setState(initialState);
+                   //localStorage.clear();
+               }
+
+
+
+         } else if(humidity >= 102) {
                const currentTasks = this.state.tasks;
                const currentText = this.state.text;
                const currentDescription = this.state.description;
@@ -189,7 +304,28 @@ class Tasks extends React.Component {
                const text = currentText.concat('De vochtigheid van de wormenbak is op het moment te hoog');
                const description = currentDescription.concat('De wormenbak is op het moment te vochtig waardoor de compost gaat beschimmelen.');
 
-               this.setState({ tasks: tasks, text: text, description: description})
+               if(localStorage.length == 0) {
+                    let data = {
+                       status: 0,
+                       deleted_date: null,
+                   }
+
+                   const stringifyData = JSON.stringify(data);
+                   localStorage.setItem('data', stringifyData);
+
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+                   this.setState({ tasks: tasks, text: text, description: description})
+
+               } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+                    this.setState({ tasks: tasks, text: text, description: description})
+                    console.log('Al 48 uur verstreken');
+               } else {
+                   console.log('48 uur is nog niet verstreken')
+                   this.setState(initialState);
+                   //localStorage.clear();
+               }
          }
 
     } else {

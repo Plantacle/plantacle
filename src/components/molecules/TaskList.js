@@ -4,18 +4,26 @@ import Checkbox from '../atoms/Checkbox';
 import SvgHelp from '../svg/Help';
 import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
+import SvgCheck from '../svg/Check';
+import moment from 'moment';
 
 const TaskBlock = styled.div`
     width: 100%;
-    height: 102px;
+    height: 150px;
     border-radius: 5px;
     box-shadow: 2px 12px 16px #F7F7F7;
     margin-bottom: 10px;
-    padding-top: 15px;
-    padding-left: 10px;
+    padding-top: 25px;
+    padding-left: 20px;
     display: flex;
     position: relative;
     justify-content: space-between;
+
+    @media (min-width: 390px) { // Tablets
+        height: 130px;
+        padding-top: 30px;
+        padding-left: 25px;
+    }
 `;
 
 const TaskTitle = styled.p`
@@ -44,10 +52,13 @@ const TaskDescription = styled.p`
     margin-top: -10px;
     color: #A5A5A5;
     letter-spacing: 1px;
-    width: 300px;
     @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
     font-family: Poppins;
     font-weight: 300;
+
+    @media (min-width: 991.98px) { // Tablets
+        width: 300px;
+    }
 `;
 
 const ListItem = styled.li`
@@ -70,6 +81,11 @@ const CheckWrapper = styled.div`
 const InfoButton = styled.button`
     background: none;
     border: none;
+    margin-left: -10px;
+
+    @media (min-width: 390px) { // Tablets
+      margin: 0;
+    }
 `;
 
 const SubmitButton = styled.button`
@@ -109,6 +125,34 @@ const Ul = styled.ul`
     margin-bottom: 30px;
 `;
 
+const Button = styled.button`
+    border: none;
+    width: 34px;
+    height: 34px;
+    background-color: #E8E8E8;
+    border-radius: 50%;
+    display: inline-block;
+    line-height:1em;
+    position:relative;
+    outline: none;
+    overflow: visible;
+    cursor: pointer;
+    margin-top: 39px;
+
+    &:active {
+        background-color: #4368D1;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+
+    @media (min-width: 390px) { // Tablets
+        margin-top: 27px;
+    }
+
+`;
+
 const BackButton = styled.button`
     font-weight: 700;
     font-size: 18px;
@@ -126,6 +170,31 @@ const BackButton = styled.button`
     text-align: center;
 `;
 
+const Test = styled.div`
+    width: 20px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+`;
+
+const Image = styled.img`
+    max-width: 100%;
+    max-height:100%;
+    margin-right: 16px;
+
+    @media (min-width: 390px) { // Tablets
+      margin: 0;
+    }
+`;
+
+const TextWrapper = styled.div`
+      max-width: 200px;
+
+      @media (min-width: 390px) { // Tablets
+        max-width: 400px;
+      }
+`;
+
 class TaskList extends React.Component {
 
     constructor(props) {
@@ -140,12 +209,27 @@ class TaskList extends React.Component {
 
   removeItem = (item, i) => {
         this.props.removeTask(item, i)
+        const currentDate = moment();
+
+        let data = {
+            status: 1,
+            deleted_date: currentDate,
+        }
+
+        const stringifyData = JSON.stringify(data);
+        localStorage.setItem('data', stringifyData);
+
+        //localStorage.clear();
     }
 
   onHide = () => this.setState({ modalShow: false });
 
   showModal = (task, description) => {
       this.setState({activeTitle: task, activeDescription: description}, ()=> this.setState({ modalShow: true }));
+  }
+
+  deleteTasks = () => {
+
   }
 
     render() {
@@ -166,14 +250,17 @@ class TaskList extends React.Component {
                         //<ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
                         <ListItem key={i}>
                             <TaskBlock>
-                            <div>
+                            <TextWrapper>
                               <TaskTitle> { task } </TaskTitle>
                               <TaskDescription> {linkText} </TaskDescription>
-
-                            </div>
+                            </TextWrapper>
                               <CheckWrapper>
 
-                                <Checkbox checked={this.state.checked} onChange={this.toggleChange}/>
+                                <Button checked={this.state.checked} onClick={() => { this.removeItem(task, i)}}>
+                                  <Test>
+                                    <Image src={require('../../assets/images/check.png')}  />
+                                  </Test>
+                                </Button>
 
                                 <InfoButton onClick={()=> this.showModal(task, description)}>
                                   <Info>
@@ -189,7 +276,7 @@ class TaskList extends React.Component {
                                  {this.state.activeDescription}
                                  </ModalBody>
                                  <Modal.Footer>
-                                      <BackButton onClick={this.onHide}>Ga terug</BackButton>
+                                      <BackButton onClick={this.onHide}>Terug</BackButton>
                                 </Modal.Footer>
                             </Modal>
                         </ListItem>
@@ -198,7 +285,7 @@ class TaskList extends React.Component {
                })}
           </Ul>
 
-          <SubmitButton>Klaar!</SubmitButton>
+           {/*   <SubmitButton onClick={this.deleteTasks}>Klaar!</SubmitButton> */}
 
         </div>
       )

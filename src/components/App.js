@@ -19,11 +19,13 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
     basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkwMDQyNTEsImV4cCI6MTU3OTAzMzA1MX0.vYZ6f6SEOTEzQdKzZFmJKdY-F9nvEPfmJ_h77w_tYSs"
+    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkxNzM4NzAsImV4cCI6MTU3OTIwMjY3MH0.UuYqm6-HsOkg07qOKCGFa5PHEbNCbuRxnFHItDY-bV8",
+    rememberMe: true,
 })
 
 // Gets the accessToken from the localStorage for all pages in the application
 localStorage.getItem("accessToken");
+
 console.log(localStorage)
 
 export const authenticationApi = new AuthenticationApi(apiConfig)
@@ -69,7 +71,7 @@ class App extends React.Component {
 
     // Get days
     getDays() {
-        let startDate = moment('2020-01-7') // Dummy data
+        let startDate = moment('2020-01-7')
         let currentDate = moment()
         const newDate = currentDate.diff(startDate, 'days');
         this.setState({day: newDate})
@@ -81,7 +83,7 @@ class App extends React.Component {
           //SHOW
           const result = {
             data: {
-              temperature: 45
+              temperature: 12
             }
           }
 
@@ -89,7 +91,7 @@ class App extends React.Component {
           //const currentDay = this.state.day;
 
           //SHOW
-          const currentDay = 57;
+          const currentDay = 12;
 
           // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
           if(result.data.temperature >= 10 && result.data.temperature <= 40 && currentDay >= 3 && currentDay <= 14 || result.data.temperature >= 10 && result.data.temperature <= 30 && currentDay < 3) {
@@ -101,7 +103,7 @@ class App extends React.Component {
                 phase.status = 'De compost is in een goede staat!';
                 return { phase };
 
-              });
+          });
 
           // Fase 2 actually starts at day 14, but if it gets hot too quick on day 7 or earlier the compost might fail.
         } else if(result.data.temperature >= 40 && result.data.temperature <=60 && currentDay >= 7 && currentDay < 56 || result.data.temperature >=40 && result.data.temperature <= 50 && currentDay >= 3 && currentDay < 7) { // 56 = 8 weeks

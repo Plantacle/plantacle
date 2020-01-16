@@ -9,6 +9,9 @@ const SVG = styled.svg`
     margin-left: 2px;
 
     @media (min-width: 991.98px) { // Tablets
+      width: 16px;
+      margin-left: 1px;
+      margin-bottom: 8px;
     }
 
   }

@@ -39,14 +39,19 @@ const ThirdRow = styled(Row)`
 
 const SecondCol = styled(Col)`
     && {
-      margin-top: 20px;
       display: flex;
       justify-content: center;
+
+      @media (min-width: 991.98px) { // Tablets
+        margin-top: 20px;
+      }
     }
 `;
 
 const CompostTransitionWrapper = styled.div`
-    margin-bottom: 30px;
+    @media (min-width: 991.98px) { // Tablets
+        margin-bottom: 40px;
+    }
 `;
 
 class Overview extends React.Component {
@@ -58,7 +63,7 @@ class Overview extends React.Component {
                   <Col xs={3}>
                       <Measurements temperature={this.props.temperature} humidity={this.props.humidity} methane={this.props.methane}/>
                   </Col>
-                  <SecondCol xs={6}>
+                  <SecondCol xs={7} md={6}>
                       <CurrentDay day={this.props.day} />
                   </SecondCol>
                   <Col xs={3}>
@@ -70,9 +75,9 @@ class Overview extends React.Component {
                 </CompostTransitionWrapper>
             </SecondRow>
             <ThirdRow>
-                <Link to="/tasks">
+                <a href="/tasks">
                     <OverviewButton />
-                </Link>
+                </a>
             </ThirdRow>
             <Navigation/>
         </StyledContainer>
