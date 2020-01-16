@@ -19,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
     basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkxMjc5OTgsImV4cCI6MTU3OTE1Njc5OH0.81L2cWfKpvioUGhGwvJI8_5SF4KKS4vp18N35gkftpM",
+    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkxNzM4NzAsImV4cCI6MTU3OTIwMjY3MH0.UuYqm6-HsOkg07qOKCGFa5PHEbNCbuRxnFHItDY-bV8",
     rememberMe: true,
 })
 
