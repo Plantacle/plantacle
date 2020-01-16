@@ -8,20 +8,34 @@ import svgImage3 from '../../assets/svg/phase3.png'; // with import
 import svgImage4 from '../../assets/svg/phase4.png'; // with import
 
 const CompostImageWrapper = styled.div`
-    width: 284px;
-    height: 310px;
+    width: 254px;
+    height: 270px;
+
+    @media (min-width: 390px) { // Tablets
+        width: 280px;
+        height: 280px;
+    }
 
     @media (min-width: 991.98px) { // Tablets
-        width: 384px;
-        height: 410px;
+        width: 350px;
+        height: 350px;
     }
 `;
 
 const CompostWrapper = styled.div`
     margin-bottom: 40px;
+    margin-right: 50px;
+
+    @media (min-width: 390px) { // Tablets
+        margin-right: 0;
+        margin-top: -30px;
+        margin-bottom: 80px;
+    }
 
     @media (min-width: 991.98px) { // Tablets
         margin-top: -90px;
+        margin-right: 0;
+        margin-bottom: 40px;
     }
 `;
 

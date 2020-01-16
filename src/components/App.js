@@ -19,8 +19,8 @@ export const GlobalStyles = createGlobalStyle`
 
 export const apiConfig = new Configuration({
     basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkwODI5OTQsImV4cCI6MTU3OTExMTc5NH0.lOlgHsLVYJveRTp4KA72drp_zp3DtRKJLROYjiGe0O4",
-  "expires": "2020-01-15T18:09:54.651Z"
+    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1NzkxMjc5OTgsImV4cCI6MTU3OTE1Njc5OH0.81L2cWfKpvioUGhGwvJI8_5SF4KKS4vp18N35gkftpM",
+    rememberMe: true,
 })
 
 // Gets the accessToken from the localStorage for all pages in the application
@@ -71,7 +71,7 @@ class App extends React.Component {
 
     // Get days
     getDays() {
-        let startDate = moment('2020-01-7') // Dummy data
+        let startDate = moment('2020-01-7')
         let currentDate = moment()
         const newDate = currentDate.diff(startDate, 'days');
         this.setState({day: newDate})
@@ -83,7 +83,7 @@ class App extends React.Component {
           //SHOW
           const result = {
             data: {
-              temperature: 43
+              temperature: 12
             }
           }
 
@@ -91,7 +91,7 @@ class App extends React.Component {
           //const currentDay = this.state.day;
 
           //SHOW
-          const currentDay = 58;
+          const currentDay = 12;
 
           // Fase 1 actually starts at day 1, but if it gets hot too quick on day 1 or 2 the compost might fail.
           if(result.data.temperature >= 10 && result.data.temperature <= 40 && currentDay >= 3 && currentDay <= 14 || result.data.temperature >= 10 && result.data.temperature <= 30 && currentDay < 3) {

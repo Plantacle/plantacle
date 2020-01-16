@@ -143,7 +143,7 @@ class Tasks extends React.Component {
         const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
 
-        const tasks = currentTasks.concat('Voeg om de 2 dagen 1,25 cm groen afval toe', ' Voeg om de 2 dagen 1,25 cm bruin afval toe');
+        const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
@@ -181,7 +181,7 @@ class Tasks extends React.Component {
         const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
         const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
-        const tasks = currentTasks.concat('Voeg om de 3 dagen 1,25 cm groen afval toe', ' Voeg om de 3 dagen 1,25 cm bruin afval toe');
+        const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
@@ -219,7 +219,7 @@ class Tasks extends React.Component {
         const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
         const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
 
-        const tasks = currentTasks.concat('Voeg om de 4 dagen 1,25 cm groen afval toe', ' Voeg om de 4 dagen 1,25 cm bruin afval toe');
+        const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', 'Voeg 1,25 cm bruin afval toe');
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
@@ -241,10 +241,8 @@ class Tasks extends React.Component {
              this.setState({ tasks: tasks, text: text, description: description})
              console.log('Al 96 uur verstreken');
         } else {
-            //console.log('96 uur is nog niet verstreken')
-            //this.setState(initialState);
-
-            localStorage.clear()
+            console.log('96 uur is nog niet verstreken')
+            this.setState(initialState)
         }
 
     } else {

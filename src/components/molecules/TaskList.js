@@ -9,15 +9,21 @@ import moment from 'moment';
 
 const TaskBlock = styled.div`
     width: 100%;
-    height: 102px;
+    height: 150px;
     border-radius: 5px;
     box-shadow: 2px 12px 16px #F7F7F7;
     margin-bottom: 10px;
-    padding-top: 15px;
-    padding-left: 10px;
+    padding-top: 25px;
+    padding-left: 20px;
     display: flex;
     position: relative;
     justify-content: space-between;
+
+    @media (min-width: 390px) { // Tablets
+        height: 130px;
+        padding-top: 30px;
+        padding-left: 25px;
+    }
 `;
 
 const TaskTitle = styled.p`
@@ -46,10 +52,13 @@ const TaskDescription = styled.p`
     margin-top: -10px;
     color: #A5A5A5;
     letter-spacing: 1px;
-    width: 300px;
     @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
     font-family: Poppins;
     font-weight: 300;
+
+    @media (min-width: 991.98px) { // Tablets
+        width: 300px;
+    }
 `;
 
 const ListItem = styled.li`
@@ -72,6 +81,11 @@ const CheckWrapper = styled.div`
 const InfoButton = styled.button`
     background: none;
     border: none;
+    margin-left: -10px;
+
+    @media (min-width: 390px) { // Tablets
+      margin: 0;
+    }
 `;
 
 const SubmitButton = styled.button`
@@ -123,7 +137,7 @@ const Button = styled.button`
     outline: none;
     overflow: visible;
     cursor: pointer;
-    margin-top: 19px;
+    margin-top: 39px;
 
     &:active {
         background-color: #4368D1;
@@ -132,6 +146,11 @@ const Button = styled.button`
     &:focus {
         outline: 0;
     }
+
+    @media (min-width: 390px) { // Tablets
+        margin-top: 27px;
+    }
+
 `;
 
 const BackButton = styled.button`
@@ -161,6 +180,19 @@ const Test = styled.div`
 const Image = styled.img`
     max-width: 100%;
     max-height:100%;
+    margin-right: 16px;
+
+    @media (min-width: 390px) { // Tablets
+      margin: 0;
+    }
+`;
+
+const TextWrapper = styled.div`
+      max-width: 200px;
+
+      @media (min-width: 390px) { // Tablets
+        max-width: 400px;
+      }
 `;
 
 class TaskList extends React.Component {
@@ -218,10 +250,10 @@ class TaskList extends React.Component {
                         //<ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
                         <ListItem key={i}>
                             <TaskBlock>
-                            <div>
+                            <TextWrapper>
                               <TaskTitle> { task } </TaskTitle>
                               <TaskDescription> {linkText} </TaskDescription>
-                            </div>
+                            </TextWrapper>
                               <CheckWrapper>
 
                                 <Button checked={this.state.checked} onClick={() => { this.removeItem(task, i)}}>
@@ -244,7 +276,7 @@ class TaskList extends React.Component {
                                  {this.state.activeDescription}
                                  </ModalBody>
                                  <Modal.Footer>
-                                      <BackButton onClick={this.onHide}>Ga terug</BackButton>
+                                      <BackButton onClick={this.onHide}>Terug</BackButton>
                                 </Modal.Footer>
                             </Modal>
                         </ListItem>
@@ -253,7 +285,7 @@ class TaskList extends React.Component {
                })}
           </Ul>
 
-          <SubmitButton onClick={this.deleteTasks}>Klaar!</SubmitButton>
+           {/*   <SubmitButton onClick={this.deleteTasks}>Klaar!</SubmitButton> */}
 
         </div>
       )
