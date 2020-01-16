@@ -71,7 +71,7 @@ class App extends React.Component {
 
     // Get days
     getDays() {
-        let startDate = moment('2020-01-7')
+        let startDate = moment('2020-01-15')
         let currentDate = moment()
         const newDate = currentDate.diff(startDate, 'days');
         this.setState({day: newDate})
