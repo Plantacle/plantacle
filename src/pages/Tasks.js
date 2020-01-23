@@ -118,6 +118,8 @@ class Tasks extends React.Component {
 
             this.setState({ tasks: tasks, text: text, description: description})
 
+            console.log('null')
+
         } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
             this.setState({ tasks: tasks, text: text, description: description})
 
@@ -129,6 +131,8 @@ class Tasks extends React.Component {
             this.setState(initialState);
 
         }
+
+        console.log('er gaat wat mis')
 
 
     } else if(currentPhase == "phase2") {
