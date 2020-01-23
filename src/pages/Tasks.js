@@ -107,7 +107,7 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
 
-        if(accessObject ==! null) {  //localStorage.length == 0
+        if(accessObject == null) {  //localStorage.length == 0
              let data = {
                 status: 0,
                 deleted_date: null,
@@ -120,20 +120,17 @@ class Tasks extends React.Component {
 
             console.log('null')
 
+        } else if(localStorage.length > 0 && accessObject == null) {
+            console.log('Accesobject has not been made')
         } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
             this.setState({ tasks: tasks, text: text, description: description})
-
         } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
              this.setState({ tasks: tasks, text: text, description: description})
              console.log('Al 24 uur verstreken');
         } else {
-            console.log('24 uur is nog niet verstreken')
-            this.setState(initialState);
-
+            this.setState({ initialState });
+            //localStorage.clear();
         }
-
-        console.log('er gaat wat mis')
-
 
     } else if(currentPhase == "phase2") {
 
