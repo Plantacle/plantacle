@@ -148,7 +148,7 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        if(localStorage.length == 0) {
+        if(accessObject == null) {
              let data = {
                 status: 0,
                 deleted_date: null,
@@ -159,6 +159,8 @@ class Tasks extends React.Component {
 
             this.setState({ tasks: tasks, text: text, description: description})
 
+        } else if(localStorage.length > 0 && accessObject == null) {
+            console.log('Accesobject has not been made')
         } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
             this.setState({ tasks: tasks, text: text, description: description})
 
@@ -186,7 +188,7 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        if(localStorage.length == 0) {
+        if(accessObject == null) {
              let data = {
                 status: 0,
                 deleted_date: null,
@@ -197,6 +199,8 @@ class Tasks extends React.Component {
 
             this.setState({ tasks: tasks, text: text, description: description})
 
+        } else if(localStorage.length > 0 && accessObject == null) {
+            console.log('Accesobject has not been made')
         } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
             this.setState({ tasks: tasks, text: text, description: description})
 
@@ -224,7 +228,7 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
 
-        if(localStorage.length == 0) {
+        if(accessObject == null) {
              let data = {
                 status: 0,
                 deleted_date: null,
@@ -235,6 +239,8 @@ class Tasks extends React.Component {
 
             this.setState({ tasks: tasks, text: text, description: description})
 
+        } else if(localStorage.length > 0 && accessObject == null) {
+            console.log('Accesobject has not been made')
         } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
             this.setState({ tasks: tasks, text: text, description: description})
 
@@ -271,7 +277,7 @@ class Tasks extends React.Component {
                const text = currentText.concat('De vochtigheid in de wormenbak is op het moment te laag');
                const description = currentDescription.concat('De composthoop mag niet te nat of te droog worden. Af en toe een beetje water is prima, maar bij te veel regen spoelen de voedingsstoffen uit, of kan een tekort aan lucht ontstaan in de composthoop.')
 
-               if(localStorage.length == 0) {
+               if(accessObject == null) {
                     let data = {
                        status: 0,
                        deleted_date: null,
@@ -282,6 +288,8 @@ class Tasks extends React.Component {
 
                    this.setState({ tasks: tasks, text: text, description: description})
 
+               } else if(localStorage.length > 0 && accessObject == null) {
+                   console.log('Accesobject has not been made')
                } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
                    this.setState({ tasks: tasks, text: text, description: description})
 
@@ -305,7 +313,7 @@ class Tasks extends React.Component {
                const text = currentText.concat('De vochtigheid van de wormenbak is op het moment te hoog');
                const description = currentDescription.concat('De wormenbak is op het moment te vochtig waardoor de compost gaat beschimmelen.');
 
-               if(localStorage.length == 0) {
+               if(accessObject == null) {
                     let data = {
                        status: 0,
                        deleted_date: null,
@@ -316,6 +324,8 @@ class Tasks extends React.Component {
 
                    this.setState({ tasks: tasks, text: text, description: description})
 
+               } else if(localStorage.length > 0 && accessObject == null) {
+                   console.log('Accesobject has not been made')
                } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
                    this.setState({ tasks: tasks, text: text, description: description})
 
