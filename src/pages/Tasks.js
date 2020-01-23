@@ -107,7 +107,7 @@ class Tasks extends React.Component {
         const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
         const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
 
-        if(localStorage.length == 0) {
+        if(accessObject ==! null) {  //localStorage.length == 0
              let data = {
                 status: 0,
                 deleted_date: null,
@@ -127,7 +127,7 @@ class Tasks extends React.Component {
         } else {
             console.log('24 uur is nog niet verstreken')
             this.setState(initialState);
-            //localStorage.clear();
+
         }
 
 
