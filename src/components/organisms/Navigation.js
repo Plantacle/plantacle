@@ -89,10 +89,10 @@ class Navigation extends React.Component {
                     <Nav>
                         <Row className="nav-row">
                                 <Nav.Item>
-                                    <Link><i className="fas fa-map-marker-alt glyph location-glyph"></i></Link>
-                                    <Link className="nav-link">Locaties</Link>
+                                    <Link to="/overview"><i className="fas fa-map-marker-alt glyph location-glyph"></i></Link>
+                                    <Link to="/overview" className="nav-link">Locaties</Link>
                                 </Nav.Item>
-                                
+
                                 <Nav.Item>
                                     <Link to="/tasks"><i className="fas fa-tasks glyph task-icon"></i></Link>
                                     <Link to="/tasks" className="nav-link">Taken</Link>
@@ -103,7 +103,7 @@ class Navigation extends React.Component {
                                     <Link to="/overview" onClick={this.removeAccessToken} className="nav-link">Overzicht</Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>                               
+                                <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>
                                     <Link to="/login" className="nav-link">Uitloggen</Link>
                                 </Nav.Item>
                         </Row>

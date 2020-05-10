@@ -6,7 +6,7 @@ import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
 import LoginForm from '../pages/LoginForm'
 import Navigation from '../components/organisms/Navigation'
-import {AuthenticationApi, Configuration, UsersApi, MeasurementsApi} from 'plantacle-api-client'
+import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client' // MeasurementsApi
 import moment from 'moment'
 import { createGlobalStyle } from 'styled-components';
 
@@ -30,16 +30,16 @@ console.log(localStorage)
 
 export const authenticationApi = new AuthenticationApi(apiConfig)
 export const usersApi = new UsersApi(apiConfig)
-export const measurementsApi = new MeasurementsApi(apiConfig)
+//export const measurementsApi = new MeasurementsApi(apiConfig)
 
 class App extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
-        temperature: '',
+        temperature: '20',
         humidity: '',
         methane: '5,24',
-        day: '',
+        day: '12',
         phase: {
             currentPhase: '',
             status: '',
@@ -47,27 +47,27 @@ class App extends React.Component {
         }
     }
 
-    this.getMeasurements = this.getMeasurements.bind(this);
+    //this.getMeasurements = this.getMeasurements.bind(this);
     this.getDays = this.getDays.bind(this);
     this.calculatePhase = this.calculatePhase.bind(this);
 
     }
 
     componentDidMount() {
-        this.getMeasurements()
+        //this.getMeasurements()
         this.getDays()
         this.calculatePhase()
     }
 
     // Get temperature
-    async getMeasurements() {
-        const result = await measurementsApi.getLatest()
-        const currentHumidity = result.data.humidity
-        this.setState({
-            temperature: result.data.temperature,
-            humidity: currentHumidity
-       });
-    }
+    //async getMeasurements() {
+        //const result = await measurementsApi.getLatest()
+        //const currentHumidity = result.data.humidity
+        //this.setState({
+            //temperature: result.data.temperature,
+            //humidity: currentHumidity
+       //});
+    //}
 
     // Get days
     getDays() {
@@ -83,7 +83,7 @@ class App extends React.Component {
           //SHOW
           const result = {
             data: {
-              temperature: 12
+              temperature: 20
             }
           }
 
@@ -104,6 +104,7 @@ class App extends React.Component {
                 return { phase };
 
           });
+
 
           // Fase 2 actually starts at day 14, but if it gets hot too quick on day 7 or earlier the compost might fail.
         } else if(result.data.temperature >= 40 && result.data.temperature <=60 && currentDay >= 7 && currentDay < 56 || result.data.temperature >=40 && result.data.temperature <= 50 && currentDay >= 3 && currentDay < 7) { // 56 = 8 weeks
