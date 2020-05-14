@@ -36,8 +36,8 @@ class App extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
-        temperature: '20',
-        humidity: '',
+        temperature: '20 °C', // sensor
+        humidity: '15', // sensor
         methane: '5,24',
         day: '12',
         phase: {
