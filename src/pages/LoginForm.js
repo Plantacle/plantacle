@@ -5,7 +5,7 @@ import SvgPassword from '../components/svg/Password'
 import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
 import { Row, Col, Container, Form } from 'react-bootstrap';
-import { authenticationApi, apiConfig, usersApi } from '../components/App'
+//import { authenticationApi, apiConfig, usersApi } from '../components/App'
 import {Link} from 'react-router-dom'
 
 
@@ -62,13 +62,13 @@ const InputCheckBox = styled.input``
 
 /* End Styling */
 
-        
+
 let emailError = ''
 let passwordError = ''
 
 
 class Login extends React.Component {
-    
+
 
     constructor(props) {
         super(props);
@@ -109,7 +109,7 @@ class Login extends React.Component {
             passwordError = 'Geef een wachtwoord op'
         }
 
-        // If there is an error set the state to that error 
+        // If there is an error set the state to that error
         if (emailError || passwordError) {
             this.setState({ emailError, passwordError })
             return false
@@ -121,63 +121,63 @@ class Login extends React.Component {
 
     async handleSubmit(event) {
 
-        // Prevent the default submit action
-        event.preventDefault()
-
-        // Validates the input fields after
-        const isValid = this.validate()
-        if (isValid) {
-            console.log(this.state)
-            //this.setState(intitialState)
-        }
-
-        // Authenticates the user trying to log in
-        let authenticateLogin
-        
-        try {
-            authenticateLogin = await authenticationApi.login({ email: this.state.email, password: this.state.password })
-        } catch (error) {
-            if (error.response.status === 401) {
-                console.log('fout')
-                emailError = 'Het wachtwoord of e-mailadres is fout, probeer het opnieuw!'
-                passwordError = ''
-                console.log(emailError)
-
-            } else {
-                throw error
-            }
-            return
-        }
-
-        // Generates an accessToken 
-        apiConfig.accessToken = authenticateLogin.data.accessToken
-
-        console.log(apiConfig.accessToken)
-
-        // Add the accessToken to the localStorage
-        localStorage.setItem("accessToken", apiConfig.accessToken);
-
-        // Checks if the username and password are both correct (comes from api/auth)
-        if (authenticateLogin.status == 201) {
-            console.log('Naam en wachtwoord zijn allebei correct!')
-        }
-
-        // Finds the registred user 
-        const getAuthenticatedUser = await usersApi.getUser()
-        console.log(getAuthenticatedUser)
-
-        // Checks if the input value is equal to data from the database (comes from api/users/me)
-        if (getAuthenticatedUser.data.email == this.state.email) {
-            console.log('De ingevulde e-mail door de gebruiker komt overeen met die uit de database!')
-        }
-
-        // Checks if value in the inputtext field matches the database information (does not work at the moment)
-        //if (getAuthenticatedUser.data.email !== this.state.email) {
-        //     console.log('Deze gebruiker bestaat niet!')
-        //}
-
-        // Redirect the user to the overview page
-        window.location.href = "overview";
+        // // Prevent the default submit action
+        // event.preventDefault()
+        //
+        // // Validates the input fields after
+        // const isValid = this.validate()
+        // if (isValid) {
+        //     console.log(this.state)
+        //     //this.setState(intitialState)
+        // }
+        //
+        // // Authenticates the user trying to log in
+        // let authenticateLogin
+        //
+        // try {
+        //     authenticateLogin = await authenticationApi.login({ email: this.state.email, password: this.state.password })
+        // } catch (error) {
+        //     if (error.response.status === 401) {
+        //         console.log('fout')
+        //         emailError = 'Het wachtwoord of e-mailadres is fout, probeer het opnieuw!'
+        //         passwordError = ''
+        //         console.log(emailError)
+        //
+        //     } else {
+        //         throw error
+        //     }
+        //     return
+        // }
+        //
+        // // Generates an accessToken
+        // apiConfig.accessToken = authenticateLogin.data.accessToken
+        //
+        // console.log(apiConfig.accessToken)
+        //
+        // // Add the accessToken to the localStorage
+        // localStorage.setItem("accessToken", apiConfig.accessToken);
+        //
+        // // Checks if the username and password are both correct (comes from api/auth)
+        // if (authenticateLogin.status == 201) {
+        //     console.log('Naam en wachtwoord zijn allebei correct!')
+        // }
+        //
+        // // Finds the registred user
+        // const getAuthenticatedUser = await usersApi.getUser()
+        // console.log(getAuthenticatedUser)
+        //
+        // // Checks if the input value is equal to data from the database (comes from api/users/me)
+        // if (getAuthenticatedUser.data.email == this.state.email) {
+        //     console.log('De ingevulde e-mail door de gebruiker komt overeen met die uit de database!')
+        // }
+        //
+        // // Checks if value in the inputtext field matches the database information (does not work at the moment)
+        // //if (getAuthenticatedUser.data.email !== this.state.email) {
+        // //     console.log('Deze gebruiker bestaat niet!')
+        // //}
+        //
+        // // Redirect the user to the overview page
+        // window.location.href = "overview";
 
     }
 

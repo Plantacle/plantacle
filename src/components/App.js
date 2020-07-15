@@ -6,7 +6,7 @@ import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
 import LoginForm from '../pages/LoginForm'
 import Navigation from '../components/organisms/Navigation'
-import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client' // MeasurementsApi
+//import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client' // MeasurementsApi
 import moment from 'moment'
 import { createGlobalStyle } from 'styled-components';
 
@@ -17,19 +17,17 @@ export const GlobalStyles = createGlobalStyle`
     }
 `;
 
-export const apiConfig = new Configuration({
-    basePath: "https://app.plantacle.com",
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzk3NzgyODMsImV4cCI6MTU3OTgwNzA4M30.nRIoUeHw2rxPoVQLqhrWwE7DRRdR_PyUMj3sjmB3YUs",
-    rememberMe: true,
-})
+// export const apiConfig = new Configuration({
+//     basePath: "https://app.plantacle.com",
+//     accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTE1MjJjN2I3MmY2Zjc4ZmU4ZGYyZWQiLCJpYXQiOjE1Nzk3NzgyODMsImV4cCI6MTU3OTgwNzA4M30.nRIoUeHw2rxPoVQLqhrWwE7DRRdR_PyUMj3sjmB3YUs",
+//     rememberMe: true,
+// })
 
 // Gets the accessToken from the localStorage for all pages in the application
 localStorage.getItem("accessToken");
 
-console.log(localStorage)
-
-export const authenticationApi = new AuthenticationApi(apiConfig)
-export const usersApi = new UsersApi(apiConfig)
+//export const authenticationApi = new AuthenticationApi(apiConfig)
+//export const usersApi = new UsersApi(apiConfig)
 //export const measurementsApi = new MeasurementsApi(apiConfig)
 
 class App extends React.Component {
@@ -71,7 +69,7 @@ class App extends React.Component {
 
     // Get days
     getDays() {
-        let startDate = moment('2020-01-15')
+        let startDate = moment('2020-05-20')
         let currentDate = moment()
         const newDate = currentDate.diff(startDate, 'days');
         this.setState({day: newDate})
@@ -241,7 +239,7 @@ class App extends React.Component {
                 <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} warning={this.state.phase.warning} day={this.state.day} temperature={this.state.temperature} humidity={this.state.humidity} methane={this.state.methane}/>}/>
                 <Route path="/tasks" render={()=><Tasks currentPhase={this.state.phase.currentPhase} humidity={this.state.humidity} />}/>
                 <Route path="/register" component={RegisterForm} />
-                <Route path="/login" component={LoginForm} />
+                <Route path="/" component={LoginForm} />
                 <Route path="/navigation" component={Navigation} />
 
               </Switch>

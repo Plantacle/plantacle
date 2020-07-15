@@ -5,7 +5,7 @@ import SvgPassword from '../components/svg/Password'
 import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
 import { Row, Col, Container, Form } from 'react-bootstrap';
-import { usersApi } from '../components/App'
+//import { usersApi } from '../components/App'
 import {Link} from 'react-router-dom'
 
 /* Styling */
@@ -100,15 +100,15 @@ class Register extends React.Component {
         if (this.state.password === '') {
             passwordError = 'Geef een wachtwoord op'
         }
-             
+
         if (this.state.password.length < 8){
             passwordError = 'Het wachtwoord moet minstens 8 tekens bevatten'
         }
 
         if (this.state.verifyPassword === '') {
             verifyPasswordError = 'Geef het wachtwoord opnieuw op'
-        } 
-        
+        }
+
         if (this.state.verifyPassword.length < 8){
             passwordError = 'Het wachtwoord moet minstens 8 tekens bevatten'
         }
@@ -130,46 +130,39 @@ class Register extends React.Component {
 
     async handleSubmit(event) {
 
-        // Prevent the default submit action
-        event.preventDefault()
-
-        // Validates the form
-        const isValid = this.validate()
-        if (isValid) {
-            
-            console.log(this.state)
-            this.setState(initializeState)
-
-        }
-
-        try {
-                    
-        // Creates a new user with an username and password
-        const registerNewUser = await usersApi.addUser({email: this.state.email, password: this.state.password,})
-
-        } catch (error) {
-            if (error.response.status === 400) {
-
-                console.log('Er zijn nog velden vergeten')
-
-            } else {
-                throw error
-            }
-            return
-        }
-
-
-        // Redirects the user to the login page after being succesfully registered
-        this.props.history.push('overview')
+        // // Prevent the default submit action
+        // event.preventDefault()
+        //
+        // // Validates the form
+        // const isValid = this.validate()
+        // if (isValid) {
+        //
+        //     console.log(this.state)
+        //     this.setState(initializeState)
+        //
+        // }
+        //
+        // try {
+        //
+        // // Creates a new user with an username and password
+        // const registerNewUser = await usersApi.addUser({email: this.state.email, password: this.state.password,})
+        //
+        // } catch (error) {
+        //     if (error.response.status === 400) {
+        //
+        //         console.log('Er zijn nog velden vergeten')
+        //
+        //     } else {
+        //         throw error
+        //     }
+        //     return
+        // }
+        //
+        //
+        // // Redirects the user to the login page after being succesfully registered
+        // this.props.history.push('overview')
 
     }
-
-
-
-
-
-
-    
 
     render() {
         return (
