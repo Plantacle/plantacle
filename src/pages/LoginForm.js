@@ -8,6 +8,7 @@ import { Row, Col, Container, Form } from 'react-bootstrap';
 //import { authenticationApi, apiConfig, usersApi } from '../components/App'
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import decode from "jwt-decode";
 
 
 /* Styling */
@@ -77,7 +78,8 @@ class Login extends React.Component {
             email: '',
             password: '',
             emailError: '',
-            passwordError: ''
+            passwordError: '',
+            payload: null,
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -124,14 +126,6 @@ class Login extends React.Component {
         // Prevent the default submit action
         event.preventDefault()
 
-        // const response = await fetch('/login', {
-        //   method: 'POST',
-        //   headers: {
-        //       'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify({ email: this.state.email, password: this.state.password})
-        // });
-
         const loginInfo = {
             email: this.state.email,
             password: this.state.password
@@ -158,68 +152,30 @@ class Login extends React.Component {
           }
         })
         .then(response => {
-            alert(response.data.message)
+            //alert(response.data.message)
+            //console.log(response.data.token)
+            //this.setToken(response.data.token)
+            //return Promise.resolve(response);
+            this.getConfirm(response.data.token);
+            console.log(localStorage)
+
         })
         .catch( err => {
           console.log(err)
         })
+    }
 
+    setToken = idToken => {
+        localStorage.setItem("id_token", idToken)
+    };
 
-        // // Validates the input fields after
-        // const isValid = this.validate()
-        // if (isValid) {
-        //     console.log(this.state)
-        //     //this.setState(intitialState)
-        // }
-        //
-        // // Authenticates the user trying to log in
-        // let authenticateLogin
-        //
-        // try {
-        //     authenticateLogin = await authenticationApi.login({ email: this.state.email, password: this.state.password })
-        // } catch (error) {
-        //     if (error.response.status === 401) {
-        //         console.log('fout')
-        //         emailError = 'Het wachtwoord of e-mailadres is fout, probeer het opnieuw!'
-        //         passwordError = ''
-        //         console.log(emailError)
-        //
-        //     } else {
-        //         throw error
-        //     }
-        //     return
-        // }
-        //
-        // // Generates an accessToken
-        // apiConfig.accessToken = authenticateLogin.data.accessToken
-        //
-        // console.log(apiConfig.accessToken)
-        //
-        // // Add the accessToken to the localStorage
-        // localStorage.setItem("accessToken", apiConfig.accessToken);
-        //
-        // // Checks if the username and password are both correct (comes from api/auth)
-        // if (authenticateLogin.status == 201) {
-        //     console.log('Naam en wachtwoord zijn allebei correct!')
-        // }
-        //
-        // // Finds the registred user
-        // const getAuthenticatedUser = await usersApi.getUser()
-        // console.log(getAuthenticatedUser)
-        //
-        // // Checks if the input value is equal to data from the database (comes from api/users/me)
-        // if (getAuthenticatedUser.data.email == this.state.email) {
-        //     console.log('De ingevulde e-mail door de gebruiker komt overeen met die uit de database!')
-        // }
-        //
-        // // Checks if value in the inputtext field matches the database information (does not work at the moment)
-        // //if (getAuthenticatedUser.data.email !== this.state.email) {
-        // //     console.log('Deze gebruiker bestaat niet!')
-        // //}
-        //
-        // // Redirect the user to the overview page
-        // window.location.href = "overview";
+    getToken = () => {
+        return localStorage.getItem("id_token");
+    }
 
+    getConfirm = token => {
+      let answer = decode(token);
+      localStorage.setItem("decoded_token", JSON.stringify(answer.user))
     }
 
     render() {
