@@ -6,7 +6,8 @@ import logo from '../../src/img/logo.png'
 import SvgWave from '../components/svg/Wave'
 import { Row, Col, Container, Form } from 'react-bootstrap';
 //import { authenticationApi, apiConfig, usersApi } from '../components/App'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 
 /* Styling */
@@ -85,7 +86,6 @@ class Login extends React.Component {
 
     componentDidMount() {
 
-        console.log('Page loaded!')
 
     }
 
@@ -121,9 +121,50 @@ class Login extends React.Component {
 
     async handleSubmit(event) {
 
-        // // Prevent the default submit action
-        // event.preventDefault()
-        //
+        // Prevent the default submit action
+        event.preventDefault()
+
+        // const response = await fetch('/login', {
+        //   method: 'POST',
+        //   headers: {
+        //       'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ email: this.state.email, password: this.state.password})
+        // });
+
+        const loginInfo = {
+            email: this.state.email,
+            password: this.state.password
+        }
+
+        // axios.post('http://localhost:4000/login', loginInfo, {
+        //   headers: {
+        //       "Content-Type": "application/json"
+        //   },
+        // })
+        // .then(response => {
+        //     alert(response.data.message)
+        // })
+        // .catch( err => {
+        //   console.log(err)
+        // })
+
+        axios({
+        method: 'post',
+        url: 'http://localhost:4000/login',
+        data: {
+          email: this.state.email,
+          password: this.state.password
+          }
+        })
+        .then(response => {
+            alert(response.data.message)
+        })
+        .catch( err => {
+          console.log(err)
+        })
+
+
         // // Validates the input fields after
         // const isValid = this.validate()
         // if (isValid) {
