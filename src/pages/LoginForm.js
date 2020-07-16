@@ -142,6 +142,10 @@ class Login extends React.Component {
         // .catch( err => {
         //   console.log(err)
         // })
+        
+        const config = {
+            headers: { Authorization: `Bearer ${this.getToken()}` }
+        };
 
         axios({
         method: 'post',
@@ -149,7 +153,8 @@ class Login extends React.Component {
         data: {
           email: this.state.email,
           password: this.state.password
-          }
+        },
+        config
         })
         .then(response => {
             //alert(response.data.message)
@@ -157,13 +162,35 @@ class Login extends React.Component {
             //this.setToken(response.data.token)
             //return Promise.resolve(response);
             this.getConfirm(response.data.token);
-            console.log(localStorage)
+
+            //Redirect the user to the overview page
+            window.location.href = "overview";
 
         })
         .catch( err => {
           console.log(err)
         })
     }
+
+    loggedIn = () => {
+        // Checks if there is a saved token and it's still valid
+        const token = this.getToken(); // Getting token from localstorage
+        return !!token && !this.isTokenExpired(token); // handwaiving here
+    };
+
+    isTokenExpired = token => {
+       try {
+         const decoded = decode(token);
+         if (decoded.exp < Date.now() / 1000) {
+           // Checking if token is expired.
+           return true;
+         } else return false;
+       } catch (err) {
+         console.log("expired check failed! Line 42: AuthService.js");
+         return false;
+       }
+    };
+
 
     setToken = idToken => {
         localStorage.setItem("id_token", idToken)
@@ -174,9 +201,10 @@ class Login extends React.Component {
     }
 
     getConfirm = token => {
-      let answer = decode(token);
-      localStorage.setItem("decoded_token", JSON.stringify(answer.user))
+        let answer = decode(token);
+        localStorage.setItem("decoded_token", JSON.stringify(answer.user))
     }
+
 
     render() {
         return (

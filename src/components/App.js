@@ -5,6 +5,7 @@ import Overview from '../pages/Overview';
 import Tasks from '../pages/Tasks';
 import RegisterForm from '../pages/RegisterForm'
 import LoginForm from '../pages/LoginForm'
+import Profile from '../pages/Profile'
 import Navigation from '../components/organisms/Navigation'
 //import {AuthenticationApi, Configuration, UsersApi} from 'plantacle-api-client' // MeasurementsApi
 import moment from 'moment'
@@ -239,8 +240,9 @@ class App extends React.Component {
                 <Route path="/overview" render={()=><Overview currentPhase={this.state.phase.currentPhase} status={this.state.phase.status} warning={this.state.phase.warning} day={this.state.day} temperature={this.state.temperature} humidity={this.state.humidity} methane={this.state.methane}/>}/>
                 <Route path="/tasks" render={()=><Tasks currentPhase={this.state.phase.currentPhase} humidity={this.state.humidity} />}/>
                 <Route path="/register" component={RegisterForm} />
-                <Route path="/" component={LoginForm} />
+                <Route exact path="/" component={LoginForm} />
                 <Route path="/navigation" component={Navigation} />
+                <Route path="/profile" component={Profile} />
 
               </Switch>
             </Router>
