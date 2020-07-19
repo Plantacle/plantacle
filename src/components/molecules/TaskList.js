@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import SvgCheck from '../svg/Check';
 import moment from 'moment';
+import axios from 'axios';
 
 const TaskBlock = styled.div`
     width: 100%;
@@ -204,7 +205,12 @@ class TaskList extends React.Component {
             modalShow: false,
             activeTitle: '',
             activeDescription: '',
+
+            // Profile
+            points: ''
         }
+
+            this.addPoints = this.addPoints.bind(this);
     }
 
   removeItem = (item, i) => {
@@ -219,7 +225,8 @@ class TaskList extends React.Component {
         const stringifyData = JSON.stringify(data);
         localStorage.setItem('data', stringifyData);
 
-        //localStorage.clear();
+        // Profile
+        this.addPoints();
     }
 
   onHide = () => this.setState({ modalShow: false });
@@ -228,7 +235,42 @@ class TaskList extends React.Component {
       this.setState({activeTitle: task, activeDescription: description}, ()=> this.setState({ modalShow: true }));
   }
 
-  deleteTasks = () => {
+  addPoints = () => {
+
+    // Add points to this.state
+    const points = this.state.points + 1
+
+
+    // // Change the state with the points in localstorage, so they won't disappear.
+    // this.setState((state) => ({
+    //     points: getScore
+    // }))
+    //
+    // //Get decoded token, take id and pass into Bearer for authorization.
+    // let decodedToken = JSON.parse(localStorage.getItem("decoded_token"));
+    // const token = decodedToken.id;
+    //
+    // // Bearer tokens to execute requests
+    // const config = {
+    //     headers: { Authorization: `Bearer ${token}` }
+    // };
+    //
+    //
+    // // Update compost points (also in back-end)
+    // axios({
+    // method: 'put',
+    // url: 'http://localhost:4000/login',
+    // data: {
+    //   compost_points: getScore
+    // },
+    // config
+    // })
+    // .then(response => {
+    //
+    // })
+    // .catch( err => {
+    //   console.log(err)
+    // })
 
   }
 
@@ -270,6 +312,7 @@ class TaskList extends React.Component {
 
                               </CheckWrapper>
                             </TaskBlock>
+
                             <Modal show={this.state.modalShow} onHide={this.onHide}>
                                  <ModalHeader closeButton>{this.state.activeTitle}</ModalHeader>
                                  <ModalBody>

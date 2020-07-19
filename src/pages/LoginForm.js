@@ -142,18 +142,19 @@ class Login extends React.Component {
         // .catch( err => {
         //   console.log(err)
         // })
-        
+
         const config = {
             headers: { Authorization: `Bearer ${this.getToken()}` }
         };
 
         axios({
         method: 'post',
-        url: 'http://localhost:4000/login',
+        url: 'http://localhost:4000/users',
         data: {
           email: this.state.email,
           password: this.state.password
         },
+
         config
         })
         .then(response => {

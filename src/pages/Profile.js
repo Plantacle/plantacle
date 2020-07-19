@@ -12,9 +12,10 @@ class Profile extends React.Component {
           this.state = {
               firstName: '',
               lastName: '',
-              compostPoints: '',
-              totalActivity: ''
+              //points: 0,
+              totalActivity: 0
           }
+
       }
 
     componentDidMount() {
@@ -25,52 +26,38 @@ class Profile extends React.Component {
         const token = localStorage.getItem("decoded_token");
         const decodedToken = JSON.parse(token);
 
-        const firstName = decodedToken.firstName;
-        const lastName = decodedToken.lastName;
-        const compostPoints = decodedToken.compostPoints;
-        const totalActivity = decodedToken.totalActivity;
+        const id = decodedToken.id;
 
-        this.setState({
-          firstName: firstName, lastName: lastName, compostPoints: compostPoints, totalActivity: totalActivity
+        axios.get(`http://localhost:4000/users/${id}`)
+        .then(response => {
+            let userData = response.data.results;
+            userData.forEach(data => {
+                this.setState({ firstName: data.first_name, lastName: data.last_name, compostPoints: data.compost_points, totalActivity: data.total_activity});
+            });
         })
-
-
-        // DEZE HEB JE NODIG VOOR TASKS
-
-        // let decodedToken = JSON.parse(localStorage.getItem("decoded_token"));
-        // const token = decodedToken.id;
+        .catch(error => {
+          console.log(error);
+        });
         //
-        // const config = {
-        //     headers: { Authorization: `Bearer ${token}` }
-        // };
-        //
-        // axios({
-        // method: 'get',
-        // url: 'http://localhost:4000/users',
-        // config
+        // const firstName = decodedToken.firstName;
+        // const lastName = decodedToken.lastName;
+        // const compostPoints = decodedToken.compostPoints;
+        // const totalActivity = decodedToken.totalActivity;
+        // this.setState({
+        //   firstName: firstName, lastName: lastName, compostPoints: compostPoints, totalActivity: totalActivity
         // })
-        // .then(response => {
-        //
-        //   console.log(response.data);
-        //
-        // })
-        // .catch( err => {
-        //   console.log(err)
-        // })
+
 
 
     }
-
     // Als score hoger is dan zoveel, laat dan een achievement zien of laat alle achievements zien.
 
     render() {
       return (
           <Container>
 
-          <ul>
-          <li>{this.state.firstName}</li>
-          <li>{this.state.compostPoints}</li>
-          </ul>
+          <p>{this.state.firstName}</p>
+          <p>{this.state.compostPoints}</p>
 
           </Container>
       )

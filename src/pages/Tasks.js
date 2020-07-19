@@ -76,6 +76,7 @@ class Tasks extends React.Component {
       })
   }
 
+
   componentDidMount() {
     this.addTasks();
     this.addWater();
@@ -263,11 +264,7 @@ addTasks = async (props) => {
 addWater = async (props) => {
     console.log("blub")
 
-
-
 }
-
-
 
   render(props) {
 
