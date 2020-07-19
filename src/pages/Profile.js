@@ -30,7 +30,7 @@ class Profile extends React.Component {
 
         axios.get(`http://localhost:4000/users/${id}`)
         .then(response => {
-            let userData = response.data.results;
+            let userData = response.data;
             userData.forEach(data => {
                 this.setState({ firstName: data.first_name, lastName: data.last_name, compostPoints: data.compost_points, totalActivity: data.total_activity});
             });
