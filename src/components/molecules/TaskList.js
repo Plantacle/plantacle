@@ -207,7 +207,7 @@ class TaskList extends React.Component {
       activeDescription: '',
 
       // Profile
-      points: ''
+      points: 0
     }
 
     this.addPoints = this.addPoints.bind(this);
@@ -237,40 +237,35 @@ class TaskList extends React.Component {
 
   addPoints = () => {
 
-    // Add points to this.state
-    const points = this.state.points + 1
+    const token = localStorage.getItem("decoded_token");
+    const decodedToken = JSON.parse(token);
 
+    let id = decodedToken.id;
 
-    // // Change the state with the points in localstorage, so they won't disappear.
-    // this.setState((state) => ({
-    //     points: getScore
-    // }))
     //
     // //Get decoded token, take id and pass into Bearer for authorization.
     // let decodedToken = JSON.parse(localStorage.getItem("decoded_token"));
     // const token = decodedToken.id;
     //
-    // // Bearer tokens to execute requests
+    // //
+    // Bearer tokens to execute requests
     // const config = {
-    //     headers: { Authorization: `Bearer ${token}` }
+    //     headers: { Authorization: `Bearer ${id}` }
     // };
-    //
-    //
-    // // Update compost points (also in back-end)
-    // axios({
-    // method: 'put',
-    // url: 'http://localhost:4000/login',
-    // data: {
-    //   compost_points: getScore
-    // },
+
+    //console.log(this.state.points)
+    // // Update compost points
+    axios({
+    method: 'put',
+    url: `http://localhost:4000/users/${id}`,
     // config
-    // })
-    // .then(response => {
-    //
-    // })
-    // .catch( err => {
-    //   console.log(err)
-    // })
+    })
+    .then(response => {
+       //console.log(response)
+    })
+    .catch( err => {
+      console.log(err)
+    })
 
   }
 

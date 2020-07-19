@@ -10,6 +10,7 @@ import { GlobalStyles } from '../components/App'
 import SvgBackArrow from '../components/svg/BackArrow';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import axios from 'axios';
 
 window.id = 0;
 
@@ -88,6 +89,49 @@ addTasks = async (props) => {
     //const result = await measurementsApi.getLatest()
 
    //let currentPhase = this.props.currentPhase;
+   // Fetch tasks
+
+   // const token = localStorage.getItem("decoded_token");
+   // const decodedToken = JSON.parse(token);
+   //
+   // axios.get(`http://localhost:4000/tasks`)
+   // .then(response => {
+   //     let userData = response.data;
+   //     userData.forEach(data => {
+   //         this.setState({ firstName: data.first_name, lastName: data.last_name, compostPoints: data.compost_points, totalActivity: data.total_activity});
+   //     });
+   // })
+   // .catch(error => {
+   //   console.log(error);
+   // });
+
+   let phase1 = 'http://localhost:4000/tasks/1';
+   let phase2= 'http://localhost:4000/tasks/2';
+   let phase3 ='http://localhost:4000/tasks/3';
+   let phase4 ='http://localhost:4000/tasks/4';
+
+   const requestPhase1 = axios.get(phase1);
+   const requestPhase2 = axios.get(phase2);
+   const requestPhase3 = axios.get(phase3);
+   const requestPhase4 = axios.get(phase4);
+
+   axios
+      .all([requestPhase1, requestPhase2, requestPhase3, requestPhase4])
+      .then(
+        axios.spread((...responses) => {
+          const responsePhase1 = responses[0];
+          const responsePhase2 = responses[1];
+          const responsePhase3 = responses[2];
+          const responsePhase4 = responses[3];
+
+          // use/access the results
+          console.log(responsePhase1, responsePhase2, responsePhase3);
+        })
+      )
+      .catch(errors => {
+        // react on errors.
+        console.error(errors);
+      });
 
    let currentPhase = "phase1";
 

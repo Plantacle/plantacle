@@ -48,6 +48,7 @@ class Profile extends React.Component {
 
           <p>{this.state.firstName}</p>
           <p>{this.state.compostPoints}</p>
+          <p>{this.state.totalActivity}H</p>
 
           </Container>
       )
