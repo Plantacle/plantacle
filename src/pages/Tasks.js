@@ -25,309 +25,278 @@ const differenceDate = currentDate.diff(currentDate, 'days');
 
 //Reset startDate
 const initialState = {
-    /* etc */
+  /* etc */
 };
 
 const StyledContainer = styled(Container)`
-    && {
-      padding-left: 25px;
-      padding-right: 25px;
-      padding-top: 25px;
-    }
+&& {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+}
 `;
 
 const TaskTitle = styled.p`
-    font-weight: 500;
-    font-size: 19px;
-    color: #324BB8;
-    letter-spacing: 2px;
-    margin-left: 20px;
-    @import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
-    font-family: Poppins;
+font-weight: 500;
+font-size: 19px;
+color: #324BB8;
+letter-spacing: 2px;
+margin-left: 20px;
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,500,700&display=swap');
+font-family: Poppins;
 `;
 
 const BackWrapper = styled.div`
-    display: flex;
-    margin-bottom: 20px;
+display: flex;
+margin-bottom: 20px;
 `;
 
 class Tasks extends React.Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
-        tasks: [],
-        text: [],
-        description: [],
-        //taskInfo: [],
-        phase: props.currentPhase,
-        humidity: props.humidity,
+      tasks: [],
+      text: [],
+      description: [],
+      //taskInfo: [],
+      phase: '',
+      humidity: props.humidity,
     }
 
     this.removeTask = this.removeTask.bind(this);
     this.addTasks = this.addTasks.bind(this);
     this.addWater = this.addWater.bind(this);
 
-    }
-
-  removeTask(name, i) {
-      let tasks = this.state.tasks.slice();
-      tasks.splice(i, 1);
-      this.setState({
-          tasks
-      })
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps.currentPhase!==prevState.phase){
+      return { phase: nextProps.currentPhase};
+    }
+    else return null;
+  }
+
+  removeTask(name, i) {
+    let tasks = this.state.tasks.slice();
+    tasks.splice(i, 1);
+    this.setState({
+      tasks
+    })
+  }
 
   componentDidMount() {
     this.addTasks();
     this.addWater();
   }
 
-addTasks = async (props) => {
-    console.log('addTasks')
+  addTasks = async (props) => {
+    let phase1 = 'http://localhost:4000/tasks/1';
+    let phase2= 'http://localhost:4000/tasks/2';
+    let phase3 ='http://localhost:4000/tasks/3';
+    let phase4 ='http://localhost:4000/tasks/4';
 
-    //const result = await measurementsApi.getLatest()
+    const requestPhase1 = axios.get(phase1);
+    const requestPhase2 = axios.get(phase2);
+    const requestPhase3 = axios.get(phase3);
+    const requestPhase4 = axios.get(phase4);
 
-   //let currentPhase = this.props.currentPhase;
-   // Fetch tasks
+    axios
+    .all([requestPhase1, requestPhase2, requestPhase3, requestPhase4])
+    .then(
+      axios.spread((...responses) => {
+        const responsePhase1 = responses[0];
+        const responsePhase2 = responses[1];
+        const responsePhase3 = responses[2];
+        const responsePhase4 = responses[3];
 
-   // const token = localStorage.getItem("decoded_token");
-   // const decodedToken = JSON.parse(token);
-   //
-   // axios.get(`http://localhost:4000/tasks`)
-   // .then(response => {
-   //     let userData = response.data;
-   //     userData.forEach(data => {
-   //         this.setState({ firstName: data.first_name, lastName: data.last_name, compostPoints: data.compost_points, totalActivity: data.total_activity});
-   //     });
-   // })
-   // .catch(error => {
-   //   console.log(error);
-   // });
+        // use/access the results
+        //console.log(responsePhase1, responsePhase2, responsePhase3);
 
-   let phase1 = 'http://localhost:4000/tasks/1';
-   let phase2= 'http://localhost:4000/tasks/2';
-   let phase3 ='http://localhost:4000/tasks/3';
-   let phase4 ='http://localhost:4000/tasks/4';
+        this.addPhaseText(responsePhase1, responsePhase2, responsePhase3, responsePhase4);
 
-   const requestPhase1 = axios.get(phase1);
-   const requestPhase2 = axios.get(phase2);
-   const requestPhase3 = axios.get(phase3);
-   const requestPhase4 = axios.get(phase4);
+      })
+    )
+    .catch(errors => {
+      // react on errors.
+      console.error(errors);
+    });
 
-   axios
-      .all([requestPhase1, requestPhase2, requestPhase3, requestPhase4])
-      .then(
-        axios.spread((...responses) => {
-          const responsePhase1 = responses[0];
-          const responsePhase2 = responses[1];
-          const responsePhase3 = responses[2];
-          const responsePhase4 = responses[3];
+  }
 
-          // use/access the results
-          //console.log(responsePhase1, responsePhase2, responsePhase3);
+  addPhaseText = (phase1, phase2, phase3, phase4) => {
+    let currentPhase = this.state.phase;
 
-          responsePhase1.data.forEach(element => console.log(element.title));
-        })
-      )
-      .catch(errors => {
-        // react on errors.
-        console.error(errors);
+    if(currentPhase == "phase1") {
+
+      const tasks = [];
+      const text = [];
+      const description = [];
+
+      phase1.data.forEach(element => {
+        tasks.push(element.title);
+        text.push(element.preview_description);
+        description.push(element.description);
       });
 
-   let currentPhase = "phase1";
+      if(accessObject == null) {  //localStorage.length == 0
+        let data = {
+          status: 0,
+          deleted_date: null,
+        }
 
-   if(currentPhase == "phase1") {
+        const stringifyData = JSON.stringify(data);
+        localStorage.setItem('data', stringifyData);
 
-       const currentTasks = this.state.tasks;
-       const currentText = this.state.text;
-       const currentDescription = this.state.description;
+        this.setState({ tasks: tasks, text: text, description: description})
 
-       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
-       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
-       const tipsText = 'Hou de wormen goed in de gaten, want zij zijn de basis van de wormenbak'
-       const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
-       const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
-       const descriptionTips = 'Elke wormenbak is anders omdat er verschillende variabelen zijn zoals de voedselfrequentie, de aard van het voedsel, de vochtigheid en de standplaats van de wormenbak alsook de omgevingstemperatuur. Een wormenbak in stand houden vraagt dus een beetje ervaring, noem het kunst, maar vooral een flinke dosis gezond verstand.Het is inderdaad zo dat een wormenbak heel weinig onderhoud vraagt maar toch is alles sterk afhankelijk van de gezondheid van de compostwormen. Deze dienen dus geregeld eens kort geinspecteerd te worden.Ga eens om de vier weken met een kleine woelvork of een stokje door de compost en controleer de vitaliteit van de compostwormen om er zeker van te zijn dat de compostproductie op volle toeren draait. In dezelfde handeling controleer je ook meteen het vochtgehalte en de zuurtegraad van jouw compostbak.Voeg bij twijfel genoeg versnipperd krantenpapier toe en een handvol kalk. Leeg de drainage schaal tijdig om overvloedig vocht en condens geen kans te geven.Composteren met wormen is een eenvoudig, efficient en natuurlijk proces. Een klein beetje zorg en aandacht zorgt reeds voor een geweldig succes. Hoewel er maar weinig problemen zijn, zijn ze eenvoudig te vermijden en meestal eenvoudig te verhelpen. Onthoud dat de conditie van de wormen allesbepalend is voor de snelheid en de kwaliteit van het composteringsproces.'
-
-       const tasks = currentTasks.concat('Instructie groenafval', 'Instructie bruinafval', 'Tips & tricks');
-       const text = currentText.concat(groenafvalText, bruinafvalText, tipsText);
-       const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval, descriptionTips);
-
-       if(accessObject == null) {  //localStorage.length == 0
-            let data = {
-               status: 0,
-               deleted_date: null,
-           }
-
-           const stringifyData = JSON.stringify(data);
-           localStorage.setItem('data', stringifyData);
-
-           this.setState({ tasks: tasks, text: text, description: description})
-
-           console.log('null')
-
-       } else if(localStorage.length > 0 && accessObject == null) {
-           console.log('Accesobject has not been made')
-       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-           this.setState({ tasks: tasks, text: text, description: description})
-       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
-            this.setState({ tasks: tasks, text: text, description: description})
-            console.log('Al 24 uur verstreken');
-       } else {
-           this.setState({ initialState });
-           //localStorage.clear();
-       }
-
-   } else if(currentPhase == "phase2") {
-
-       const currentTasks = this.state.tasks;
-       const currentText = this.state.text;
-       const currentDescription = this.state.description;
-
-       const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
-       const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
-       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
-       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
+      } else if(localStorage.length > 0 && accessObject == null) {
+        console.log('Accesobject has not been made')
+      } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+        this.setState({ tasks: tasks, text: text, description: description})
+      } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
+        this.setState({ tasks: tasks, text: text, description: description})
+        console.log('Al 24 uur verstreken');
+      } else {
+        this.setState({ initialState });
+        //localStorage.clear();
+      }
 
 
-       const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
-       const text = currentText.concat(groenafvalText, bruinafvalText);
-       const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
+    } else if(currentPhase == "phase2") {
 
-       if(accessObject == null) {
-            let data = {
-               status: 0,
-               deleted_date: null,
-           }
+      const tasks = [];
+      const text = [];
+      const description = [];
 
-           const stringifyData = JSON.stringify(data);
-           localStorage.setItem('data', stringifyData);
+      phase2.data.forEach(element => {
+        tasks.push(element.title);
+        text.push(element.preview_description);
+        description.push(element.description);
+      });
 
-           this.setState({ tasks: tasks, text: text, description: description})
+      if(accessObject == null) {
+        let data = {
+          status: 0,
+          deleted_date: null,
+        }
 
-       } else if(localStorage.length > 0 && accessObject == null) {
-           console.log('Accesobject has not been made')
-       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-           this.setState({ tasks: tasks, text: text, description: description})
+        const stringifyData = JSON.stringify(data);
+        localStorage.setItem('data', stringifyData);
 
-       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 2 ) {
-            this.setState({ tasks: tasks, text: text, description: description})
-            console.log('Al 48 uur verstreken');
-       } else {
-           console.log('48 uur is nog niet verstreken')
-           this.setState(initialState);
-           //localStorage.clear();
-       }
+        this.setState({ tasks: tasks, text: text, description: description})
 
-   } else if(currentPhase == "phase3") {
+      } else if(localStorage.length > 0 && accessObject == null) {
+        console.log('Accesobject has not been made')
+      } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+        this.setState({ tasks: tasks, text: text, description: description})
 
-       const currentTasks = this.state.tasks;
-       const currentText = this.state.text;
-       const currentDescription = this.state.description;
+      } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 2 ) {
+        this.setState({ tasks: tasks, text: text, description: description})
+        console.log('Al 48 uur verstreken');
+      } else {
+        console.log('48 uur is nog niet verstreken')
+        this.setState(initialState);
+        //localStorage.clear();
+      }
 
-       const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
-       const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
-       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
-       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
+    } else if(currentPhase == "phase3") {
 
-       const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', ' Voeg 1,25 cm bruin afval toe');
-       const text = currentText.concat(groenafvalText, bruinafvalText);
-       const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
+      const tasks = [];
+      const text = [];
+      const description = [];
 
-       if(accessObject == null) {
-            let data = {
-               status: 0,
-               deleted_date: null,
-           }
+      phase3.data.forEach(element => {
+        tasks.push(element.title);
+        text.push(element.preview_description);
+        description.push(element.description);
+      });
 
-           const stringifyData = JSON.stringify(data);
-           localStorage.setItem('data', stringifyData);
+      if(accessObject == null) {
+        let data = {
+          status: 0,
+          deleted_date: null,
+        }
 
-           this.setState({ tasks: tasks, text: text, description: description})
+        const stringifyData = JSON.stringify(data);
+        localStorage.setItem('data', stringifyData);
 
-       } else if(localStorage.length > 0 && accessObject == null) {
-           console.log('Accesobject has not been made')
-       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-           this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description})
 
-       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 3 ) {
-            this.setState({ tasks: tasks, text: text, description: description})
-            console.log('Al 72 uur verstreken');
-       } else {
-           console.log('72 uur is nog niet verstreken')
-           this.setState(initialState);
-           //localStorage.clear();
-       }
+      } else if(localStorage.length > 0 && accessObject == null) {
+        console.log('Accesobject has not been made')
+      } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+        this.setState({ tasks: tasks, text: text, description: description})
 
-   } else if(currentPhase == "phase4") {
+      } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 3 ) {
+        this.setState({ tasks: tasks, text: text, description: description})
+        console.log('Al 72 uur verstreken');
+      } else {
+        console.log('72 uur is nog niet verstreken')
+        this.setState(initialState);
+        //localStorage.clear();
+      }
 
-       const currentTasks = this.state.tasks;
-       const currentText = this.state.text;
-       const currentDescription = this.state.description;
+    } else if(currentPhase == "phase4") {
 
-       const descriptionGroenAfval = 'Niet al het groenafaval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden- Rauwe groenten en fruit- Aardappelschillen (beperkt, tenzij biologisch), - Bagger uit plastic regengoot of tuinvijver- Bladeren (goed mengen)- Citrusschillen (beperkt, tenzij biologisch)'
-       const descriptionBruinAfval = 'Niet al het bruinafval mag op de composthoop. Zie hieronder wat je over het algemeen wel en niet mag zelf composteren. Voorbeelden:* Snoeiafval in kleine stukjes* Grasmaaisel* Eierschalen* Koffiefilters en theezakjes* Houtsnippers'
-       const groenafvalText = 'Bijvoorbeeld: Aardappelschillen (beperkt, tenzij biologisch)';
-       const bruinafvalText = 'Bijvoorbeeld: Eierdozen'
+      const tasks = [];
+      const text = [];
+      const description = [];
 
-       const tasks = currentTasks.concat('Voeg 1,25 cm groen afval toe', 'Voeg 1,25 cm bruin afval toe');
-       const text = currentText.concat(groenafvalText, bruinafvalText);
-       const description = currentDescription.concat(descriptionGroenAfval, descriptionBruinAfval);
+      phase4.data.forEach(element => {
+        tasks.push(element.title);
+        text.push(element.preview_description);
+        description.push(element.description);
+      });
 
-       if(accessObject == null) {
-            let data = {
-               status: 0,
-               deleted_date: null,
-           }
+      if(accessObject == null) {
+        let data = {
+          status: 0,
+          deleted_date: null,
+        }
 
-           const stringifyData = JSON.stringify(data);
-           localStorage.setItem('data', stringifyData);
+        const stringifyData = JSON.stringify(data);
+        localStorage.setItem('data', stringifyData);
 
-           this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description})
 
-       } else if(localStorage.length > 0 && accessObject == null) {
-           console.log('Accesobject has not been made')
-       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-           this.setState({ tasks: tasks, text: text, description: description})
+      } else if(localStorage.length > 0 && accessObject == null) {
+        console.log('Accesobject has not been made')
+      } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
+        this.setState({ tasks: tasks, text: text, description: description})
 
-       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 4 ) {
-            this.setState({ tasks: tasks, text: text, description: description})
-            console.log('Al 96 uur verstreken');
-       } else {
-           console.log('96 uur is nog niet verstreken')
-           this.setState(initialState)
-       }
+      } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 4 ) {
+        this.setState({ tasks: tasks, text: text, description: description})
+        console.log('Al 96 uur verstreken');
+      } else {
+        console.log('96 uur is nog niet verstreken')
+        this.setState(initialState)
+      }
 
-   } else {
-       console.log('errror')
-   }
+    } else {
+      console.log('errror')
+    }
+  }
 
-   console.log(localStorage);
-
-}
-
-addWater = async (props) => {
+  addWater = async (props) => {
     console.log("blub")
 
-}
-
+  }
+  
   render(props) {
-
     return (
-    <div>
-        <StyledContainer>
-            <BackWrapper>
-                <Link to="/overview">
-                    <SvgBackArrow />
-                </Link>
-                <TaskTitle> Taken </TaskTitle>
-            </BackWrapper>
-            <TaskList tasks={this.state.tasks} text={this.state.text} description={this.state.description} removeTask={this.removeTask}> </TaskList>
-            <Navigation/>
-        </StyledContainer>
-        <GlobalStyles />
-    </div>
+      <div>
+      <StyledContainer>
+      <BackWrapper>
+      <Link to="/overview">
+      <SvgBackArrow />
+      </Link>
+      <TaskTitle> Taken </TaskTitle>
+      </BackWrapper>
+      <TaskList tasks={this.state.tasks} text={this.state.text} description={this.state.description} removeTask={this.removeTask}> </TaskList>
+      <Navigation/>
+      </StyledContainer>
+      <GlobalStyles />
+      </div>
     )
   }
 }

@@ -256,12 +256,12 @@ class TaskList extends React.Component {
     //console.log(this.state.points)
     // // Update compost points
     axios({
-    method: 'put',
-    url: `http://localhost:4000/users/${id}`,
-    // config
+      method: 'put',
+      url: `http://localhost:4000/users/${id}`,
+      // config
     })
     .then(response => {
-       //console.log(response)
+      //console.log(response)
     })
     .catch( err => {
       console.log(err)
