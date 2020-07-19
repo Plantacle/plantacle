@@ -38,16 +38,6 @@ class Profile extends React.Component {
         .catch(error => {
           console.log(error);
         });
-        //
-        // const firstName = decodedToken.firstName;
-        // const lastName = decodedToken.lastName;
-        // const compostPoints = decodedToken.compostPoints;
-        // const totalActivity = decodedToken.totalActivity;
-        // this.setState({
-        //   firstName: firstName, lastName: lastName, compostPoints: compostPoints, totalActivity: totalActivity
-        // })
-
-
 
     }
     // Als score hoger is dan zoveel, laat dan een achievement zien of laat alle achievements zien.

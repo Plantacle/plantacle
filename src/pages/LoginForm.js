@@ -15,48 +15,48 @@ import decode from "jwt-decode";
 
 
 const Anchor = styled.a`
-  color: #FFC759 !important;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  &:hover {
-      text-decoration: none;
-      color: #FFC759;
-  }
+color: #FFC759 !important;
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 1px;
+&:hover {
+  text-decoration: none;
+  color: #FFC759;
+}
 `
 
 const P = styled.p`
-  font-size: 12px;
-  float: right;
-  margin-top: 5px;
-  color: #676767
-  font-weight: 700;
-  letter-spacing: 1px;
+font-size: 12px;
+float: right;
+margin-top: 5px;
+color: #676767
+font-weight: 700;
+letter-spacing: 1px;
 `
 
 const Input = styled.input`
 
-  width: 100%;
-  height: 48px;
-  border-radius: 5px;
-  padding-left: 50px;
-  border: none;
-  letter-spacing: 2px;
+width: 100%;
+height: 48px;
+border-radius: 5px;
+padding-left: 50px;
+border: none;
+letter-spacing: 2px;
+font-weight: 400;
+::placeholder{
+  color: #b6bab3;
   font-weight: 400;
-  ::placeholder{
-      color: #b6bab3;
-      font-weight: 400;
-  }
+}
 `
 
 const BigButton = styled.input`
-  background: #FFC759;
-  width: 100%;
-  height: 48px;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
+background: #FFC759;
+width: 100%;
+height: 48px;
+color: #FFFFFF;
+border: none;
+border-radius: 6px;
+font-weight: 500;
 `
 
 const InputCheckBox = styled.input``
@@ -72,210 +72,210 @@ let passwordError = ''
 class Login extends React.Component {
 
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            emailError: '',
-            passwordError: '',
-            payload: null,
-        }
-        this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      emailError: '',
+      passwordError: '',
+      payload: null,
+    }
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+
+  componentDidMount() {
+
+
+  }
+
+  // Sets the state of the input fields
+  handleInputChange(event) {
+
+    this.setState({ [event.target.name]: event.target.value })
+
+  }
+
+  // Validates the form
+  validate(email, password) {
+
+    // Checks if the user filled in a valid e-mail address
+    if (this.state.email === '') {
+      emailError = 'Geef een e-mailadres op'
     }
 
-
-    componentDidMount() {
-
-
+    // Checks if the password field is empty
+    if (this.state.password === '') {
+      passwordError = 'Geef een wachtwoord op'
     }
 
-    // Sets the state of the input fields
-    handleInputChange(event) {
-
-        this.setState({ [event.target.name]: event.target.value })
-
+    // If there is an error set the state to that error
+    if (emailError || passwordError) {
+      this.setState({ emailError, passwordError })
+      return false
     }
 
-    // Validates the form
-    validate(email, password) {
+    return true
 
-        // Checks if the user filled in a valid e-mail address
-        if (this.state.email === '') {
-            emailError = 'Geef een e-mailadres op'
-        }
+  }
 
-        // Checks if the password field is empty
-        if (this.state.password === '') {
-            passwordError = 'Geef een wachtwoord op'
-        }
+  async handleSubmit(event) {
 
-        // If there is an error set the state to that error
-        if (emailError || passwordError) {
-            this.setState({ emailError, passwordError })
-            return false
-        }
+    // Prevent the default submit action
+    event.preventDefault()
 
-        return true
-
+    const loginInfo = {
+      email: this.state.email,
+      password: this.state.password
     }
 
-    async handleSubmit(event) {
+    // axios.post('http://localhost:4000/login', loginInfo, {
+    //   headers: {
+    //       "Content-Type": "application/json"
+    //   },
+    // })
+    // .then(response => {
+    //     alert(response.data.message)
+    // })
+    // .catch( err => {
+    //   console.log(err)
+    // })
 
-        // Prevent the default submit action
-        event.preventDefault()
-
-        const loginInfo = {
-            email: this.state.email,
-            password: this.state.password
-        }
-
-        // axios.post('http://localhost:4000/login', loginInfo, {
-        //   headers: {
-        //       "Content-Type": "application/json"
-        //   },
-        // })
-        // .then(response => {
-        //     alert(response.data.message)
-        // })
-        // .catch( err => {
-        //   console.log(err)
-        // })
-
-        const config = {
-            headers: { Authorization: `Bearer ${this.getToken()}` }
-        };
-
-        axios({
-        method: 'post',
-        url: 'http://localhost:4000/users',
-        data: {
-          email: this.state.email,
-          password: this.state.password
-        },
-
-        config
-        })
-        .then(response => {
-            //alert(response.data.message)
-            //console.log(response.data.token)
-            //this.setToken(response.data.token)
-            //return Promise.resolve(response);
-            this.getConfirm(response.data.token);
-
-            //Redirect the user to the overview page
-            window.location.href = "overview";
-
-        })
-        .catch( err => {
-          console.log(err)
-        })
-    }
-
-    loggedIn = () => {
-        // Checks if there is a saved token and it's still valid
-        const token = this.getToken(); // Getting token from localstorage
-        return !!token && !this.isTokenExpired(token); // handwaiving here
+    const config = {
+      headers: { Authorization: `Bearer ${this.getToken()}` }
     };
 
-    isTokenExpired = token => {
-       try {
-         const decoded = decode(token);
-         if (decoded.exp < Date.now() / 1000) {
-           // Checking if token is expired.
-           return true;
-         } else return false;
-       } catch (err) {
-         console.log("expired check failed! Line 42: AuthService.js");
-         return false;
-       }
-    };
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/users',
+      data: {
+        email: this.state.email,
+        password: this.state.password
+      },
 
+      config
+    })
+    .then(response => {
+      //alert(response.data.message)
+      //console.log(response.data.token)
+      //this.setToken(response.data.token)
+      //return Promise.resolve(response);
+      this.getConfirm(response.data.token);
 
-    setToken = idToken => {
-        localStorage.setItem("id_token", idToken)
-    };
+      //Redirect the user to the overview page
+      window.location.href = "overview";
 
-    getToken = () => {
-        return localStorage.getItem("id_token");
+    })
+    .catch( err => {
+      console.log(err)
+    })
+  }
+
+  loggedIn = () => {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken(); // Getting token from localstorage
+    return !!token && !this.isTokenExpired(token); // handwaiving here
+  };
+
+  isTokenExpired = token => {
+    try {
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        // Checking if token is expired.
+        return true;
+      } else return false;
+    } catch (err) {
+      console.log("expired check failed! Line 42: AuthService.js");
+      return false;
     }
+  };
 
-    getConfirm = token => {
-        let answer = decode(token);
-        localStorage.setItem("decoded_token", JSON.stringify(answer.user))
+
+  setToken = idToken => {
+    localStorage.setItem("id_token", idToken)
+  };
+
+  getToken = () => {
+    return localStorage.getItem("id_token");
+  }
+
+  getConfirm = token => {
+    let answer = decode(token);
+    localStorage.setItem("decoded_token", JSON.stringify(answer.user))
+  }
+
+
+  render() {
+    return (
+      <div>
+      <Container className="text-center container-top">
+      <img src={logo} className="logo" />
+      {/*<h5>Plantacle</h5>*/}
+      </Container>
+      <Container className="waveContainer">
+          <SvgWave className="wave"></SvgWave>
+      </Container>
+      <Form onSubmit={this.handleSubmit}>
+      <Container className="container-bottom">
+      <Row>
+      <Col>
+      <Form.Group controlId="formBasicEmail">
+      <SvgEmail className="icons icon-1" />
+      <Input
+      type='text'
+      name='email'
+      placeholder="Email"
+      value={this.state.email}
+      onChange={this.handleInputChange}
+      className="mb-3 mt-3"
+      ></Input>
+      <P className="error-messages">{this.state.emailError}</P>
+      </Form.Group>
+      </Col>
+      </Row>
+      <Row>
+      <Col>
+      <Form.Group controlId="formBasicPassword">
+      <SvgPassword className="icons icon-2" />
+      <Input
+      type='password'
+      name='password'
+      placeholder="Wachtwoord"
+      value={this.state.password}
+      onChange={this.handleInputChange}
+      className="mb-3"
+      ></Input>
+      <P className="error-messages">{this.state.passwordError}</P>
+      </Form.Group>
+      </Col>
+      </Row>
+      {/*
+        <Row>
+        <Col className="text-left">
+        <InputCheckBox id="input" type="checkbox" />
+        <P className="remember-password">Wachtwoord onthouden</P>
+        </Col>
+        <Col className="text-right mb-5 forgotpassword">
+        <Anchor href="register" className="anchor">Wachtwoord vergeten?</Anchor>
+        </Col>
+        </Row>
+        */}
+        <BigButton type="submit" className="mb-4" value="Login"></BigButton>
+        <Row>
+        <Col>
+        <P>Nog geen account?</P>
+        </Col>
+        <Col>
+        <Link to="/register" className="extra-link anchor">Registreer</Link>
+        </Col>
+        </Row>
+        </Container>
+        </Form>
+        </div>
+      );
     }
+  }
 
-
-    render() {
-        return (
-            <div>
-                <Container className="text-center container-top">
-                    <img src={logo} className="logo" />
-                    {/*<h5>Plantacle</h5>*/}
-                </Container>
-                <Container className="waveContainer">
-                <SvgWave className="wave"></SvgWave>
-                </Container>
-                <Form onSubmit={this.handleSubmit}>
-                    <Container className="container-bottom">
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="formBasicEmail">
-                                    <SvgEmail className="icons icon-1" />
-                                    <Input
-                                        type='text'
-                                        name='email'
-                                        placeholder="Email"
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange}
-                                        className="mb-3 mt-3"
-                                    ></Input>
-                                    <P className="error-messages">{this.state.emailError}</P>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="formBasicPassword">
-                                    <SvgPassword className="icons icon-2" />
-                                    <Input
-                                        type='password'
-                                        name='password'
-                                        placeholder="Wachtwoord"
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                        className="mb-3"
-                                    ></Input>
-                                    <P className="error-messages">{this.state.passwordError}</P>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        {/*
-                        <Row>
-                            <Col className="text-left">
-                            <InputCheckBox id="input" type="checkbox" />
-                                <P className="remember-password">Wachtwoord onthouden</P>
-                            </Col>
-                            <Col className="text-right mb-5 forgotpassword">
-                                <Anchor href="register" className="anchor">Wachtwoord vergeten?</Anchor>
-                            </Col>
-                        </Row>
-                        */}
-                        <BigButton type="submit" className="mb-4" value="Login"></BigButton>
-                        <Row>
-                            <Col>
-                                <P>Nog geen account?</P>
-                            </Col>
-                            <Col>
-                                <Link to="/register" className="extra-link anchor">Registreer</Link>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Form>
-            </div>
-        );
-    }
-}
-
-export default Login
+  export default Login
