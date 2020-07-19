@@ -125,7 +125,9 @@ addTasks = async (props) => {
           const responsePhase4 = responses[3];
 
           // use/access the results
-          console.log(responsePhase1, responsePhase2, responsePhase3);
+          //console.log(responsePhase1, responsePhase2, responsePhase3);
+
+          responsePhase1.data.forEach(element => console.log(element.title));
         })
       )
       .catch(errors => {
