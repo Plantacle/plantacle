@@ -8,10 +8,10 @@ const SVG = styled.svg`
     margin-bottom: 12px;
     margin-left: 2px;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 1024px) { // Tablets
       width: 16px;
-      margin-left: 1px;
-      margin-bottom: 8px;
+      margin-left: 3px;
+      margin-bottom: 5px;
     }
 
   }

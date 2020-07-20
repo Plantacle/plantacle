@@ -11,8 +11,8 @@ const StatusWrapper = styled.div`
 
     @media (min-width: 1024px) { // Tablets
         right: 180px;
-        width: 320px;
-        height: 125px;
+        width: 280px;
+        height: 95px;
         background-color: #F4F6FF;
         border-radius: 13px;
     }
@@ -57,7 +57,13 @@ const StatusIcon = styled.div`
     border-radius: 50%;
 
     @media (min-width: 1024px) { // Tablets
-        display: none;
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        width: 25px;
+        height: 25px;
+
+        background-color: #324BB8;
     }
 
 `;

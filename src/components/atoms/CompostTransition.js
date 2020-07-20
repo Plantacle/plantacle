@@ -16,9 +16,10 @@ const CompostImageWrapper = styled.div`
         height: 280px;
     }
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 1024px) { // Tablets
         width: 350px;
         height: 350px;
+        margin-top: 70px;
     }
 `;
 

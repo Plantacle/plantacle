@@ -7,12 +7,17 @@ import styled from 'styled-components';
 import Navigation from '../components/organisms/Navigation'
 import { Link, Router} from 'react-router-dom';
 
+import SvgProfile from '../components/svg/Profile';
+
 import {Bootstrap, Grid, Row, Col, Container, Nav} from 'react-bootstrap';
 
 const StyledContainer = styled(Container)`
     && {
     padding-top: 20px;
+    background-color: grey
 
+    padding-left: 40px;
+    padding-right: 40px;
     }
 `;
 
@@ -36,20 +41,38 @@ const ThirdRow = styled(Row)`
     }
 `;
 
+const FirstCol = styled(Col)`
+    && {
+        padding: 0;
+        background-color: pink;
+    }
+`;
+
 const SecondCol = styled(Col)`
     && {
       display: flex;
       justify-content: center;
+      background-color: blue;
 
-      @media (min-width: 991.98px) { // Tablets
+      @media (min-width: 1024px) { // Tablets
         margin-top: 20px;
       }
     }
 `;
 
+const ThirdCol = styled(Col)`
+    && {
+      background-color: yellow;
+
+      @media (min-width: 1024px) { // Tablets
+
+      }
+    }
+`;
+
 const CompostTransitionWrapper = styled.div`
-    @media (min-width: 991.98px) { // Tablets
-        margin-bottom: 40px;
+    @media (min-width: 1024px) { // Tablets
+        margin-bottom: 50px;
     }
 `;
 
@@ -60,14 +83,18 @@ class Overview extends React.Component {
         <div>
           <StyledContainer>
               <FirstRow>
-                  <Col xs={3}>
+                  <FirstCol xs={3}>
                       <Measurements temperature={this.props.temperature} humidity={this.props.humidity} methane={this.props.methane}/>
-                  </Col>
-                  <SecondCol xs={7} md={6}>
+                  </FirstCol>
+                  <SecondCol xs={7}>
                       <CurrentDay day={this.props.day} />
                   </SecondCol>
-                  <Col xs={3}>
-                  </Col>
+                  <ThirdCol xs={1} md={2}>
+
+                  </ThirdCol>
+                  <ThirdCol xs={1} className="d-xs-block d-md-none">
+                      <SvgProfile fill="#324BB8"> </SvgProfile>
+                  </ThirdCol>
               </FirstRow>
             <SecondRow>
                 <CompostTransitionWrapper>

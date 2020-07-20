@@ -6,6 +6,7 @@ import SvgLocation from '../svg/Location';
 import SvgTask from '../svg/Task';
 import SvgOverview from '../svg/Overview';
 import SvgLogout from '../svg/Logout';
+import SvgProfileDesktop from '../svg/ProfileDesktop';
 
 
 /* Styling */
@@ -143,6 +144,12 @@ class Navigation extends React.Component {
                         <NavItem>
                         <NavLink to="/overview"  className="nav_icon"><SvgOverview /></NavLink>
                           <NavLink to="/overview" className="nav_link">Overzicht</NavLink>
+                        </NavItem>
+                  </Col>
+                  <Col className="nav_col d-md-block d-sm-none">
+                        <NavItem>
+                            <NavLink to="/profile"><SvgProfileDesktop fill="#D2D2D2"></SvgProfileDesktop></NavLink>
+                            <NavLink to="/profile">Profiel</NavLink>
                         </NavItem>
                   </Col>
                   <Col className="nav_col">
