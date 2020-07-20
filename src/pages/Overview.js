@@ -11,9 +11,8 @@ import {Bootstrap, Grid, Row, Col, Container, Nav} from 'react-bootstrap';
 
 const StyledContainer = styled(Container)`
     && {
-      padding-left: 25px;
-      padding-right: 25px;
-      padding-top: 25px;
+    padding-top: 20px;
+
     }
 `;
 
@@ -58,6 +57,7 @@ class Overview extends React.Component {
     render() {
 
       return (
+        <div>
           <StyledContainer>
               <FirstRow>
                   <Col xs={3}>
@@ -79,8 +79,10 @@ class Overview extends React.Component {
                     <OverviewButton />
                 </a>
             </ThirdRow>
-            <Navigation/>
         </StyledContainer>
+
+        <Navigation/>
+        </div>
       )
     }
 }

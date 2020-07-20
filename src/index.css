@@ -89,30 +89,24 @@ code {
   padding-right: 10px;
 }
 
-.nav{
-  box-shadow: 0 -3px 5px -6px #333;
-  justify-content: space-between;
-  padding: 22px 0px 15px 0px;
-  position: relative;
-}
 
 
-.nav-row{
-  display: contents !important;
-}
 
-.nav-col{
-  display: contents !important;
-}
+
 
 .nav-col:nth-child(2){
   flex-direction: row-reverse !important;
 }
 
-.nav-link{
+.nav_link{
   font-size: 13px;
   color: #4e4e4e;
   font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  margin-top: 8px;
+  letter-spacing: 1px;
 }
 
 .nav-link:hover{
@@ -177,22 +171,7 @@ code {
     left: calc(50% - 38px) !important;
 }
 
-.nav:before {
-  content: '';
-  position: absolute;
-  width: 70px;
-  background: #fff;
-  height: 70px;
-  border-radius: 100%;
-  box-shadow: inset 0 -4px 6px -7px #333;
-  top: -44px;
-  left: calc(50% - 45px);
-}
 
-.nav-icon {
-  background-color: green;
-  width: 100%;
-}
 
 .home-glyph {
   color: #ffff;
@@ -244,4 +223,19 @@ input[type="checkbox"]:checked + span {
 
 .noPadding {
   padding: 0;
+}
+
+.nav_wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.nav_col {
+
+
+}
+
+.nav_row {
+  margin-bottom: 20px;
 }

@@ -49,6 +49,7 @@ const NavItem = styled(Nav.Item)`
     && {
         display: flex;
         flex-direction: column;
+        text-align: center;
     }
 `;
 
@@ -72,29 +73,36 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <div>
-                    <Nav>
-                        <Row>
-                                <NavItem>
-                                    <Link to="/overview" className="nav-icon"><SvgLocation /></Link>
-                                    <Link to="/overview" className="nav-link">Locaties</Link>
-                                </NavItem>
+            <div className="nav_wrapper">
+                <Row className="nav_row">
+                    <Col className="nav_col">
+                        <NavItem>
+                            <Link to="/overview" className="nav_icon"><SvgLocation /></Link>
+                            <Link to="/overview" className="nav_link">Locaties</Link>
+                        </NavItem>
+                    </Col>
 
-                                <NavItem>
-                                    <Link to="/tasks"><SvgTask /></Link>
-                                    <Link to="/tasks" className="nav-link">Taken</Link>
-                                </NavItem>
+                    <Col className="nav_col">
+                        <NavItem>
+                            <Link to="/tasks"  className="nav_icon"><SvgTask /></Link>
+                            <Link to="/tasks" className="nav_link">Taken</Link>
+                        </NavItem>
 
-                                <NavItem>
-                                <Link to="/overview"><SvgOverview /></Link>
-                                  <Link to="/overview" className="nav-link">Overzicht</Link>
-                                </NavItem>
-                                <NavItem>
-                                    <Link to="/login"><SvgLogout /></Link>
-                                    <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Link>
-                                </NavItem>
-                        </Row>
-                    </Nav>
+                    </Col>
+
+                    <Col className="nav_col">
+                        <NavItem>
+                        <Link to="/overview"  className="nav_icon"><SvgOverview /></Link>
+                          <Link to="/overview" className="nav_link">Overzicht</Link>
+                        </NavItem>
+                  </Col>
+                  <Col className="nav_col">
+                        <NavItem>
+                            <Link to="/login"  className="nav_icon"><SvgLogout /></Link>
+                            <Link to="/login" onClick={this.removeAccessToken} className="nav_link">Uitloggen</Link>
+                        </NavItem>
+                  </Col>
+                </Row>
             </div>
         );
     }
