@@ -281,7 +281,7 @@ class Tasks extends React.Component {
     console.log("blub")
 
   }
-  
+
   render(props) {
     return (
       <div>
@@ -293,8 +293,8 @@ class Tasks extends React.Component {
       <TaskTitle> Taken </TaskTitle>
       </BackWrapper>
       <TaskList tasks={this.state.tasks} text={this.state.text} description={this.state.description} removeTask={this.removeTask}> </TaskList>
-      <Navigation/>
       </StyledContainer>
+            <Navigation/>
       <GlobalStyles />
       </div>
     )
