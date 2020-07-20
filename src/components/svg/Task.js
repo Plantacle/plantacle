@@ -4,13 +4,12 @@ import styled from "styled-components"
 
 const SVG = styled.svg`
   && {
-    background-color: yellow;
     width: 25px;
 
     @media (min-width: 768px) { // Tablets
       width: 29px;
     }
-    
+
   }
 `;
 

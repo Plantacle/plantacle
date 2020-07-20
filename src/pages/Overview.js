@@ -14,7 +14,6 @@ import {Bootstrap, Grid, Row, Col, Container, Nav} from 'react-bootstrap';
 const StyledContainer = styled(Container)`
     && {
     padding-top: 20px;
-    background-color: grey
 
     padding-left: 40px;
     padding-right: 40px;
@@ -44,7 +43,6 @@ const ThirdRow = styled(Row)`
 const FirstCol = styled(Col)`
     && {
         padding: 0;
-        background-color: pink;
     }
 `;
 
@@ -52,7 +50,6 @@ const SecondCol = styled(Col)`
     && {
       display: flex;
       justify-content: center;
-      background-color: blue;
 
       @media (min-width: 1024px) { // Tablets
         margin-top: 20px;
@@ -62,7 +59,6 @@ const SecondCol = styled(Col)`
 
 const ThirdCol = styled(Col)`
     && {
-      background-color: yellow;
 
       @media (min-width: 1024px) { // Tablets
 
@@ -83,17 +79,14 @@ class Overview extends React.Component {
         <div>
           <StyledContainer>
               <FirstRow>
-                  <FirstCol xs={3}>
+                  <FirstCol xs={3} md={4}>
                       <Measurements temperature={this.props.temperature} humidity={this.props.humidity} methane={this.props.methane}/>
                   </FirstCol>
-                  <SecondCol xs={7}>
+                  <SecondCol xs={7} md={4}>
                       <CurrentDay day={this.props.day} />
                   </SecondCol>
-                  <ThirdCol xs={1} md={2}>
+                  <ThirdCol xs={1} md={4}>
 
-                  </ThirdCol>
-                  <ThirdCol xs={1} className="d-xs-block d-md-none">
-                      <SvgProfile fill="#324BB8"> </SvgProfile>
                   </ThirdCol>
               </FirstRow>
             <SecondRow>
@@ -107,7 +100,6 @@ class Overview extends React.Component {
                 </a>
             </ThirdRow>
         </StyledContainer>
-
         <Navigation/>
         </div>
       )

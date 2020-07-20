@@ -1,10 +1,140 @@
 import React from 'react'
 import styled from 'styled-components';
-import Navigation from '../components/organisms/Navigation'
+import Navigation from '../components/organisms/Navigation';
+import AchievementBadge from '../components/molecules/AchievementBadge';
 import { Link, Router} from 'react-router-dom';
 import axios from 'axios';
+import SvgProfilePicture from '../components/svg/ProfilePicture';
+import waveImg from '../assets/images/wave.png';
+import waveImgTablet from '../assets/images/wave--tablet.png';
+
 
 import {Bootstrap, Grid, Row, Col, Container, Nav} from 'react-bootstrap';
+
+const ProfileContainer = styled(Container)`
+    && {
+
+    }
+`;
+
+const ContainerTest = styled(Container)`
+&& {
+  @media (min-width: 1024px) { // Tablets
+    max-width: 1024px;
+  }
+
+  @media (min-width: 1200px) { // Tablets
+    max-width: 1200px;
+    background-color: green;
+    height: 1000px;
+  }
+}
+`
+
+const ProfileRow = styled(Row)`
+    && {
+      background-color: yellow;
+    }
+`;
+
+const ProfileRow3 = styled(Row)`
+    && {
+
+    }
+`;
+
+const Col1 = styled(Col)`
+    && {
+      display: flex;
+      justify-content: center;
+      height: 350px;
+      background-image: url(${waveImg});
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 100%;
+      position: relative;
+      margin-bottom: 50px;
+
+      @media (min-width: 768px) { // Tablets
+          background-image: url(${waveImgTablet});
+          background-color: pink;
+          height: 400px;
+      }
+    }
+`;
+
+const Col2 = styled(Col)`
+    && {
+      background-color: pink;
+    }
+`;
+
+const Col3 = styled(Col)`
+    && {
+        background-color: purple;
+    }
+`;
+
+const Circle = styled.div`
+    margin-bottom: 20px;
+`;
+
+const UserWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 170px;
+    position: absolute;
+    top: 50%; right: 50%;
+    transform: translate(50%,-50%);
+`;
+
+const UserName = styled.h2`
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+    color: #fff;
+`;
+
+const UserBio = styled.p`
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: -5px;
+    color: #fff;
+`;
+
+const ActivityStyle = styled.h2`
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    color: #4368D1;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+`;
+
+const ResultStyle = styled.h2`
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+    color: #FFC759;
+    letter-spacing: 2px;
+`;
+
+const AchievementTitle = styled.h2`
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    color: #4368D1;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    background-color: crimson;
+`;
+
+const AchievementTitleWrapper = styled.div`
+    position: absolute;
+`;
 
 class Profile extends React.Component {
       constructor(props) {
@@ -12,8 +142,10 @@ class Profile extends React.Component {
           this.state = {
               firstName: '',
               lastName: '',
+              bio: '',
               //points: 0,
-              totalActivity: 0
+              totalActivity: 0,
+              compostPoints: 0,
           }
 
       }
@@ -32,7 +164,7 @@ class Profile extends React.Component {
         .then(response => {
             let userData = response.data;
             userData.forEach(data => {
-                this.setState({ firstName: data.first_name, lastName: data.last_name, compostPoints: data.compost_points, totalActivity: data.total_activity});
+                this.setState({ firstName: data.first_name, lastName: data.last_name, compostPoints: data.compost_points, totalActivity: data.total_activity, bio: data.bio});
             });
         })
         .catch(error => {
@@ -43,14 +175,71 @@ class Profile extends React.Component {
     // Als score hoger is dan zoveel, laat dan een achievement zien of laat alle achievements zien.
 
     render() {
+
+      let activity = this.state.totalActivity;
+      let achievement
+
+      let test;
+
+      if(activity > 336) {
+          achievement = <AchievementBadge achievement="bronze" />;
+          test = '360';
+      } else if(activity > 1344) {
+          achievement = <AchievementBadge achievement="silver" />;
+      } else if(activity > 2688) {
+          achievement = <AchievementBadge achievement="platinum" />;
+      } else {
+          achievement = <AchievementBadge achievement="none" />;
+      }
+
+
       return (
-          <Container>
+      <div>
+          <ProfileContainer fluid>
+              <ProfileRow>
+                  <Col1>
+                      <UserWrapper>
+                          <Circle>
+                              <SvgProfilePicture />
+                          </Circle>
+                          <UserName>{this.state.firstName} {this.state.lastName}</UserName>
+                          <UserBio>{this.state.bio}</UserBio>
+                      </UserWrapper>
+                  </Col1>
+              </ProfileRow>
+              <ContainerTest>
+              <ProfileRow>
+                  <Col2>
+                      <ActivityStyle>
+                         COMPOST POINTS
+                      </ActivityStyle>
+                      <ResultStyle>
+                          {this.state.compostPoints}
+                      </ResultStyle>
+                  </Col2>
+                  <Col2>
+                      <ActivityStyle>
+                          TOTAL ACTIVITY
+                      </ActivityStyle>
+                      <ResultStyle>
+                          {this.state.totalActivity}H
+                      </ResultStyle>
+                  </Col2>
+                  </ProfileRow>
+                  <ProfileRow3>
+                      <Col3 xs={6}>
+                          <AchievementTitle> ACHIEVEMENTS </AchievementTitle>
+                          {achievement}
+                      </Col3>
+                      <Col3 xs={6}>
 
-          <p>{this.state.firstName}</p>
-          <p>{this.state.compostPoints}</p>
-          <p>{this.state.totalActivity}H</p>
+                      </Col3>
+                  </ProfileRow3>
+                  </ContainerTest>
+          </ProfileContainer>
+          <Navigation/>
 
-          </Container>
+      </div>
       )
     }
 }

@@ -27,7 +27,6 @@ const Circle = styled.div`
     @media (min-width: 768px) { // Tablets
       width: 40px;
       height: 39px;
-      background-color: grey;
     }
 
     @media (min-width: 1024px) { // Tablets
