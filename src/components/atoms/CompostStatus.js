@@ -9,6 +9,13 @@ const StatusWrapper = styled.div`
     right: -16px;
     display: flex;
 
+    @media (min-width: 1024px) { // Tablets
+        right: 180px;
+        width: 320px;
+        height: 125px;
+        background-color: #F4F6FF;
+        border-radius: 13px;
+    }
 `;
 
 const Status = styled.p`
@@ -20,9 +27,14 @@ const Status = styled.p`
     width: ${props => props.primary ? '130px' : '200px'};
     margin-top: -6px;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 1024px) { // Tablets
         font-size: 17px;
         width: 210px;
+        text-align: center;
+
+        position: absolute;
+        top: 50%; right: 50%;
+        transform: translate(50%,-50%);
     }
 `;
 
@@ -33,9 +45,8 @@ const StatusLine = styled.div`
     margin-top: 7px;
     margin-left: 5px;
 
-    @media (min-width: 991.98px) { // Tablets
-        width: 40px;
-        height: 5px;
+    @media (min-width: 1024px) { // Tablets
+        display: none;
     }
 `;
 
@@ -45,9 +56,8 @@ const StatusIcon = styled.div`
     background-color: #FFC759;
     border-radius: 50%;
 
-    @media (min-width: 991.98px) { // Tablets
-        width: 22px;
-        height: 22px;
+    @media (min-width: 1024px) { // Tablets
+        display: none;
     }
 
 `;
