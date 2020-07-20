@@ -7,8 +7,8 @@ const SVG = styled.svg`
     width: 25px;
     background-color: yellow;
 
-    @media (min-width: 991.98px) { // Tablets
-
+    @media (min-width: 768px) { // Tablets
+      width: 29px;
     }
   }
 `;

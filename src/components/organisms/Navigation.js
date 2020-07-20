@@ -50,8 +50,58 @@ const NavItem = styled(Nav.Item)`
         display: flex;
         flex-direction: column;
         text-align: center;
+
+        @media (min-width: 1024px) {
+          margin-bottom: 40px;
+        }
     }
 `;
+
+const NavLink = styled(Link)`
+    && {
+        font-size: 13px;
+        color: #4e4e4e;
+        font-weight: 500;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 10px;
+        margin-top: 8px;
+        letter-spacing: 1px;
+
+        @media (min-width: 768px) { // Tablets
+            font-size: 12px;
+        }
+    }
+`
+const NavWrapper = styled.div`
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    @media (min-width: 1024px) {
+
+      bottom: auto;
+      width: 100px;
+      height: 100%;
+      z-index: 99;
+      top: 0;
+      right: 0;
+      overflow-x: hidden;
+
+      -webkit-box-shadow: -5px 0px 7px -2px rgba(245,245,245,1);
+      -moz-box-shadow: -5px 0px 7px -2px rgba(245,245,245,1);
+      box-shadow: -5px 0px 7px -2px rgba(245,245,245,1);
+    }
+`
+
+const NavRow = styled(Row)`
+  margin-bottom: 20px;
+
+  @media (min-width: 1024px) {
+      flex-direction: column;
+      margin-top: 20px;
+  }
+`
 
 
 /* End Styling */
@@ -73,37 +123,36 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <div className="nav_wrapper">
-                <Row className="nav_row">
+            <NavWrapper>
+                <NavRow>
                     <Col className="nav_col">
                         <NavItem>
-                            <Link to="/overview" className="nav_icon"><SvgLocation /></Link>
-                            <Link to="/overview" className="nav_link">Locaties</Link>
+                            <NavLink to="/overview" className="nav_icon"><SvgLocation /></NavLink>
+                            <NavLink to="/overview" className="nav_link">Locaties</NavLink>
                         </NavItem>
                     </Col>
 
                     <Col className="nav_col">
                         <NavItem>
-                            <Link to="/tasks"  className="nav_icon"><SvgTask /></Link>
-                            <Link to="/tasks" className="nav_link">Taken</Link>
+                            <NavLink to="/tasks"  className="nav_icon"><SvgTask /></NavLink>
+                            <NavLink to="/tasks" className="nav_link">Taken</NavLink>
                         </NavItem>
-
                     </Col>
 
                     <Col className="nav_col">
                         <NavItem>
-                        <Link to="/overview"  className="nav_icon"><SvgOverview /></Link>
-                          <Link to="/overview" className="nav_link">Overzicht</Link>
+                        <NavLink to="/overview"  className="nav_icon"><SvgOverview /></NavLink>
+                          <NavLink to="/overview" className="nav_link">Overzicht</NavLink>
                         </NavItem>
                   </Col>
                   <Col className="nav_col">
                         <NavItem>
-                            <Link to="/login"  className="nav_icon"><SvgLogout /></Link>
-                            <Link to="/login" onClick={this.removeAccessToken} className="nav_link">Uitloggen</Link>
+                            <NavLink to="/login"  className="nav_icon"><SvgLogout /></NavLink>
+                            <NavLink to="/login" onClick={this.removeAccessToken} className="nav_link">Uitloggen</NavLink>
                         </NavItem>
                   </Col>
-                </Row>
-            </div>
+                </NavRow>
+            </NavWrapper>
         );
     }
 }

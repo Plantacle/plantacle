@@ -6,9 +6,11 @@ const SVG = styled.svg`
   && {
     background-color: yellow;
     width: 25px;
-    @media (min-width: 991.98px) { // Tablets
 
+    @media (min-width: 768px) { // Tablets
+      width: 29px;
     }
+    
   }
 `;
 

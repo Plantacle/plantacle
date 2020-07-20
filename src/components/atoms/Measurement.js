@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     width: 32px;
     margin-bottom: 30px;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 768px) { // Tablets
       margin-bottom: 45px;
     }
 `;
@@ -24,7 +24,13 @@ const Circle = styled.div`
     margin-bottom: 5px;
     width: 32px;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 768px) { // Tablets
+      width: 40px;
+      height: 39px;
+      background-color: grey;
+    }
+
+    @media (min-width: 1024px) { // Tablets
       width: 44px;
       height: 43px;
     }
@@ -36,7 +42,13 @@ const TitleCircle = styled.p`
     font-size: 10px;
     text-align: center;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 768px) { // Tablets
+      width: 40px;
+      height: 39px;
+      font-size: 12px;
+    }
+
+    @media (min-width: 1024px) { // Tablets
       width: 44px;
       height: 43px;
       font-size: 12px;

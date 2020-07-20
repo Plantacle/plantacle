@@ -7,9 +7,16 @@ const SVG = styled.svg`
     width: 24px;
     height: auto;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 768px) { // Tablets
+      width: 29px;
+      margin-top: 2px;
+      margin-left: 1px;
+    }
+
+    @media (min-width: 1024px) { // Tablets
       width: 33px;
       margin-top: 3px;
+      margin-left: 0;
     }
 
   }

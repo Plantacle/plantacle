@@ -6,8 +6,16 @@ const SVG = styled.svg`
     width: 24px;
     height: auto;
 
-    @media (min-width: 991.98px) { // Tablets
+    @media (min-width: 768px) { // Tablets
+      width: 29px;
+      margin-left: 1px;
+      margin-top: 2px;
+    }
+
+    @media (min-width: 1024px) { // Tablets
       width: 35px;
+      margin-left: 0;
+      margin-top: 0;
     }
   }
 `;
