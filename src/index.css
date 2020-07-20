@@ -96,17 +96,6 @@ code {
   position: relative;
 }
 
-.nav:before{
-  content: '';
-  position: absolute;
-  width: 100px;
-  background: #fff;
-  height: 90px;
-  border-radius: 100%;
-  box-shadow: inset 0 -4px 6px -7px #333;
-  top: -44px;
-  left: calc(50% - 60px);
-}
 
 .nav-row{
   display: contents !important;
@@ -200,6 +189,11 @@ code {
   left: calc(50% - 45px);
 }
 
+.nav-icon {
+  background-color: green;
+  width: 100%;
+}
+
 .home-glyph {
   color: #ffff;
   margin: 13px 0px 0px 12px;
@@ -251,4 +245,3 @@ input[type="checkbox"]:checked + span {
 .noPadding {
   padding: 0;
 }
-

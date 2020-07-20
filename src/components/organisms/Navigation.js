@@ -2,6 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import {Row, Col, Container, Nav } from 'react-bootstrap';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import SvgLocation from '../svg/Location';
+import SvgTask from '../svg/Task';
+import SvgOverview from '../svg/Overview';
+import SvgLogout from '../svg/Logout';
+
 
 /* Styling */
 
@@ -40,30 +45,13 @@ const Input = styled.input`
   }
 `
 
-const BigButton = styled.input`
-  background: #FFC759;
-  width: 100%;
-  height: 48px;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
-`
-
-const Circle = styled.div`
-    height: 70px;
-    margin-top: -33px !important;
-    width: 70px;
-    border-radius: 50%;
-    border-color:  #4368d1;
-    border-style: solid;
-    background:  #4368d1;
-    border-width: 2px;
-    position: absolute;
-    z-index: 999999;
-    left: calc(50% - 45px);
-    cursor: pointer;
+const NavItem = styled(Nav.Item)`
+    && {
+        display: flex;
+        flex-direction: column;
+    }
 `;
+
 
 /* End Styling */
 
@@ -84,28 +72,27 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <div className="mt-5">
-            <Link to="/overview"><Circle><i className="fas fa-home home-glyph fa-2x"></i></Circle></Link>
+            <div>
                     <Nav>
-                        <Row className="nav-row">
-                                <Nav.Item>
-                                    <Link to="/overview"><i className="fas fa-map-marker-alt glyph location-glyph"></i></Link>
+                        <Row>
+                                <NavItem>
+                                    <Link to="/overview" className="nav-icon"><SvgLocation /></Link>
                                     <Link to="/overview" className="nav-link">Locaties</Link>
-                                </Nav.Item>
+                                </NavItem>
 
-                                <Nav.Item>
-                                    <Link to="/tasks"><i className="fas fa-tasks glyph task-icon"></i></Link>
+                                <NavItem>
+                                    <Link to="/tasks"><SvgTask /></Link>
                                     <Link to="/tasks" className="nav-link">Taken</Link>
-                                </Nav.Item>
+                                </NavItem>
 
-                                <Nav.Item>
-                                <Link to="/overview"><i className="fas fa-chart-line glyph"></i></Link>
-                                    <Link to="/overview" onClick={this.removeAccessToken} className="nav-link">Overzicht</Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                <Link to="/login"><i className="fas fa-sign-out-alt glyph"></i></Link>
-                                    <Link to="/login" className="nav-link">Uitloggen</Link>
-                                </Nav.Item>
+                                <NavItem>
+                                <Link to="/overview"><SvgOverview /></Link>
+                                  <Link to="/overview" className="nav-link">Overzicht</Link>
+                                </NavItem>
+                                <NavItem>
+                                    <Link to="/login"><SvgLogout /></Link>
+                                    <Link to="/login" onClick={this.removeAccessToken} className="nav-link">Uitloggen</Link>
+                                </NavItem>
                         </Row>
                     </Nav>
             </div>
