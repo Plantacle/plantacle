@@ -26,7 +26,6 @@ const ContainerTest = styled(Container)`
   }
 
   @media (min-width: 1200px) { // Tablets
-    max-width: 1200px;
     height: 1000px;
   }
 }
@@ -58,7 +57,7 @@ const Col1 = styled(Col)`
 
       @media (min-width: 768px) { // Tablets
           background-image: url(${waveImgTablet});
-          height: 400px;
+          height: 500px;
       }
     }
 `;
@@ -176,16 +175,17 @@ class Profile extends React.Component {
     render() {
 
       let activity = this.state.totalActivity;
-      let achievement
+      let achievement;
 
       let test;
 
-      if(activity > 336) {
+      if(activity >= 336 && activity < 1344) {
           achievement = <AchievementBadge achievement="bronze" />;
-          test = '360';
-      } else if(activity > 1344) {
+              console.log(activity + 'bronze')
+      } else if(activity >= 1344 && activity < 2688) {
           achievement = <AchievementBadge achievement="silver" />;
-      } else if(activity > 2688) {
+            console.log(activity + 'silver')
+      } else if(activity >= 2688) {
           achievement = <AchievementBadge achievement="platinum" />;
       } else {
           achievement = <AchievementBadge achievement="none" />;
