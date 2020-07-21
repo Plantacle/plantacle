@@ -19,13 +19,14 @@ const ProfileContainer = styled(Container)`
 
 const ContainerTest = styled(Container)`
 && {
+  min-height: 500px;
+  width: 100%;
   @media (min-width: 1024px) { // Tablets
     max-width: 1024px;
   }
 
   @media (min-width: 1200px) { // Tablets
     max-width: 1200px;
-    background-color: green;
     height: 1000px;
   }
 }
@@ -33,7 +34,7 @@ const ContainerTest = styled(Container)`
 
 const ProfileRow = styled(Row)`
     && {
-      background-color: yellow;
+
     }
 `;
 
@@ -57,7 +58,6 @@ const Col1 = styled(Col)`
 
       @media (min-width: 768px) { // Tablets
           background-image: url(${waveImgTablet});
-          background-color: pink;
           height: 400px;
       }
     }
@@ -65,13 +65,14 @@ const Col1 = styled(Col)`
 
 const Col2 = styled(Col)`
     && {
-      background-color: pink;
     }
 `;
 
 const Col3 = styled(Col)`
     && {
-        background-color: purple;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
     }
 `;
 
@@ -123,13 +124,11 @@ const ResultStyle = styled.h2`
 `;
 
 const AchievementTitle = styled.h2`
-    text-align: center;
     font-family: 'Poppins', sans-serif;
     font-size: 17px;
     color: #4368D1;
     letter-spacing: 2px;
-    margin-bottom: 15px;
-    background-color: crimson;
+    margin-bottom: 30px;
 `;
 
 const AchievementTitleWrapper = styled.div`
@@ -227,12 +226,9 @@ class Profile extends React.Component {
                   </Col2>
                   </ProfileRow>
                   <ProfileRow3>
-                      <Col3 xs={6}>
-                          <AchievementTitle> ACHIEVEMENTS </AchievementTitle>
+                      <Col3 xs={12}>
+                          <AchievementTitle> Achievements </AchievementTitle>
                           {achievement}
-                      </Col3>
-                      <Col3 xs={6}>
-
                       </Col3>
                   </ProfileRow3>
                   </ContainerTest>

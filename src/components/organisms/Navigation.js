@@ -78,6 +78,17 @@ const NavWrapper = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
+    background-color: #fff;
+
+      overflow-y: auto;
+
+    -webkit-box-shadow: -1px -3px 5px 0px rgba(235,235,235,1);
+    -moz-box-shadow: -1px -3px 5px 0px rgba(235,235,235,1);
+    box-shadow: -1px -3px 5px 0px rgba(235,235,235,1);
+
+    padding-top: 15px;
+
+
 
     @media (min-width: 1024px) {
 
@@ -89,9 +100,10 @@ const NavWrapper = styled.div`
       right: 0;
       overflow-x: hidden;
 
-      -webkit-box-shadow: -5px 0px 7px -2px rgba(245,245,245,1);
-      -moz-box-shadow: -5px 0px 7px -2px rgba(245,245,245,1);
-      box-shadow: -5px 0px 7px -2px rgba(245,245,245,1);
+      -webkit-box-shadow: -1px 3px 5px 0px rgba(212,212,212,1);
+-moz-box-shadow: -1px 3px 5px 0px rgba(212,212,212,1);
+box-shadow: -1px 3px 5px 0px rgba(212,212,212,1);
+
     }
 `
 
