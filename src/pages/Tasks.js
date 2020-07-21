@@ -58,6 +58,7 @@ class Tasks extends React.Component {
       tasks: [],
       text: [],
       description: [],
+      icon: [],
       //taskInfo: [],
       phase: '',
       humidity: props.humidity,
@@ -131,11 +132,13 @@ class Tasks extends React.Component {
       const tasks = [];
       const text = [];
       const description = [];
+      const icon = [];
 
       phase1.data.forEach(element => {
         tasks.push(element.title);
         text.push(element.preview_description);
         description.push(element.description);
+        icon.push(element.icon);
       });
 
       if(accessObject == null) {  //localStorage.length == 0
@@ -147,14 +150,14 @@ class Tasks extends React.Component {
         const stringifyData = JSON.stringify(data);
         localStorage.setItem('data', stringifyData);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon})
 
       } else if(localStorage.length > 0 && accessObject == null) {
         console.log('Accesobject has not been made')
       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon})
       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 1 ) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon})
         console.log('Al 24 uur verstreken');
       } else {
         this.setState({ initialState });
@@ -167,11 +170,13 @@ class Tasks extends React.Component {
       const tasks = [];
       const text = [];
       const description = [];
+      const icon = [];
 
       phase2.data.forEach(element => {
         tasks.push(element.title);
         text.push(element.preview_description);
         description.push(element.description);
+        icon.push(element.icon);
       });
 
       if(accessObject == null) {
@@ -183,15 +188,15 @@ class Tasks extends React.Component {
         const stringifyData = JSON.stringify(data);
         localStorage.setItem('data', stringifyData);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon})
 
       } else if(localStorage.length > 0 && accessObject == null) {
         console.log('Accesobject has not been made')
       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon })
 
       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 2 ) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon })
         console.log('Al 48 uur verstreken');
       } else {
         console.log('48 uur is nog niet verstreken')
@@ -204,11 +209,13 @@ class Tasks extends React.Component {
       const tasks = [];
       const text = [];
       const description = [];
+      const icon = [];
 
       phase3.data.forEach(element => {
         tasks.push(element.title);
         text.push(element.preview_description);
         description.push(element.description);
+        icon.push(element.icon);
       });
 
       if(accessObject == null) {
@@ -220,15 +227,15 @@ class Tasks extends React.Component {
         const stringifyData = JSON.stringify(data);
         localStorage.setItem('data', stringifyData);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon})
 
       } else if(localStorage.length > 0 && accessObject == null) {
         console.log('Accesobject has not been made')
       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({  tasks: tasks, text: text, description: description, icon: icon })
 
       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 3 ) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({  tasks: tasks, text: text, description: description, icon: icon })
         console.log('Al 72 uur verstreken');
       } else {
         console.log('72 uur is nog niet verstreken')
@@ -241,11 +248,13 @@ class Tasks extends React.Component {
       const tasks = [];
       const text = [];
       const description = [];
+      const icon = [];
 
       phase4.data.forEach(element => {
         tasks.push(element.title);
         text.push(element.preview_description);
         description.push(element.description);
+        icon.push(element.icon);
       });
 
       if(accessObject == null) {
@@ -257,15 +266,15 @@ class Tasks extends React.Component {
         const stringifyData = JSON.stringify(data);
         localStorage.setItem('data', stringifyData);
 
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon })
 
       } else if(localStorage.length > 0 && accessObject == null) {
         console.log('Accesobject has not been made')
       } else if(localStorage.length > 0 && accessObject.status == 0 && accessObject.deleted_date == null) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon })
 
       } else if(localStorage.length > 0 && accessObject.status == 1 && differenceDate >= 4 ) {
-        this.setState({ tasks: tasks, text: text, description: description})
+        this.setState({ tasks: tasks, text: text, description: description, icon: icon })
         console.log('Al 96 uur verstreken');
       } else {
         console.log('96 uur is nog niet verstreken')
@@ -292,7 +301,7 @@ class Tasks extends React.Component {
       </Link>
       <TaskTitle> Taken </TaskTitle>
       </BackWrapper>
-      <TaskList tasks={this.state.tasks} text={this.state.text} description={this.state.description} removeTask={this.removeTask}> </TaskList>
+      <TaskList tasks={this.state.tasks} text={this.state.text} description={this.state.description} icon={this.state.icon} removeTask={this.removeTask}> </TaskList>
       </StyledContainer>
             <Navigation/>
       <GlobalStyles />

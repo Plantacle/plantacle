@@ -5,8 +5,18 @@ import SvgHelp from '../svg/Help';
 import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import SvgCheck from '../svg/Check';
+import SvgGreen from '../svg/Green';
+import SvgBrown from '../svg/Brown';
+import SvgTips from '../svg/Tips';
+import SvgWorm from '../svg/Worm';
 import moment from 'moment';
 import axios from 'axios';
+
+import {Bootstrap, Row, Col, Container} from 'react-bootstrap';
+
+const StyledContainer = styled(Container)`
+
+`;
 
 const TaskBlock = styled.div`
 width: 100%;
@@ -77,6 +87,8 @@ margin-top: -12px;
 const CheckWrapper = styled.div`
 display: flex;
 justify-content: space-between;
+
+margin-right: 15px;
 `;
 
 const InfoButton = styled.button`
@@ -124,6 +136,15 @@ text-indent: 4px;
 
 const Ul = styled.ul`
 margin-bottom: 30px;
+width: 100%;
+
+@media (min-width: 768px) { // Tablets
+  max-width: 768px;
+}
+
+@media (min-width: 1024px) { // Tablets
+  max-width: 1024px;
+}
 `;
 
 const Button = styled.button`
@@ -131,7 +152,7 @@ border: none;
 width: 34px;
 height: 34px;
 background-color: #E8E8E8;
-border-radius: 50%;
+border-radius: 6px;
 display: inline-block;
 line-height:1em;
 position:relative;
@@ -139,6 +160,7 @@ outline: none;
 overflow: visible;
 cursor: pointer;
 margin-top: 39px;
+margin-right: 5px;
 
 &:active {
   background-color: #4368D1;
@@ -189,12 +211,38 @@ margin-right: 16px;
 `;
 
 const TextWrapper = styled.div`
-max-width: 200px;
+    max-width: 220px;
 
-@media (min-width: 390px) { // Tablets
-  max-width: 400px;
-}
+    @media (min-width: 1024px) { // Tablets
+        max-width: 400px;
+    }
 `;
+
+
+const TextIcon = styled.div`
+    min-width: 32px;
+    height: 32px;
+    background-color: #324BB8;
+    border-radius: 5px;
+    margin-right: 22px;
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: 1024px) { // Tablets
+      min-width: 35px;
+      height: 35px;
+    }
+`;
+
+const StyledCol = styled(Col)`
+
+`
+
+const TaskStartWrapper = styled.div`
+    display: flex;
+`
+
 
 class TaskList extends React.Component {
 
@@ -272,60 +320,84 @@ class TaskList extends React.Component {
   render() {
 
     return(
-      <div>
+      <StyledContainer>
       <HeadTitleWrapper>
       <HeadTitle> Mijn taken </HeadTitle>
       </HeadTitleWrapper>
 
+      <Row>
       <Ul className="noPadding">
       { this.props.tasks.map((task, i) => {
         const linkText = this.props.text[i];
         const description = this.props.description[i];
 
+        const icon = this.props.icon[i];
+
+        let iconSvg;
+
+        if(icon == "green") {
+            iconSvg = <SvgGreen />;
+        } else if(icon == "brown") {
+            iconSvg = <SvgBrown />;
+        } else if(icon == "tips") {
+          iconSvg = <SvgTips />
+        } else if(icon == "worm") {
+          iconSvg = <SvgWorm />
+        } else {
+          console.log(iconSvg)
+        }
+
+          console.log(this.props.icon[i])
+
         return (
 
           //<ListItem onClick={() => { this.removeItem(task, i)}} key={i}>
-          <ListItem key={i}>
-          <TaskBlock>
-          <TextWrapper>
-          <TaskTitle> { task } </TaskTitle>
-          <TaskDescription> {linkText} </TaskDescription>
-          </TextWrapper>
-          <CheckWrapper>
+          <StyledCol key={i} xs={12}>
+              <ListItem>
+                  <TaskBlock>
+                  <TaskStartWrapper>
+                      <TextIcon>{iconSvg}</TextIcon>
+                      <TextWrapper>
+                          <TaskTitle> { task } </TaskTitle>
+                          <TaskDescription> {linkText} </TaskDescription>
+                      </TextWrapper>
+                  </TaskStartWrapper>
+                  <CheckWrapper>
+                  <Button checked={this.state.checked} onClick={() => { this.removeItem(task, i)}}>
+                  <Test>
+                      <Image src={require('../../assets/images/check.png')}  />
+                  </Test>
+                  </Button>
 
-          <Button checked={this.state.checked} onClick={() => { this.removeItem(task, i)}}>
-          <Test>
-          <Image src={require('../../assets/images/check.png')}  />
-          </Test>
-          </Button>
+                  <InfoButton onClick={()=> this.showModal(task, description)}>
+                      <Info>
+                          <SvgHelp />
+                      </Info>
+                  </InfoButton>
 
-          <InfoButton onClick={()=> this.showModal(task, description)}>
-          <Info>
-          <SvgHelp />
-          </Info>
-          </InfoButton>
+                  </CheckWrapper>
+                  </TaskBlock>
 
-          </CheckWrapper>
-          </TaskBlock>
-
-          <Modal show={this.state.modalShow} onHide={this.onHide}>
-          <ModalHeader closeButton>{this.state.activeTitle}</ModalHeader>
-          <ModalBody>
-          {this.state.activeDescription}
-          </ModalBody>
-          <Modal.Footer>
-          <BackButton onClick={this.onHide}>Terug</BackButton>
-          </Modal.Footer>
-          </Modal>
-          </ListItem>
+                  <Modal show={this.state.modalShow} onHide={this.onHide}>
+                  <ModalHeader closeButton>{this.state.activeTitle}</ModalHeader>
+                  <ModalBody>
+                  {this.state.activeDescription}
+                  </ModalBody>
+                  <Modal.Footer>
+                  <BackButton onClick={this.onHide}>Terug</BackButton>
+                  </Modal.Footer>
+                  </Modal>
+              </ListItem>
+          </StyledCol>
 
         )
       })}
       </Ul>
 
-      {/*   <SubmitButton onClick={this.deleteTasks}>Klaar!</SubmitButton> */}
+        </Row>
 
-      </div>
+      {/*   <SubmitButton onClick={this.deleteTasks}>Klaar!</SubmitButton> */}
+      </StyledContainer>
     )
   }
 }
